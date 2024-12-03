@@ -1,0 +1,40 @@
+@import "_reset";
+
+.section {
+	padding: 1rem;
+}
+.audio-player {
+	border-radius: $border-radius-general;
+	background: rgba(255, 255, 255, 0.305);
+	backdrop-filter: blur(30px);
+	border: 1.5px solid rgba(255, 255, 255, 0.394);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-width: 300px;
+	width: 100%;
+	gap: 20px;
+	padding: 1.5rem;
+	box-shadow: 1px 1px 20px 10px rgba(255, 255, 255, 0.12) inset;
+}
+
+.radio-icon {
+	width: 100px;
+	border-radius: $border-radius-general - 5px;
+	filter: drop-shadow(0 0 8px $primary-color);
+}
+.btn-container {
+	display: flex;
+	gap: 20px;
+}
+.play-btn,
+.prev-btn,
+.next-btn {
+	width: 50px;
+
+	&:hover {
+		cursor: pointer;
+		transform: scale(0.9);
+	}
+}

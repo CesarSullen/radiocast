@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="./style/style.css" />
+		<title>Chill Space</title>
+	</head>
+	<body>
+		<div class="body-container">
+			<div class="section">
+				<audio id="radioPlayer" controls class="hidden">
+					<source id="radioSource" src="" type="audio/mpeg" />
+					Your browser doesn't support my power B)
+				</audio>
+
+				<div class="audio-player">
+					<img src="" alt="cover" id="radioIcon" class="radio-icon" />
+					<p id="radioName" class="radio-name">Loading...</p>
+
+					<div class="btn-container">
+						<img src="./assets/prev-fill.svg" id="prevBtn" class="prev-btn" />
+						<img src="./assets/pause-fill.svg" id="playBtn" class="play-btn" />
+						<img src="./assets/next-fill.svg" id="nextBtn" class="next-btn" />
+					</div>
+
+					<input
+						type="range"
+						id="volumeControl"
+						class="volume-control"
+						min="0"
+						max="1"
+						step="0.1"
+						value="0.5"
+					/>
+				</div>
+			</div>
+		</div>
+
+		<script src="./js/app.js"></script>
+	</body>
+</html>

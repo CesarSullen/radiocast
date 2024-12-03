@@ -1,0 +1,159 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  border: none;
+  transition: all 0.3s;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
+  font-family: "Poppins";
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../typography/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../typography/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: 800;
+}
+.important-text {
+  color: #800cee;
+}
+
+.important-text-2 {
+  color: #48007f;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+hr {
+  background-color: #edf2ef;
+  width: 100%;
+  height: 1px;
+  border-radius: 25px;
+}
+
+.body-container {
+  padding: 1rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  background-color: #800cee;
+  color: #edf2ef;
+}
+.btn a {
+  color: #edf2ef;
+}
+.btn:hover {
+  opacity: 0.9;
+}
+.btn:active {
+  transform: scale(0.9);
+}
+
+.ghost-btn {
+  background: transparent;
+  border: solid 2px #800cee;
+  color: #800cee;
+}
+.ghost-btn a {
+  color: #800cee;
+}
+.ghost-btn:hover {
+  background-color: #800cee;
+  color: #edf2ef;
+  box-shadow: none;
+  opacity: 1;
+}
+.ghost-btn:hover a {
+  color: #edf2ef;
+}
+
+.warning-text {
+  color: red;
+}
+
+body {
+  background-color: #800cee;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.section {
+  padding: 1rem;
+}
+
+.audio-player {
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.305);
+  backdrop-filter: blur(30px);
+  border: 1.5px solid rgba(255, 255, 255, 0.394);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+  width: 100%;
+  gap: 20px;
+  padding: 1.5rem;
+  box-shadow: 1px 1px 20px 10px rgba(255, 255, 255, 0.12) inset;
+}
+
+.radio-icon {
+  width: 100px;
+  border-radius: 20px;
+  filter: drop-shadow(0 0 8px #800cee);
+}
+
+.btn-container {
+  display: flex;
+  gap: 20px;
+}
+
+.play-btn,
+.prev-btn,
+.next-btn {
+  width: 50px;
+}
+.play-btn:hover,
+.prev-btn:hover,
+.next-btn:hover {
+  cursor: pointer;
+  transform: scale(0.9);
+}
+
+/*# sourceMappingURL=style.css.map */
