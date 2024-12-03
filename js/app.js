@@ -40,10 +40,10 @@ const nextBtn = document.getElementById("nextBtn");
 playBtn.addEventListener("click", () => {
 	if (radioPlayer.paused) {
 		radioPlayer.play();
-		playBtn.src = "../assets/pause-fill.svg";
+		playBtn.src = "./assets/pause-fill.svg";
 	} else {
 		radioPlayer.pause();
-		playBtn.src = "../assets/play-fill.svg";
+		playBtn.src = "./assets/play-fill.svg";
 	}
 });
 prevBtn.addEventListener("click", startPlaying);
