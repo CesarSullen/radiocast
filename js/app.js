@@ -1,48 +1,26 @@
-let tag = "lofi";
-let url = `https://de1.api.radio-browser.info/json/stations/bytag/${tag}`;
-
 const radioPlayer = document.getElementById("radioPlayer");
 const radioSource = document.getElementById("radioSource");
 const radioCover = document.getElementById("radioCover");
 const radioName = document.getElementById("radioName");
 
-/* function startPlaying() {
-	fetch(url)
-		.then((response) => response.json())
-		.then((data) => {
-			let chillStations = data.length;
+const lofiStations = [
+	"https://de1.api.radio-browser.info/json/stations/byname/Lo-Fi%20Girl",
+	"https://de1.api.radio-browser.info/json/stations/byname/MoE%20Lofi",
+	"https://de1.api.radio-browser.info/json/stations/byname/NIA%20Radio%20Lo-Fi",
+	"https://de1.api.radio-browser.info/json/stations/byname/CodeRadio%20from%20FreeCodeCamp",
+];
+const rockStations = [
+	"https://de1.api.radio-browser.info/json/stations/byname/Rockhausradio",
+	"https://de1.api.radio-browser.info/json/stations/byname/%20Gadingharjo%20Core",
+	"https://de1.api.radio-browser.info/json/stations/byname/Best%20Net%20Radio%20-%2080s%20Metal",
+	"https://de1.api.radio-browser.info/json/stations/byname/Exclusively%20Metallica",
+];
 
-			let randomIndex = Math.floor(Math.random() * chillStations);
-			const selectedStation = data[randomIndex];
+const genres = ["lofi", "rock"];
 
-			const stationIndex = randomIndex;
-			const stationName = selectedStation.name;
-			const stationURL = selectedStation.url_resolved;
-			const stationIcon = selectedStation.favicon;
-
-			console.log(stationIndex, stationName, stationURL);
-
-			radioSource.src = selectedStation.url_resolved;
-			radioCover.src = "./assets/covers/lofi.JPG";
-			radioName.textContent = stationName;
-			radioPlayer.load();
-			radioPlayer.play();
-		})
-		.catch((error) => console.error("Error:", error));
-}
-startPlaying(); */
-
-let lofiStations = [];
-
-const LoFiGirl =
-	"https://de1.api.radio-browser.info/json/stations/byname/Lo-Fi%20Girl";
-const MoELofi =
-	"https://de1.api.radio-browser.info/json/stations/byname/MoE%20Lofi";
-const NiaRadioLoFi =
-	"https://de1.api.radio-browser.info/json/stations/byname/NIA%20Radio%20Lo-Fi";
-
-lofiStations.push(LoFiGirl, MoELofi, NiaRadioLoFi);
 let currentStationIndex = 0;
+let currentGenreIndex = 0;
+let currentStationUrl;
 
 function startPlaying(stationURL, stationName) {
 	console.log(`Reproduciendo: ${stationName} - URL: ${stationURL}`);
@@ -54,8 +32,13 @@ function startPlaying(stationURL, stationName) {
 }
 
 function getStations() {
-	const currentStationUrl = lofiStations[currentStationIndex];
-
+	switch (currentGenreIndex) {
+		case 0:
+			currentStationUrl = lofiStations[currentStationIndex];
+			break;
+		case 1:
+			currentStationUrl = rockStations[currentStationIndex];
+	}
 	fetch(currentStationUrl)
 		.then((response) => response.json())
 		.then((data) => {
@@ -79,8 +62,6 @@ function switchPrevStation() {
 	getStations();
 }
 
-getStations();
-
 // Control Buttons
 const prevBtn = document.getElementById("prevBtn");
 const playBtn = document.getElementById("playBtn");
@@ -89,10 +70,20 @@ const nextBtn = document.getElementById("nextBtn");
 playBtn.addEventListener("click", () => {
 	if (radioPlayer.paused) {
 		radioPlayer.play();
-		playBtn.src = "./assets/pause-fill.svg";
+
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			playBtn.src = "./assets/green-pause-fill.svg";
+		} else {
+			playBtn.src = "./assets/pause-fill.svg";
+		}
 	} else {
 		radioPlayer.pause();
-		playBtn.src = "./assets/play-fill.svg";
+
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			playBtn.src = "./assets/green-play-fill.svg";
+		} else {
+			playBtn.src = "./assets/play-fill.svg";
+		}
 	}
 });
 prevBtn.addEventListener("click", switchPrevStation);
@@ -107,3 +98,28 @@ volumeControl.value = radioPlayer.volume;
 volumeControl.addEventListener("input", function () {
 	radioPlayer.volume = this.value;
 });
+
+if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+	prevBtn.src = "./assets/green-prev-fill.svg";
+	nextBtn.src = "./assets/green-next-fill.svg";
+	playBtn.src = "./assets/green-play-fill.svg";
+}
+
+// Cards and genre selection
+const lofiGenreCard = document.getElementById("lofiGenreCard");
+const rockGenreCard = document.getElementById("rockGenreCard");
+
+function selectGenre(genreIndex) {
+	currentGenreIndex = genreIndex;
+	currentStationIndex = 0;
+	getStations();
+}
+
+lofiGenreCard.addEventListener("click", function () {
+	selectGenre(0);
+});
+rockGenreCard.addEventListener("click", function () {
+	selectGenre(1);
+});
+
+getStations();

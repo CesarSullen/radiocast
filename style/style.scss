@@ -1,14 +1,8 @@
 @import "_reset";
 
-.section {
-	padding: 1rem;
-}
 .audio-player {
 	border-radius: $border-radius-general;
-	background: rgba(255, 255, 255, 0.356);
 	color: white;
-	backdrop-filter: blur(30px);
-	/* border: 1.5px solid rgba(255, 255, 255, 0.394); */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -17,14 +11,18 @@
 	width: 100%;
 	gap: 20px;
 	padding: 1.5rem;
-	box-shadow: 1px 1px 20px 10px rgba(255, 255, 255, 0.12) inset;
+
+	background: light-dark(rgba(255, 255, 255, 0.356), lighten(#1c1f24, 5%));
+	border: solid 1px light-dark(white, $primary-color);
+	backdrop-filter: blur(30px);
 }
 
 .radio-cover {
 	position: relative;
 	width: 250px;
 	border-radius: 10px;
-	filter: drop-shadow(0 0 8px $primary-color);
+	border: solid 1px $primary-color;
+	filter: drop-shadow(0 0 5px $primary-color);
 }
 .live-flag {
 	position: absolute;
@@ -65,5 +63,29 @@
 	}
 	to {
 		transform: rotate(360deg);
+	}
+}
+
+// Genres
+.genres-section {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+.genre-card {
+	background: light-dark(rgba(255, 255, 255, 0.356), lighten(#1c1f24, 5%));
+	border: solid 1px light-dark(white, $primary-color);
+	border-radius: $border-radius-general;
+	padding: 1rem;
+	text-align: center;
+	font-weight: bold;
+
+	&:hover {
+		cursor: pointer;
+		background-color: $primary-color;
+		color: black;
+	}
+	&:active {
+		transform: scale(0.9);
 	}
 }
