@@ -1,7 +1,12 @@
 let tag = "lofi";
 let url = `https://de1.api.radio-browser.info/json/stations/bytag/${tag}`;
 
-function startPlaying() {
+const radioPlayer = document.getElementById("radioPlayer");
+const radioSource = document.getElementById("radioSource");
+const radioCover = document.getElementById("radioCover");
+const radioName = document.getElementById("radioName");
+
+/* function startPlaying() {
 	fetch(url)
 		.then((response) => response.json())
 		.then((data) => {
@@ -17,20 +22,64 @@ function startPlaying() {
 
 			console.log(stationIndex, stationName, stationURL);
 
-			const radioPlayer = document.getElementById("radioPlayer");
-			const radioSource = document.getElementById("radioSource");
-			const radioIcon = document.getElementById("radioIcon");
-			const radioName = document.getElementById("radioName");
-
 			radioSource.src = selectedStation.url_resolved;
-			radioIcon.src = stationIcon;
+			radioCover.src = "./assets/covers/lofi.JPG";
 			radioName.textContent = stationName;
 			radioPlayer.load();
 			radioPlayer.play();
 		})
 		.catch((error) => console.error("Error:", error));
 }
-startPlaying();
+startPlaying(); */
+
+let lofiStations = [];
+
+const LoFiGirl =
+	"https://de1.api.radio-browser.info/json/stations/byname/Lo-Fi%20Girl";
+const MoELofi =
+	"https://de1.api.radio-browser.info/json/stations/byname/MoE%20Lofi";
+const NiaRadioLoFi =
+	"https://de1.api.radio-browser.info/json/stations/byname/NIA%20Radio%20Lo-Fi";
+
+lofiStations.push(LoFiGirl, MoELofi, NiaRadioLoFi);
+let currentStationIndex = 0;
+
+function startPlaying(stationURL, stationName) {
+	console.log(`Reproduciendo: ${stationName} - URL: ${stationURL}`);
+
+	radioSource.src = stationURL;
+	radioName.textContent = stationName;
+	radioPlayer.load();
+	radioPlayer.play();
+}
+
+function getStations() {
+	const currentStationUrl = lofiStations[currentStationIndex];
+
+	fetch(currentStationUrl)
+		.then((response) => response.json())
+		.then((data) => {
+			data.forEach((station) => {
+				const stationName = station.name;
+				const stationURL = station.url_resolved;
+
+				startPlaying(stationURL, stationName);
+			});
+		});
+}
+
+function switchNextStation() {
+	currentStationIndex = (currentStationIndex + 1) % lofiStations.length;
+	getStations();
+}
+
+function switchPrevStation() {
+	currentStationIndex =
+		(currentStationIndex - 1 + lofiStations.length) % lofiStations.length;
+	getStations();
+}
+
+getStations();
 
 // Control Buttons
 const prevBtn = document.getElementById("prevBtn");
@@ -46,8 +95,8 @@ playBtn.addEventListener("click", () => {
 		playBtn.src = "./assets/play-fill.svg";
 	}
 });
-prevBtn.addEventListener("click", startPlaying);
-nextBtn.addEventListener("click", startPlaying);
+prevBtn.addEventListener("click", switchPrevStation);
+nextBtn.addEventListener("click", switchNextStation);
 
 // Volume Control
 const volumeControl = document.getElementById("volumeControl");

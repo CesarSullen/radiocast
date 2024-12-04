@@ -22,11 +22,11 @@
   font-weight: 800;
 }
 .important-text {
-  color: #800cee;
+  color: #6e07cf;
 }
 
 .important-text-2 {
-  color: #48007f;
+  color: #3d036a;
 }
 
 .bold {
@@ -69,7 +69,7 @@ hr {
   font-weight: bold;
   cursor: pointer;
   width: 100%;
-  background-color: #800cee;
+  background-color: #6e07cf;
   color: #edf2ef;
 }
 .btn a {
@@ -84,14 +84,14 @@ hr {
 
 .ghost-btn {
   background: transparent;
-  border: solid 2px #800cee;
-  color: #800cee;
+  border: solid 2px #6e07cf;
+  color: #6e07cf;
 }
 .ghost-btn a {
-  color: #800cee;
+  color: #6e07cf;
 }
 .ghost-btn:hover {
-  background-color: #800cee;
+  background-color: #6e07cf;
   color: #edf2ef;
   box-shadow: none;
   opacity: 1;
@@ -105,7 +105,7 @@ hr {
 }
 
 body {
-  background-color: #800cee;
+  background-color: #6e07cf;
   overflow-x: hidden;
   height: 100%;
   display: flex;
@@ -119,9 +119,10 @@ body {
 
 .audio-player {
   border-radius: 25px;
-  background: rgba(255, 255, 255, 0.305);
+  background: rgba(255, 255, 255, 0.356);
+  color: white;
   backdrop-filter: blur(30px);
-  border: 1.5px solid rgba(255, 255, 255, 0.394);
+  /* border: 1.5px solid rgba(255, 255, 255, 0.394); */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -133,10 +134,28 @@ body {
   box-shadow: 1px 1px 20px 10px rgba(255, 255, 255, 0.12) inset;
 }
 
-.radio-icon {
-  width: 100px;
-  border-radius: 20px;
-  filter: drop-shadow(0 0 8px #800cee);
+.radio-cover {
+  position: relative;
+  width: 250px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 8px #6e07cf);
+}
+
+.live-flag {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: red;
+  padding: 0.1rem 0.3rem;
+  border-radius: 25px;
+}
+
+.live-icon {
+  width: 20px;
+  animation: infiniteRotation 4s infinite ease-in-out;
 }
 
 .btn-container {
@@ -153,7 +172,21 @@ body {
 .prev-btn:hover,
 .next-btn:hover {
   cursor: pointer;
-  transform: scale(0.9);
+  transform: scale(1.1);
+}
+.play-btn:active,
+.prev-btn:active,
+.next-btn:active {
+  transform: scale(0.8);
+}
+
+@keyframes infiniteRotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

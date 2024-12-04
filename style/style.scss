@@ -5,9 +5,10 @@
 }
 .audio-player {
 	border-radius: $border-radius-general;
-	background: rgba(255, 255, 255, 0.305);
+	background: rgba(255, 255, 255, 0.356);
+	color: white;
 	backdrop-filter: blur(30px);
-	border: 1.5px solid rgba(255, 255, 255, 0.394);
+	/* border: 1.5px solid rgba(255, 255, 255, 0.394); */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -19,10 +20,26 @@
 	box-shadow: 1px 1px 20px 10px rgba(255, 255, 255, 0.12) inset;
 }
 
-.radio-icon {
-	width: 100px;
-	border-radius: $border-radius-general - 5px;
+.radio-cover {
+	position: relative;
+	width: 250px;
+	border-radius: 10px;
 	filter: drop-shadow(0 0 8px $primary-color);
+}
+.live-flag {
+	position: absolute;
+	top: 8%;
+	right: 12%;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	background-color: red;
+	padding: 0.1rem 0.3rem;
+	border-radius: $border-radius-general;
+}
+.live-icon {
+	width: 20px;
+	animation: infiniteRotation 4s infinite ease-in-out;
 }
 .btn-container {
 	display: flex;
@@ -35,6 +52,18 @@
 
 	&:hover {
 		cursor: pointer;
-		transform: scale(0.9);
+		transform: scale(1.1);
+	}
+	&:active {
+		transform: scale(0.8);
+	}
+}
+
+@keyframes infiniteRotation {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
 	}
 }
