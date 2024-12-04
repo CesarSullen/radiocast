@@ -196,11 +196,16 @@ body {
 }
 .genre-card:hover {
   cursor: pointer;
-  background-color: light-dark(#6e07cf, #00ffb7);
-  color: black;
+  background-color: light-dark(light-dark(#3d036a, #1c1f23), light-dark(#6e07cf, #00ffb7));
+  color: light-dark(white, black);
 }
 .genre-card:active {
   transform: scale(0.9);
+}
+
+.selected {
+  background-color: light-dark(light-dark(#3d036a, #1c1f23), light-dark(#6e07cf, #00ffb7));
+  color: light-dark(white, black);
 }
 
 /*# sourceMappingURL=style.css.map */

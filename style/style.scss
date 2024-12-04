@@ -82,10 +82,14 @@
 
 	&:hover {
 		cursor: pointer;
-		background-color: $primary-color;
-		color: black;
+		background-color: light-dark($secondary-color, $primary-color);
+		color: light-dark(white, black);
 	}
 	&:active {
 		transform: scale(0.9);
 	}
+}
+.selected {
+	background-color: light-dark($secondary-color, $primary-color);
+	color: light-dark(white, black);
 }

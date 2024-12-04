@@ -10,13 +10,19 @@ const lofiStations = [
 	"https://de1.api.radio-browser.info/json/stations/byname/CodeRadio%20from%20FreeCodeCamp",
 ];
 const rockStations = [
-	"https://de1.api.radio-browser.info/json/stations/byname/Rockhausradio",
-	"https://de1.api.radio-browser.info/json/stations/byname/%20Gadingharjo%20Core",
+	"https://de1.api.radio-browser.info/json/stations/byname/Spreeradio%20Rock",
 	"https://de1.api.radio-browser.info/json/stations/byname/Best%20Net%20Radio%20-%2080s%20Metal",
-	"https://de1.api.radio-browser.info/json/stations/byname/Exclusively%20Metallica",
+	"https://de1.api.radio-browser.info/json/stations/byname/DrGnu%20-%2090th%20Rock",
+	"https://de1.api.radio-browser.info/json/stations/byname/DrGnu%20-%20Hard%20Side",
+];
+const animeStations = [
+	"https://de1.api.radio-browser.info/json/stations/byname/Anime%20Para%20Ti",
+	"https://de1.api.radio-browser.info/json/stations/byname/stereoanime",
+	"https://de1.api.radio-browser.info/json/stations/byname/Patchwork%20Archive",
+	"https://de1.api.radio-browser.info/json/stations/byname/Gotann",
 ];
 
-const genres = ["lofi", "rock"];
+const genres = ["lofi", "rock", "anime"];
 
 let currentStationIndex = 0;
 let currentGenreIndex = 0;
@@ -38,6 +44,10 @@ function getStations() {
 			break;
 		case 1:
 			currentStationUrl = rockStations[currentStationIndex];
+			break;
+		case 2:
+			currentStationUrl = animeStations[currentStationIndex];
+			break;
 	}
 	fetch(currentStationUrl)
 		.then((response) => response.json())
@@ -108,6 +118,7 @@ if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
 // Cards and genre selection
 const lofiGenreCard = document.getElementById("lofiGenreCard");
 const rockGenreCard = document.getElementById("rockGenreCard");
+const animeGenreCard = document.getElementById("animeGenreCard");
 
 function selectGenre(genreIndex) {
 	currentGenreIndex = genreIndex;
@@ -115,11 +126,29 @@ function selectGenre(genreIndex) {
 	getStations();
 }
 
+function deselectAllCards() {
+	lofiGenreCard.classList.remove("selected");
+	rockGenreCard.classList.remove("selected");
+	animeGenreCard.classList.remove("selected");
+}
+
 lofiGenreCard.addEventListener("click", function () {
+	deselectAllCards();
 	selectGenre(0);
+	this.classList.add("selected");
 });
+
 rockGenreCard.addEventListener("click", function () {
+	deselectAllCards();
 	selectGenre(1);
+	this.classList.add("selected");
+});
+
+animeGenreCard.addEventListener("click", function () {
+	deselectAllCards();
+	selectGenre(2);
+	this.classList.add("selected");
 });
 
 getStations();
+lofiGenreCard.classList.add("selected");
