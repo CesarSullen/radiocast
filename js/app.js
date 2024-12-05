@@ -151,6 +151,13 @@ const gtaGenreCard = document.getElementById("gtaGenreCard");
 function selectGenre(genreIndex) {
 	currentGenreIndex = genreIndex;
 	currentStationIndex = 0;
+
+	playBtn.classList.remove("shown");
+	playBtn.classList.add("hidden");
+
+	pauseBtn.classList.remove("hidden");
+	pauseBtn.classList.add("shown");
+
 	getStations();
 }
 
@@ -161,6 +168,7 @@ function deselectAllCards() {
 	rockGenreCard.classList.remove("selected");
 	edmGenreCard.classList.remove("selected");
 	popGenreCard.classList.remove("selected");
+	gtaGenreCard.classList.remove("selected");
 }
 
 lofiGenreCard.addEventListener("click", function () {
