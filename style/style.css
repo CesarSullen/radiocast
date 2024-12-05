@@ -52,17 +52,9 @@ hr {
   background-color: light-dark(white, light-dark(#6e07cf, #00ffb7));
 }
 
-.body-container {
-  padding: 1rem;
-  max-width: 1000px;
-  min-height: 100vh;
-  margin: auto;
-}
-
-.section {
-  margin-bottom: 2rem;
-}
-
+/* .section {
+	margin-bottom: 2rem;
+} */
 .hidden {
   display: none;
 }
@@ -108,10 +100,23 @@ hr {
 body {
   background-color: light-dark(light-dark(#6e07cf, #00ffb7), light-dark(#3d036a, #1c1f23));
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
 }
 
+.body-container {
+  padding: 1rem;
+  max-width: 1000px;
+  min-height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .body-container {
+    flex-direction: row;
+  }
+}
 .accordion {
   width: 100%;
 }
@@ -157,6 +162,7 @@ body {
   display: flex;
   flex-direction: column;
   background: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
+  border-radius: 25px;
 }
 
 .genre-card {
@@ -168,13 +174,18 @@ body {
 .genre-card:hover {
   cursor: pointer;
   background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
+  color: light-dark(white, black);
 }
 .genre-card:active {
   transform: scale(0.9);
 }
+.genre-card:last-child {
+  border-radius: 0 0 25px 25px;
+}
 
 .selected {
   background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
+  color: light-dark(white, black);
 }
 
 .audio-player {

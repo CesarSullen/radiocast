@@ -54,15 +54,9 @@ hr {
 	border-radius: $border-radius-general;
 	background-color: light-dark(white, $primary-color);
 }
-.body-container {
-	padding: 1rem;
-	max-width: 1000px;
-	min-height: 100vh;
-	margin: auto;
-}
-.section {
+/* .section {
 	margin-bottom: 2rem;
-}
+} */
 .hidden {
 	display: none;
 }
@@ -105,6 +99,19 @@ hr {
 body {
 	background-color: light-dark($primary-color, $secondary-color);
 	overflow-x: hidden;
+}
+.body-container {
+	padding: 1rem;
+	max-width: 1000px;
+	min-height: 100vh;
+	margin: auto;
 	display: flex;
 	flex-direction: column;
+	gap: 20px;
+}
+
+@media screen and (min-width: 768px) {
+	.body-container {
+		flex-direction: row;
+	}
 }

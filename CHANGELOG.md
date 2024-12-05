@@ -9,3 +9,10 @@
 - Now the page doesn't play the radio from the reload, instead, the user has to manually tap the play button.
 - Project name is now "Radiocast"
 - Optimized JS.
+
+## 1.0.1
+
+### PWA Attempt
+
+- Tried to create the PWA version.
+- Minor improvements.

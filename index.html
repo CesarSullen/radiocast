@@ -15,13 +15,13 @@
 		<title>RadioCast</title>
 	</head>
 	<body>
+		<audio id="radioPlayer" controls class="hidden">
+			<source id="radioSource" src="" type="audio/mpeg" />
+			Your browser doesn't support my power B)
+		</audio>
+
 		<div class="body-container">
 			<div class="section">
-				<audio id="radioPlayer" controls class="hidden">
-					<source id="radioSource" src="" type="audio/mpeg" />
-					Your browser doesn't support my power B)
-				</audio>
-
 				<div class="audio-player">
 					<div class="cover-container">
 						<img
@@ -103,11 +103,10 @@
 				</div>
 			</div>
 
-			<div class="accordion">
+			<div class="accordion section">
 				<div class="accordion-item">
 					<div class="accordion-header">
-						<h4 class="accordion-title">Genres</h4>
-						<!-- <img src="images/icons/arrow-down.svg"  /> -->
+						<h3 class="accordion-title">Genres</h3>
 						<svg
 							class="accordion-toggle"
 							xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +148,6 @@
 							<div class="genre-card" id="gtaGenreCard">
 								<p class="genre-title">GTA Radio</p>
 							</div>
-							<hr />
 						</div>
 					</div>
 				</div>
@@ -169,5 +167,19 @@
 		</footer>
 		<script src="./js/app.js"></script>
 		<script src="./js/accordion.js"></script>
+		<script>
+			if ("serviceWorker" in navigator) {
+				window.addEventListener("load", () => {
+					navigator.serviceWorker
+						.register("./js/service_worker.js")
+						.then((registration) => {
+							console.log("Service Worker registrado con éxito:", registration);
+						})
+						.catch((error) => {
+							console.error("Error al registrar el Service Worker:", error);
+						});
+				});
+			}
+		</script>
 	</body>
 </html>
