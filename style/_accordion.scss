@@ -1,0 +1,64 @@
+.accordion {
+	width: 100%;
+}
+.accordion-item {
+	border-radius: $border-radius-general;
+	border: 1px solid light-dark(white, $primary-color);
+	background: light-dark(rgba(255, 255, 255, 0.356), lighten(#1c1f24, 5%));
+}
+.accordion-header {
+	display: flex;
+	padding-inline: 1.2rem;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+
+	.accordion-title {
+		color: light-dark(white, $primary-color);
+		padding-block: 10px;
+		letter-spacing: 3px;
+	}
+	.accordion-toggle {
+		width: 25px;
+		height: 25px;
+		fill: light-dark(white, $primary-color);
+
+		&.turned {
+			transform: rotate(180deg);
+		}
+	}
+}
+.accordion-content {
+	transition: all 0.3s ease-in-out;
+	max-height: 0px;
+	overflow: hidden;
+
+	&.active {
+		max-height: 500px;
+		padding-bottom: 0;
+	}
+}
+
+// Genres
+.genres-section {
+	display: flex;
+	flex-direction: column;
+	background: light-dark($secondary-color, lighten(#1c1f24, 5%));
+}
+.genre-card {
+	padding: 1rem;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+
+	&:hover {
+		cursor: pointer;
+		background-color: light-dark(rgba(255, 255, 255, 0.356), $primary-color);
+	}
+	&:active {
+		transform: scale(0.9);
+	}
+}
+.selected {
+	background-color: light-dark(rgba(255, 255, 255, 0.356), $primary-color);
+}

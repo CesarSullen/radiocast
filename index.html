@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<meta property="og:title" content="Chill Space" />
+		<meta property="og:title" content="RadioCast" />
 		<meta property="og:type" content="website" />
 		<meta property="og:image" content="./assets/logo.JPG" />
 
@@ -12,7 +12,7 @@
 		<link rel="apple-touch-icon" sizes="180x180" href="./assets/logo.JPG" />
 
 		<link rel="stylesheet" href="./style/style.css" />
-		<title>Chill Space</title>
+		<title>RadioCast</title>
 	</head>
 	<body>
 		<div class="body-container">
@@ -39,7 +39,7 @@
 							<p class="bold">LIVE</p>
 						</div>
 					</div>
-					<p id="radioName" class="radio-name bold">Loading...</p>
+					<p id="radioName" class="radio-name bold">Press Play</p>
 
 					<div class="btn-container">
 						<svg
@@ -56,7 +56,7 @@
 
 						<svg
 							id="playBtn"
-							class="control-btn hidden"
+							class="control-btn"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="#e6e6e6"
 							viewBox="0 0 256 256"
@@ -68,7 +68,7 @@
 
 						<svg
 							id="pauseBtn"
-							class="control-btn"
+							class="control-btn hidden"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="#e6e6e6"
 							viewBox="0 0 256 256"
@@ -103,21 +103,71 @@
 				</div>
 			</div>
 
-			<div class="section genres-section">
-				<div class="genre-card" id="lofiGenreCard">
-					<p class="genre-title">Lo-Fi</p>
-				</div>
-
-				<div class="genre-card" id="rockGenreCard">
-					<p class="genre-title">Rock</p>
-				</div>
-
-				<div class="genre-card" id="animeGenreCard">
-					<p class="genre-title">Anime</p>
+			<div class="accordion">
+				<div class="accordion-item">
+					<div class="accordion-header">
+						<h4 class="accordion-title">Genres</h4>
+						<!-- <img src="images/icons/arrow-down.svg"  /> -->
+						<svg
+							class="accordion-toggle"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="#e6e6e6"
+							viewBox="0 0 256 256"
+						>
+							<path
+								d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"
+							></path>
+						</svg>
+					</div>
+					<div class="accordion-content">
+						<div class="section genres-section">
+							<hr />
+							<div class="genre-card selected" id="lofiGenreCard">
+								<p class="genre-title">Lo-Fi</p>
+							</div>
+							<hr />
+							<div class="genre-card" id="animeGenreCard">
+								<p class="genre-title">Anime</p>
+							</div>
+							<hr />
+							<div class="genre-card" id="kpopGenreCard">
+								<p class="genre-title">K-pop</p>
+							</div>
+							<hr />
+							<div class="genre-card" id="rockGenreCard">
+								<p class="genre-title">Rock</p>
+							</div>
+							<hr />
+							<div class="genre-card" id="edmGenreCard">
+								<p class="genre-title">EDM</p>
+							</div>
+							<hr />
+							<div class="genre-card" id="popGenreCard">
+								<p class="genre-title">Pop</p>
+							</div>
+							<hr />
+							<div class="genre-card" id="gtaGenreCard">
+								<p class="genre-title">GTA Radio</p>
+							</div>
+							<hr />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
+		<footer>
+			<div class="footer-content">
+				<!-- 				<img src="./assets/logo.JPG" alt="Footer Image" class="footer-image" /> -->
+				<nav class="footer-links">
+					<a href="https://cesarsullen.github.io">About the Developer</a>
+					<a href="https://de1.api.radio-browser.info/" target="_blank"
+						>Radio Browser API</a
+					>
+				</nav>
+			</div>
+		</footer>
 		<script src="./js/app.js"></script>
+		<script src="./js/accordion.js"></script>
 	</body>
 </html>

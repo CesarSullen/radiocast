@@ -1,4 +1,5 @@
 @import "_reset";
+@import "_accordion";
 
 .audio-player {
 	border-radius: $border-radius-general;
@@ -11,7 +12,6 @@
 	width: 100%;
 	gap: 20px;
 	padding: 1.5rem;
-
 	background: light-dark(rgba(255, 255, 255, 0.356), lighten(#1c1f24, 5%));
 	border: solid 1px light-dark(white, $primary-color);
 	backdrop-filter: blur(30px);
@@ -34,10 +34,14 @@
 	background-color: red;
 	padding: 0.1rem 0.3rem;
 	border-radius: $border-radius-general;
+	color: white;
 }
 .live-icon {
 	width: 20px;
 	animation: infiniteRotation 4s infinite ease-in-out;
+}
+.radio-name {
+	text-transform: capitalize;
 }
 .btn-container {
 	display: flex;
@@ -65,31 +69,33 @@
 	}
 }
 
-// Genres
-.genres-section {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-}
-.genre-card {
-	background: light-dark($secondary-color, lighten(#1c1f24, 5%));
-	border: solid 1px light-dark(white, $primary-color);
-	border-radius: $border-radius-general;
+// Footer
+footer {
 	padding: 1rem;
-	text-align: center;
-	font-weight: bold;
-	color: white;
+	background-color: light-dark($secondary-color, lighten(#1c1f24, 5%));
 
-	&:hover {
-		cursor: pointer;
-		background-color: light-dark(rgba(255, 255, 255, 0.356), $primary-color);
-		color: black;
+	/* 	.footer-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
-	&:active {
-		transform: scale(0.9);
+
+	.footer-image {
+		width: 100px;
+		border-radius: $border-radius-general;
 	}
-}
-.selected {
-	background-color: light-dark(rgba(255, 255, 255, 0.356), $primary-color);
-	color: black;
+ */
+	.footer-links {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		a {
+			color: white;
+
+			&:hover {
+				color: $primary-color;
+			}
+		}
+	}
 }

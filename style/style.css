@@ -49,11 +49,13 @@ hr {
   width: 100%;
   height: 1px;
   border-radius: 25px;
+  background-color: light-dark(white, light-dark(#6e07cf, #00ffb7));
 }
 
 .body-container {
   padding: 1rem;
   max-width: 1000px;
+  min-height: 100vh;
   margin: auto;
 }
 
@@ -106,11 +108,73 @@ hr {
 body {
   background-color: light-dark(light-dark(#6e07cf, #00ffb7), light-dark(#3d036a, #1c1f23));
   overflow-x: hidden;
-  padding: 1rem;
-  height: 100%;
   display: flex;
+  flex-direction: column;
+}
+
+.accordion {
+  width: 100%;
+}
+
+.accordion-item {
+  border-radius: 25px;
+  border: 1px solid light-dark(white, light-dark(#6e07cf, #00ffb7));
+  background: light-dark(rgba(255, 255, 255, 0.356), rgb(39.15625, 43.3515625, 50.34375));
+}
+
+.accordion-header {
+  display: flex;
+  padding-inline: 1.2rem;
+  justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  cursor: pointer;
+}
+.accordion-header .accordion-title {
+  color: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  padding-block: 10px;
+  letter-spacing: 3px;
+}
+.accordion-header .accordion-toggle {
+  width: 25px;
+  height: 25px;
+  fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+}
+.accordion-header .accordion-toggle.turned {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  transition: all 0.3s ease-in-out;
+  max-height: 0px;
+  overflow: hidden;
+}
+.accordion-content.active {
+  max-height: 500px;
+  padding-bottom: 0;
+}
+
+.genres-section {
+  display: flex;
+  flex-direction: column;
+  background: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
+}
+
+.genre-card {
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+.genre-card:hover {
+  cursor: pointer;
+  background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
+}
+.genre-card:active {
+  transform: scale(0.9);
+}
+
+.selected {
+  background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
 }
 
 .audio-player {
@@ -147,11 +211,16 @@ body {
   background-color: red;
   padding: 0.1rem 0.3rem;
   border-radius: 25px;
+  color: white;
 }
 
 .live-icon {
   width: 20px;
   animation: infiniteRotation 4s infinite ease-in-out;
+}
+
+.radio-name {
+  text-transform: capitalize;
 }
 
 .btn-container {
@@ -179,33 +248,31 @@ body {
     transform: rotate(360deg);
   }
 }
-.genres-section {
+footer {
+  padding: 1rem;
+  background-color: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
+  /* 	.footer-content {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: center;
+  }
+
+  .footer-image {
+  	width: 100px;
+  	border-radius: $border-radius-general;
+  }
+  */
+}
+footer .footer-links {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
 }
-
-.genre-card {
-  background: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
-  border: solid 1px light-dark(white, light-dark(#6e07cf, #00ffb7));
-  border-radius: 25px;
-  padding: 1rem;
-  text-align: center;
-  font-weight: bold;
+footer .footer-links a {
   color: white;
 }
-.genre-card:hover {
-  cursor: pointer;
-  background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
-  color: black;
-}
-.genre-card:active {
-  transform: scale(0.9);
-}
-
-.selected {
-  background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
-  color: black;
+footer .footer-links a:hover {
+  color: light-dark(#6e07cf, #00ffb7);
 }
 
 /*# sourceMappingURL=style.css.map */
