@@ -2,7 +2,7 @@
 
 .audio-player {
 	border-radius: $border-radius-general;
-	color: white;
+	color: light-dark(white, $primary-color);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -43,10 +43,9 @@
 	display: flex;
 	gap: 20px;
 }
-.play-btn,
-.prev-btn,
-.next-btn {
-	width: 50px;
+.control-btn {
+	width: 40px;
+	fill: light-dark(white, $primary-color);
 
 	&:hover {
 		cursor: pointer;
@@ -73,23 +72,24 @@
 	gap: 15px;
 }
 .genre-card {
-	background: light-dark(rgba(255, 255, 255, 0.356), lighten(#1c1f24, 5%));
+	background: light-dark($secondary-color, lighten(#1c1f24, 5%));
 	border: solid 1px light-dark(white, $primary-color);
 	border-radius: $border-radius-general;
 	padding: 1rem;
 	text-align: center;
 	font-weight: bold;
+	color: white;
 
 	&:hover {
 		cursor: pointer;
-		background-color: light-dark($secondary-color, $primary-color);
-		color: light-dark(white, black);
+		background-color: light-dark(rgba(255, 255, 255, 0.356), $primary-color);
+		color: black;
 	}
 	&:active {
 		transform: scale(0.9);
 	}
 }
 .selected {
-	background-color: light-dark($secondary-color, $primary-color);
-	color: light-dark(white, black);
+	background-color: light-dark(rgba(255, 255, 255, 0.356), $primary-color);
+	color: black;
 }

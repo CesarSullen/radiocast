@@ -64,6 +64,9 @@ hr {
 .hidden {
 	display: none;
 }
+.shown {
+	display: flex;
+}
 .btn {
 	padding: 0.5rem 1rem;
 	border-radius: $border-radius-general;

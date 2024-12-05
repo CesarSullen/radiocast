@@ -65,6 +65,10 @@ hr {
   display: none;
 }
 
+.shown {
+  display: flex;
+}
+
 .btn {
   padding: 0.5rem 1rem;
   border-radius: 25px;
@@ -111,7 +115,7 @@ body {
 
 .audio-player {
   border-radius: 25px;
-  color: white;
+  color: light-dark(white, light-dark(#6e07cf, #00ffb7));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -155,20 +159,15 @@ body {
   gap: 20px;
 }
 
-.play-btn,
-.prev-btn,
-.next-btn {
-  width: 50px;
+.control-btn {
+  width: 40px;
+  fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
 }
-.play-btn:hover,
-.prev-btn:hover,
-.next-btn:hover {
+.control-btn:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
-.play-btn:active,
-.prev-btn:active,
-.next-btn:active {
+.control-btn:active {
   transform: scale(0.8);
 }
 
@@ -187,25 +186,26 @@ body {
 }
 
 .genre-card {
-  background: light-dark(rgba(255, 255, 255, 0.356), rgb(39.15625, 43.3515625, 50.34375));
+  background: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
   border: solid 1px light-dark(white, light-dark(#6e07cf, #00ffb7));
   border-radius: 25px;
   padding: 1rem;
   text-align: center;
   font-weight: bold;
+  color: white;
 }
 .genre-card:hover {
   cursor: pointer;
-  background-color: light-dark(light-dark(#3d036a, #1c1f23), light-dark(#6e07cf, #00ffb7));
-  color: light-dark(white, black);
+  background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
+  color: black;
 }
 .genre-card:active {
   transform: scale(0.9);
 }
 
 .selected {
-  background-color: light-dark(light-dark(#3d036a, #1c1f23), light-dark(#6e07cf, #00ffb7));
-  color: light-dark(white, black);
+  background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
+  color: black;
 }
 
 /*# sourceMappingURL=style.css.map */

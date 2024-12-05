@@ -75,27 +75,28 @@ function switchPrevStation() {
 // Control Buttons
 const prevBtn = document.getElementById("prevBtn");
 const playBtn = document.getElementById("playBtn");
+const pauseBtn = document.getElementById("pauseBtn");
 const nextBtn = document.getElementById("nextBtn");
 
 playBtn.addEventListener("click", () => {
-	if (radioPlayer.paused) {
-		radioPlayer.play();
+	playBtn.classList.remove("shown");
+	playBtn.classList.add("hidden");
 
-		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-			playBtn.src = "./assets/green-pause-fill.svg";
-		} else {
-			playBtn.src = "./assets/pause-fill.svg";
-		}
-	} else {
-		radioPlayer.pause();
+	pauseBtn.classList.remove("hidden");
+	pauseBtn.classList.add("shown");
 
-		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-			playBtn.src = "./assets/green-play-fill.svg";
-		} else {
-			playBtn.src = "./assets/play-fill.svg";
-		}
-	}
+	radioPlayer.play();
 });
+pauseBtn.addEventListener("click", () => {
+	pauseBtn.classList.remove("shown");
+	pauseBtn.classList.add("hidden");
+
+	playBtn.classList.remove("hidden");
+	playBtn.classList.add("shown");
+
+	radioPlayer.pause();
+});
+
 prevBtn.addEventListener("click", switchPrevStation);
 nextBtn.addEventListener("click", switchNextStation);
 
@@ -108,12 +109,6 @@ volumeControl.value = radioPlayer.volume;
 volumeControl.addEventListener("input", function () {
 	radioPlayer.volume = this.value;
 });
-
-if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-	prevBtn.src = "./assets/green-prev-fill.svg";
-	nextBtn.src = "./assets/green-next-fill.svg";
-	playBtn.src = "./assets/green-play-fill.svg";
-}
 
 // Cards and genre selection
 const lofiGenreCard = document.getElementById("lofiGenreCard");
