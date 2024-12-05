@@ -16,9 +16,10 @@
 	border: solid 1px light-dark(white, $primary-color);
 	backdrop-filter: blur(30px);
 }
-
-.radio-cover {
+.cover-container {
 	position: relative;
+}
+.radio-cover {
 	width: 250px;
 	border-radius: 10px;
 	border: solid 1px $primary-color;
@@ -26,8 +27,8 @@
 }
 .live-flag {
 	position: absolute;
-	top: 8%;
-	right: 12%;
+	top: 5%;
+	right: 5%;
 	display: flex;
 	align-items: center;
 	gap: 5px;

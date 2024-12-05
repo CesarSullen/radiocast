@@ -1,12 +1,12 @@
 const CACHE_NAME = "RadioCast";
 const urlsToCache = [
-	"/",
-	"/index.html",
-	"/style/style.css",
-	"/js/app.js",
-	"/js/accordion.js",
-	"/js/service_worker.js",
-	"/assets/logo.JPG",
+	"./",
+	"./index.html",
+	"./style/style.css",
+	"./js/app.js",
+	"./js/accordion.js",
+	"./js/service_worker.js",
+	"./assets/logo.JPG",
 ];
 
 // Instalación del Service Worker
