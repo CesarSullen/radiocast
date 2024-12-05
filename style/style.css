@@ -162,7 +162,7 @@ body {
   display: flex;
   flex-direction: column;
   background: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
-  border-radius: 25px;
+  border-radius: 0 0 25px 25px;
 }
 
 .genre-card {
