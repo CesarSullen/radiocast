@@ -16,3 +16,10 @@
 
 - Tried to create the PWA version.
 - Minor improvements.
+
+## 1.1.0
+
+### UI Improvements and donations
+
+- UI Improvements
+- Added donations page

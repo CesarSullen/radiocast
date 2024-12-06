@@ -29,6 +29,8 @@
 // Colors
 $primary-color: light-dark(#6e07cf, #00ffb7);
 $secondary-color: light-dark(#3d036a, #1c1f23);
+$light: rgba(153, 152, 152, 0.356);
+$dark: lighten(#1c1f24, 5%);
 
 $border-radius-general: 25px;
 
@@ -64,13 +66,17 @@ hr {
 	display: flex;
 }
 .btn {
-	padding: 0.5rem 1rem;
+	padding: 1rem 2rem;
 	border-radius: $border-radius-general;
-	font-size: 1rem;
+	background-color: $primary-color;
 	font-weight: bold;
+	font-size: 1rem;
 	cursor: pointer;
 	width: 100%;
-	background-color: $primary-color;
+	max-width: 400px;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: black;
 
 	&:hover {
 		opacity: 0.9;
@@ -80,17 +86,19 @@ hr {
 	}
 }
 .ghost-btn {
-	background: transparent;
-	border: solid 2px $primary-color;
-	color: $primary-color;
+	background: light-dark($light, $dark);
+	border: solid 1px light-dark(white, $primary-color);
+	color: light-dark(white, $primary-color);
+
 	a {
 		color: $primary-color;
 	}
 
 	&:hover {
-		background-color: $primary-color;
+		background-color: (light-dark($secondary-color, $primary-color));
 		box-shadow: none;
 		opacity: 1;
+		color: light-dark(white, black);
 	}
 }
 .warning-text {
@@ -108,10 +116,4 @@ body {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-}
-
-@media screen and (min-width: 768px) {
-	.body-container {
-		flex-direction: row;
-	}
 }

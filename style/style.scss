@@ -1,6 +1,10 @@
 @import "_reset";
 @import "_accordion";
+@import "_donate";
 
+.section-title {
+	color: light-dark(white, $primary-color);
+}
 .audio-player {
 	border-radius: $border-radius-general;
 	color: light-dark(white, $primary-color);
@@ -12,9 +16,10 @@
 	width: 100%;
 	gap: 20px;
 	padding: 1.5rem;
-	background: light-dark(rgba(255, 255, 255, 0.356), lighten(#1c1f24, 5%));
+	background: light-dark($light, $dark);
 	border: solid 1px light-dark(white, $primary-color);
 	backdrop-filter: blur(30px);
+	max-width: 400px;
 }
 .cover-container {
 	position: relative;
@@ -60,6 +65,12 @@
 		transform: scale(0.8);
 	}
 }
+.volume-control {
+	&:hover {
+		cursor: pointer;
+		transform: scale(1.1);
+	}
+}
 
 @keyframes infiniteRotation {
 	from {
@@ -73,7 +84,7 @@
 // Footer
 footer {
 	padding: 1rem;
-	background-color: light-dark($secondary-color, lighten(#1c1f24, 5%));
+	background-color: light-dark($secondary-color, $dark);
 
 	/* 	.footer-content {
 		display: flex;
@@ -98,5 +109,17 @@ footer {
 				color: $primary-color;
 			}
 		}
+	}
+}
+
+@media screen and (min-width: 500px) {
+	.body-container {
+		/* flex-direction: row;
+		justify-content: center;
+		min-height: 100vh; */
+
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		justify-items: center;
 	}
 }

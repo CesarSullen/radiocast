@@ -1,22 +1,24 @@
 .accordion {
 	width: 100%;
+	max-width: 400px;
 }
 .accordion-item {
 	border-radius: $border-radius-general;
 	border: 1px solid light-dark(white, $primary-color);
-	background: light-dark(rgba(255, 255, 255, 0.356), lighten(#1c1f24, 5%));
+	background: light-dark($light, $dark);
 }
 .accordion-header {
 	display: flex;
-	padding-inline: 1.2rem;
 	justify-content: space-between;
+	padding-inline: 0.5rem;
 	align-items: center;
 	cursor: pointer;
 
 	.accordion-title {
 		color: light-dark(white, $primary-color);
-		padding-block: 10px;
+		text-transform: uppercase;
 		letter-spacing: 3px;
+		padding: 1rem 2rem;
 	}
 	.accordion-toggle {
 		width: 25px;

@@ -64,13 +64,17 @@ hr {
 }
 
 .btn {
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
   border-radius: 25px;
-  font-size: 1rem;
+  background-color: light-dark(#6e07cf, #00ffb7);
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
   width: 100%;
-  background-color: light-dark(#6e07cf, #00ffb7);
+  max-width: 400px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: black;
 }
 .btn:hover {
   opacity: 0.9;
@@ -80,17 +84,18 @@ hr {
 }
 
 .ghost-btn {
-  background: transparent;
-  border: solid 2px light-dark(#6e07cf, #00ffb7);
-  color: light-dark(#6e07cf, #00ffb7);
+  background: light-dark(rgba(153, 152, 152, 0.356), rgb(39.15625, 43.3515625, 50.34375));
+  border: solid 1px light-dark(white, light-dark(#6e07cf, #00ffb7));
+  color: light-dark(white, light-dark(#6e07cf, #00ffb7));
 }
 .ghost-btn a {
   color: light-dark(#6e07cf, #00ffb7);
 }
 .ghost-btn:hover {
-  background-color: light-dark(#6e07cf, #00ffb7);
+  background-color: light-dark(light-dark(#3d036a, #1c1f23), light-dark(#6e07cf, #00ffb7));
   box-shadow: none;
   opacity: 1;
+  color: light-dark(white, black);
 }
 
 .warning-text {
@@ -112,32 +117,29 @@ body {
   gap: 20px;
 }
 
-@media screen and (min-width: 768px) {
-  .body-container {
-    flex-direction: row;
-  }
-}
 .accordion {
   width: 100%;
+  max-width: 400px;
 }
 
 .accordion-item {
   border-radius: 25px;
   border: 1px solid light-dark(white, light-dark(#6e07cf, #00ffb7));
-  background: light-dark(rgba(255, 255, 255, 0.356), rgb(39.15625, 43.3515625, 50.34375));
+  background: light-dark(rgba(153, 152, 152, 0.356), rgb(39.15625, 43.3515625, 50.34375));
 }
 
 .accordion-header {
   display: flex;
-  padding-inline: 1.2rem;
   justify-content: space-between;
+  padding-inline: 0.5rem;
   align-items: center;
   cursor: pointer;
 }
 .accordion-header .accordion-title {
   color: light-dark(white, light-dark(#6e07cf, #00ffb7));
-  padding-block: 10px;
+  text-transform: uppercase;
   letter-spacing: 3px;
+  padding: 1rem 2rem;
 }
 .accordion-header .accordion-toggle {
   width: 25px;
@@ -188,6 +190,82 @@ body {
   color: light-dark(white, black);
 }
 
+.donate-section {
+  color-scheme: dark;
+  background-color: light-dark(#3d036a, #1c1f23);
+  color: white;
+}
+.donate-section .btn {
+  padding: 0.7rem;
+  border-radius: 8px;
+}
+
+.crypto-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.crypto-list li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-wrap: wrap;
+}
+
+.crypto-logo {
+  width: 30px;
+}
+
+.copy-icon {
+  cursor: pointer;
+}
+.copy-icon:active path {
+  fill: white;
+}
+
+.copied-alert {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: #00ffb7;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  max-width: 400px;
+  max-height: 50px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: black;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@media screen and (min-width: 500px) {
+  .donate-section {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .donate-section .btn {
+    min-width: 400px;
+  }
+}
+.section-title {
+  color: light-dark(white, light-dark(#6e07cf, #00ffb7));
+}
+
 .audio-player {
   border-radius: 25px;
   color: light-dark(white, light-dark(#6e07cf, #00ffb7));
@@ -199,9 +277,10 @@ body {
   width: 100%;
   gap: 20px;
   padding: 1.5rem;
-  background: light-dark(rgba(255, 255, 255, 0.356), rgb(39.15625, 43.3515625, 50.34375));
+  background: light-dark(rgba(153, 152, 152, 0.356), rgb(39.15625, 43.3515625, 50.34375));
   border: solid 1px light-dark(white, light-dark(#6e07cf, #00ffb7));
   backdrop-filter: blur(30px);
+  max-width: 400px;
 }
 
 .cover-container {
@@ -254,6 +333,11 @@ body {
   transform: scale(0.8);
 }
 
+.volume-control:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 @keyframes infiniteRotation {
   from {
     transform: rotate(0deg);
@@ -287,6 +371,17 @@ footer .footer-links a {
 }
 footer .footer-links a:hover {
   color: light-dark(#6e07cf, #00ffb7);
+}
+
+@media screen and (min-width: 500px) {
+  .body-container {
+    /* flex-direction: row;
+    justify-content: center;
+    min-height: 100vh; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
