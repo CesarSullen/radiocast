@@ -1,4 +1,4 @@
-.donate-section {
+body:has(.donate-section) {
 	color-scheme: dark;
 	background-color: $secondary-color;
 	color: white;

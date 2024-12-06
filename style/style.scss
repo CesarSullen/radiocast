@@ -1,6 +1,7 @@
 @import "_reset";
 @import "_accordion";
 @import "_donate";
+@import "_animations";
 
 .section-title {
 	color: light-dark(white, $primary-color);
@@ -30,22 +31,6 @@
 	border: solid 1px $primary-color;
 	filter: drop-shadow(0 0 5px $primary-color);
 }
-.live-flag {
-	position: absolute;
-	top: 5%;
-	right: 5%;
-	display: flex;
-	align-items: center;
-	gap: 5px;
-	background-color: red;
-	padding: 0.1rem 0.3rem;
-	border-radius: $border-radius-general;
-	color: white;
-}
-.live-icon {
-	width: 20px;
-	animation: infiniteRotation 4s infinite ease-in-out;
-}
 .radio-name {
 	text-transform: capitalize;
 }
@@ -69,15 +54,6 @@
 	&:hover {
 		cursor: pointer;
 		transform: scale(1.1);
-	}
-}
-
-@keyframes infiniteRotation {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
 	}
 }
 
@@ -114,10 +90,6 @@ footer {
 
 @media screen and (min-width: 500px) {
 	.body-container {
-		/* flex-direction: row;
-		justify-content: center;
-		min-height: 100vh; */
-
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		justify-items: center;

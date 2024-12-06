@@ -23,3 +23,13 @@
 
 - UI Improvements
 - Added donations page
+
+## 1.2.0
+
+### Added stations
+
+- Added Hip-Hop stations.
+- Optimized JavaScript, from 225 code lines to 184.
+- Added exclusively stations.
+- Fixed dark theme in donations page.
+- Added audio waves (NOT WORKING YET).

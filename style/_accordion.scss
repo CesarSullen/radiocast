@@ -50,9 +50,14 @@
 }
 .genre-card {
 	padding: 1rem;
-	text-align: center;
+	min-height: 10px;
 	font-weight: bold;
 	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+
 	&:hover {
 		cursor: pointer;
 		background-color: light-dark(rgba(255, 255, 255, 0.356), $primary-color);

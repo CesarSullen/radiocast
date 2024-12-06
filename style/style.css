@@ -169,9 +169,13 @@ body {
 
 .genre-card {
   padding: 1rem;
-  text-align: center;
+  min-height: 10px;
   font-weight: bold;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 .genre-card:hover {
   cursor: pointer;
@@ -190,12 +194,12 @@ body {
   color: light-dark(white, black);
 }
 
-.donate-section {
+body:has(.donate-section) {
   color-scheme: dark;
   background-color: light-dark(#3d036a, #1c1f23);
   color: white;
 }
-.donate-section .btn {
+body:has(.donate-section) .btn {
   padding: 0.7rem;
   border-radius: 8px;
 }
@@ -262,6 +266,65 @@ body {
     min-width: 400px;
   }
 }
+.live-flag {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: red;
+  padding: 0.1rem 0.3rem;
+  border-radius: 25px;
+  color: white;
+}
+
+.live-icon {
+  width: 20px;
+  animation: infiniteRotation 4s infinite ease-in-out;
+}
+
+.audio-waves {
+  display: flex;
+  gap: 3px;
+}
+.audio-waves .line {
+  background-color: light-dark(white, black);
+  border-radius: 25px;
+  width: 4px;
+  height: 5px;
+  animation: audioWaveEnabled 1s infinite;
+  place-self: end;
+}
+.audio-waves .line:nth-child(1) {
+  animation-delay: 0.3s;
+}
+.audio-waves .line:nth-child(2) {
+  animation-delay: 0.5s;
+}
+.audio-waves .line:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+@keyframes infiniteRotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes audioWaveEnabled {
+  from {
+    height: 5px;
+  }
+  50% {
+    height: 10px;
+  }
+  to {
+    height: 5px;
+  }
+}
 .section-title {
   color: light-dark(white, light-dark(#6e07cf, #00ffb7));
 }
@@ -294,24 +357,6 @@ body {
   filter: drop-shadow(0 0 5px light-dark(#6e07cf, #00ffb7));
 }
 
-.live-flag {
-  position: absolute;
-  top: 5%;
-  right: 5%;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background-color: red;
-  padding: 0.1rem 0.3rem;
-  border-radius: 25px;
-  color: white;
-}
-
-.live-icon {
-  width: 20px;
-  animation: infiniteRotation 4s infinite ease-in-out;
-}
-
 .radio-name {
   text-transform: capitalize;
 }
@@ -338,14 +383,6 @@ body {
   transform: scale(1.1);
 }
 
-@keyframes infiniteRotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 footer {
   padding: 1rem;
   background-color: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
@@ -375,9 +412,6 @@ footer .footer-links a:hover {
 
 @media screen and (min-width: 500px) {
   .body-container {
-    /* flex-direction: row;
-    justify-content: center;
-    min-height: 100vh; */
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
