@@ -36,9 +36,15 @@
 
 ## 1.2.1
 
-### Audio waves
+### Audio waves & language
 
 - Now the audio waves are working properly.
 - Started to styling the donation page.
 - Added an animation to the control buttons when they are pressed.
 - Added spanish version.
+
+## 1.2.2
+
+### Text Animation
+
+- Added a header with an animated text.

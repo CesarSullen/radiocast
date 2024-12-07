@@ -210,13 +210,3 @@ genreCards.forEach((card, index) => {
 		this.classList.add("selected");
 	});
 });
-
-// Languaje Detection
-/* function detectLanguage() {
-	const language = navigator.language || navigator.userLanguage;
-	if (language.startsWith("es")) {
-		window.location.href = "index-es.html";
-	}
-}
-
-window.onload = detectLanguage; */

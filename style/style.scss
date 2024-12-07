@@ -3,6 +3,25 @@
 @import "_donate";
 @import "_animations";
 
+.slogan {
+	width: 90%;
+	align-self: center;
+	grid-column: span 2;
+}
+.slogan path {
+	fill: transparent;
+	stroke: light-dark(white, $primary-color);
+	stroke-width: 0.3;
+	stroke-dasharray: 50;
+	stroke-dashoffset: 50;
+	animation: textAnimation 15s ease-in-out infinite;
+}
+
+.genre-card.selected {
+	.line {
+		display: flex;
+	}
+}
 .section-title {
 	color: light-dark(white, $primary-color);
 }
@@ -24,6 +43,22 @@
 }
 .cover-container {
 	position: relative;
+}
+.live-flag {
+	position: absolute;
+	top: 5%;
+	right: 5%;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	background-color: red;
+	padding: 0.1rem 0.3rem;
+	border-radius: $border-radius-general;
+	color: white;
+}
+.live-icon {
+	width: 20px;
+	animation: infiniteRotation 10s infinite ease-in-out;
 }
 .radio-cover {
 	width: 250px;
@@ -56,6 +91,29 @@
 	&:hover {
 		cursor: pointer;
 		transform: scale(1.1);
+	}
+}
+
+.audio-waves {
+	display: flex;
+	gap: 3px;
+	.line {
+		background-color: light-dark(white, black);
+		border-radius: $border-radius-general;
+		width: 4px;
+		height: 5px;
+		animation: audioWaveEnabled 1s infinite;
+		place-self: end;
+
+		&:nth-child(1) {
+			animation-delay: 0.3s;
+		}
+		&:nth-child(2) {
+			animation-delay: 0.5s;
+		}
+		&:nth-child(3) {
+			animation-delay: 0.1s;
+		}
 	}
 }
 
@@ -95,5 +153,8 @@ footer {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		justify-items: center;
+	}
+	.slogan {
+		width: 70%;
 	}
 }
