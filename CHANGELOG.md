@@ -48,3 +48,9 @@
 ### Text Animation
 
 - Added a header with an animated text.
+
+## 1.2.3
+
+### Opera
+
+- Added Opera Stations.

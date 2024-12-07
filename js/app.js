@@ -98,11 +98,11 @@ const stations = [
 		],
 	},
 	{
-		genre: "GTA",
+		genre: "Opera",
 		urls: [
-			"https://de1.api.radio-browser.info/json/stations/byname/GTA%20Radio",
-			"https://de1.api.radio-browser.info/json/stations/byname/laut.fm%20Gta%20Classics",
-			"https://de1.api.radio-browser.info/json/stations/byname/Radio%20Greenstone",
+			"https://de1.api.radio-browser.info/json/stations/byname/Antenna%202%20Opera",
+			"https://de1.api.radio-browser.info/json/stations/byname/1.FM%20-%20Otto's%20Opera%20House",
+			"https://de1.api.radio-browser.info/json/stations/byname/OperaRadio-MRG.Fm",
 		],
 	},
 ];

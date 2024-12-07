@@ -20,11 +20,6 @@
   src: url("../typography/Poppins/Poppins-Regular.ttf") format("truetype");
   font-weight: 400;
 }
-@font-face {
-  font-family: "Poppins";
-  src: url("../typography/Poppins/Poppins-Bold.ttf") format("truetype");
-  font-weight: 800;
-}
 .important-text {
   color: light-dark(#6e07cf, #00ffb7);
 }
@@ -66,11 +61,9 @@ hr {
   padding: 1rem 2rem;
   border-radius: 25px;
   background-color: light-dark(#6e07cf, #00ffb7);
-  font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
   width: 100%;
-  max-width: 400px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: black;
@@ -373,7 +366,7 @@ body:has(.donate-section) .btn {
   width: 250px;
   border-radius: 10px;
   border: solid 1px light-dark(#6e07cf, #00ffb7);
-  filter: drop-shadow(0 0 5px light-dark(#6e07cf, #00ffb7));
+  box-shadow: 0 0 5px 0 light-dark(#6e07cf, #00ffb7);
 }
 
 .radio-name {

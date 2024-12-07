@@ -20,11 +20,6 @@
 	src: url("../typography/Poppins/Poppins-Regular.ttf") format("truetype");
 	font-weight: 400;
 }
-@font-face {
-	font-family: "Poppins";
-	src: url("../typography/Poppins/Poppins-Bold.ttf") format("truetype");
-	font-weight: 800;
-}
 
 // Colors
 $primary-color: light-dark(#6e07cf, #00ffb7);
@@ -68,11 +63,10 @@ hr {
 	padding: 1rem 2rem;
 	border-radius: $border-radius-general;
 	background-color: $primary-color;
-	font-weight: bold;
+
 	font-size: 1rem;
 	cursor: pointer;
 	width: 100%;
-	max-width: 400px;
 	letter-spacing: 3px;
 	text-transform: uppercase;
 	color: black;

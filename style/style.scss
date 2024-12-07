@@ -64,7 +64,7 @@
 	width: 250px;
 	border-radius: 10px;
 	border: solid 1px $primary-color;
-	filter: drop-shadow(0 0 5px $primary-color);
+	box-shadow: 0 0 5px 0 $primary-color;
 }
 .radio-name {
 	text-transform: capitalize;
