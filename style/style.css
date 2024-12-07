@@ -48,7 +48,6 @@
 hr {
   width: 100%;
   height: 1px;
-  border-radius: 25px;
   background-color: light-dark(white, light-dark(#6e07cf, #00ffb7));
 }
 
@@ -169,7 +168,7 @@ body {
 
 .genre-card {
   padding: 1rem;
-  min-height: 10px;
+  min-height: 1px;
   font-weight: bold;
   color: white;
   display: flex;
@@ -182,11 +181,12 @@ body {
   background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
   color: light-dark(white, black);
 }
-.genre-card:active {
-  transform: scale(0.9);
-}
 .genre-card:last-child {
   border-radius: 0 0 25px 25px;
+}
+
+.genre-title {
+  font-weight: 400;
 }
 
 .selected {
@@ -207,6 +207,7 @@ body:has(.donate-section) .btn {
 .crypto-list {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 25px;
 }
 .crypto-list li {
@@ -282,6 +283,10 @@ body:has(.donate-section) .btn {
 .live-icon {
   width: 20px;
   animation: infiniteRotation 4s infinite ease-in-out;
+}
+
+.genre-card.selected .line {
+  display: flex;
 }
 
 .audio-waves {
@@ -369,6 +374,7 @@ body:has(.donate-section) .btn {
 .control-btn {
   width: 40px;
   fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  border-radius: 25px;
 }
 .control-btn:hover {
   cursor: pointer;
@@ -376,6 +382,7 @@ body:has(.donate-section) .btn {
 }
 .control-btn:active {
   transform: scale(0.8);
+  background-color: light-dark(#3d036a, #1c1f23);
 }
 
 .volume-control:hover {

@@ -41,6 +41,7 @@
 .control-btn {
 	width: 40px;
 	fill: light-dark(white, $primary-color);
+	border-radius: $border-radius-general;
 
 	&:hover {
 		cursor: pointer;
@@ -48,6 +49,7 @@
 	}
 	&:active {
 		transform: scale(0.8);
+		background-color: $secondary-color;
 	}
 }
 .volume-control {

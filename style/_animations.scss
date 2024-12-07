@@ -14,7 +14,11 @@
 	width: 20px;
 	animation: infiniteRotation 4s infinite ease-in-out;
 }
-
+.genre-card.selected {
+	.line {
+		display: flex;
+	}
+}
 .audio-waves {
 	display: flex;
 	gap: 3px;

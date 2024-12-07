@@ -33,3 +33,12 @@
 - Added exclusively stations.
 - Fixed dark theme in donations page.
 - Added audio waves (NOT WORKING YET).
+
+## 1.2.1
+
+### Audio waves
+
+- Now the audio waves are working properly.
+- Started to styling the donation page.
+- Added an animation to the control buttons when they are pressed.
+- Added spanish version.

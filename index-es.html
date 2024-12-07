@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,7 +17,7 @@
 	<body>
 		<audio id="radioPlayer" controls class="hidden">
 			<source id="radioSource" src="" type="audio/mpeg" />
-			Your browser doesn't support my power B)
+			Tu navegador no está soportando B)
 		</audio>
 
 		<div class="body-container">
@@ -39,7 +39,7 @@
 							<p class="bold">LIVE</p>
 						</div>
 					</div>
-					<p id="radioName" class="radio-name bold">Press Play</p>
+					<p id="radioName" class="radio-name bold">Presiona Play</p>
 
 					<div class="btn-container">
 						<svg
@@ -106,7 +106,7 @@
 			<div class="accordion section">
 				<div class="accordion-item">
 					<div class="accordion-header">
-						<h3 class="accordion-title">Genres</h3>
+						<h3 class="accordion-title">Géneros</h3>
 						<svg
 							class="accordion-toggle"
 							xmlns="http://www.w3.org/2000/svg"
@@ -197,10 +197,10 @@
 			</div>
 
 			<div class="cta-section">
-				<a href="./views/donate.html"
+				<a href="./views/donate-es.html"
 					><button class="btn ghost-btn">
 						<!-- <img src="" alt="" /> -->
-						<h3>Donate to support</h3>
+						<h3>Dona para apoyar</h3>
 					</button></a
 				>
 			</div>
@@ -210,7 +210,7 @@
 			<div class="footer-content">
 				<!-- 				<img src="./assets/logo.JPG" alt="Footer Image" class="footer-image" /> -->
 				<nav class="footer-links">
-					<a href="https://cesarsullen.github.io">About the Developer</a>
+					<a href="https://cesarsullen.github.io">Sobre el desarrollador</a>
 					<a href="https://de1.api.radio-browser.info/" target="_blank"
 						>Radio Browser API</a
 					>
@@ -222,8 +222,8 @@
 		<script>
 			function detectLanguage() {
 				const language = navigator.language || navigator.userLanguage;
-				if (language.startsWith("es")) {
-					window.location.href = "index-es.html";
+				if (language.startsWith("en")) {
+					window.location.href = "index.html";
 				}
 			}
 
