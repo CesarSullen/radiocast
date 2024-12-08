@@ -143,7 +143,6 @@ body {
 }
 
 .accordion-content {
-  transition: all 0.3s ease-in-out;
   max-height: 0px;
   overflow: hidden;
 }
@@ -490,6 +489,12 @@ footer .footer-links a:hover {
   }
   .slogan {
     width: 70%;
+  }
+  /* .cta-section {
+  	grid-column: 2;
+  } */
+  .accordion-content.active {
+    max-height: 400px;
   }
 }
 

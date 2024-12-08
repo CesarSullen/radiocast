@@ -161,4 +161,10 @@ footer {
 	.slogan {
 		width: 70%;
 	}
+	/* .cta-section {
+		grid-column: 2;
+	} */
+	.accordion-content.active {
+		max-height: 400px;
+	}
 }
