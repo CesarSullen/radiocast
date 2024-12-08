@@ -129,6 +129,7 @@ function getStations() {
 		"selectedGenreIndicator"
 	);
 	selectedGenreIndicator.innerText = currentGenre.genre;
+	selectedGenreIndicator.classList.remove("hidden");
 
 	currentStationUrl = currentGenre.urls[currentStationIndex];
 	fetch(currentStationUrl, {
