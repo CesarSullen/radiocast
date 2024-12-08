@@ -57,3 +57,4 @@
 - Added an animation to the LIVE flag
 - Added Latino Stations.
 - Fixed Accordion height issue.
+- Added a selected genre indicator.

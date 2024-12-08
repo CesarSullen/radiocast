@@ -125,9 +125,18 @@ function startPlaying(stationURL, stationName) {
 
 function getStations() {
 	const currentGenre = stations[currentGenreIndex];
-	currentStationUrl = currentGenre.urls[currentStationIndex];
+	const selectedGenreIndicator = document.getElementById(
+		"selectedGenreIndicator"
+	);
+	selectedGenreIndicator.innerText = currentGenre.genre;
 
-	fetch(currentStationUrl)
+	currentStationUrl = currentGenre.urls[currentStationIndex];
+	fetch(currentStationUrl, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	})
 		.then((response) => response.json())
 		.then((data) => {
 			data.forEach((station) => {

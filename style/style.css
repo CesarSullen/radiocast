@@ -55,6 +55,7 @@ hr {
 
 .shown {
   display: flex;
+  opacity: 1;
 }
 
 .btn {
@@ -122,8 +123,7 @@ body {
 
 .accordion-header {
   display: flex;
-  justify-content: space-between;
-  padding-inline: 0.5rem;
+  justify-content: space-around;
   align-items: center;
   cursor: pointer;
 }
@@ -132,6 +132,12 @@ body {
   text-transform: uppercase;
   letter-spacing: 3px;
   padding: 1rem 2rem;
+}
+.accordion-header .selected-genre-indicator {
+  padding: 0.2rem 0.5rem;
+  background: light-dark(#6e07cf, #00ffb7);
+  color: light-dark(white, black);
+  border-radius: 8px;
 }
 .accordion-header .accordion-toggle {
   width: 25px;

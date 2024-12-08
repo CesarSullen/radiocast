@@ -9,8 +9,7 @@
 }
 .accordion-header {
 	display: flex;
-	justify-content: space-between;
-	padding-inline: 0.5rem;
+	justify-content: space-around;
 	align-items: center;
 	cursor: pointer;
 
@@ -19,6 +18,12 @@
 		text-transform: uppercase;
 		letter-spacing: 3px;
 		padding: 1rem 2rem;
+	}
+	.selected-genre-indicator {
+		padding: 0.2rem 0.5rem;
+		background: $primary-color;
+		color: light-dark(white, black);
+		border-radius: 8px;
 	}
 	.accordion-toggle {
 		width: 25px;
