@@ -58,3 +58,9 @@
 - Added Latino Stations.
 - Fixed Accordion height issue.
 - Added a selected genre indicator.
+
+## 2.0.0
+
+### Exclusives artists
+
+- Now there's a list of artists.

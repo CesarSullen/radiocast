@@ -45,7 +45,7 @@ const stations = [
 			"https://de1.api.radio-browser.info/json/stations/byuuid/c6cf12d2-1a28-4e68-9d7e-a6cbe15b9b99", //Exclusively Metallica
 			"https://de1.api.radio-browser.info/json/stations/byuuid/32b2e232-8634-4eb5-a820-af28ae9709f2", //Exclusively Guns N Roses
 			"https://de1.api.radio-browser.info/json/stations/byuuid/f41fc2e8-94ef-4c9e-b799-97b90c99e85a", //Exclusively Iron Maiden
-			"https://de1.api.radio-browser.info/json/stations/byuuid/Ex2528fcc2-7816-4e60-aa13-59e5bcc6dc50", //Exclusively Green Day
+			"https://de1.api.radio-browser.info/json/stations/byuuid/2528fcc2-7816-4e60-aa13-59e5bcc6dc50", //Exclusively Green Day
 			"https://de1.api.radio-browser.info/json/stations/byuuid/32f1ac32-3b5c-4209-be6c-bb612d384041", //Eclusively Nirvana
 			"https://de1.api.radio-browser.info/json/stations/byuuid/7f39d4e6-ef08-4298-94ea-709c912503ba", //Exclusively Aerosmith
 		],
@@ -202,7 +202,7 @@ volumeControl.addEventListener("input", function () {
 });
 
 // Cards and genre selection
-const genreCards = document.querySelectorAll(".genre-card");
+const genreCards = document.querySelectorAll(".genres-section .card");
 
 function selectGenre(genreIndex) {
 	currentGenreIndex = genreIndex;
@@ -216,9 +216,28 @@ function selectGenre(genreIndex) {
 
 	getStations();
 }
+function fetchArtistStation(url) {
+	fetch(url, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			data.forEach((stationData) => {
+				const stationName = stationData.name;
+				const stationURL = stationData.url_resolved;
+
+				startPlaying(stationURL, stationName);
+			});
+		})
+		.catch((error) => console.error("Error fetching artist station:", error));
+}
 
 function deselectAllCards() {
 	genreCards.forEach((card) => card.classList.remove("selected"));
+	artistCards.forEach((card) => card.classList.remove("selected"));
 }
 
 genreCards.forEach((card, index) => {
@@ -226,5 +245,80 @@ genreCards.forEach((card, index) => {
 		deselectAllCards();
 		selectGenre(index);
 		this.classList.add("selected");
+	});
+});
+
+const artistCards = document.querySelectorAll(".artist-cards .card");
+
+artistCards.forEach((card, index) => {
+	card.addEventListener("click", function () {
+		deselectAllCards();
+		this.classList.add("selected");
+
+		const popStation = stations.find((station) => station.genre === "Pop");
+		const hipHopStation = stations.find(
+			(station) => station.genre === "Hip-Hop"
+		);
+		const rockStation = stations.find((station) => station.genre === "Rock");
+		const kpopStation = stations.find((station) => station.genre === "K-Pop");
+		const reggaeStation = stations.find(
+			(station) => station.genre === "Reggae"
+		);
+
+		let artistUrl;
+
+		switch (index) {
+			case 0: // AC/DC
+				artistUrl = rockStation.urls[2];
+				break;
+			case 1: // Adele
+				artistUrl = popStation.urls[2];
+				break;
+			case 2: // Bob Marley
+				artistUrl = reggaeStation.urls[0];
+				break;
+			case 3: // BTS
+				artistUrl = kpopStation.urls[0];
+				break;
+			case 4: // Guns N' Roses
+				artistUrl = rockStation.urls[5];
+				break;
+			case 5: // Green Day
+				artistUrl = rockStation.urls[7];
+				break;
+			case 6: // Iron Maiden
+				artistUrl = rockStation.urls[6];
+				break;
+			case 7: // Justin Bieber
+				artistUrl = popStation.urls[6];
+				break;
+			case 8: // Lana Del Rey
+				artistUrl = popStation.urls[7];
+				break;
+			case 9: // Metallica
+				artistUrl = rockStation.urls[4];
+				break;
+			case 10: // Michael Jackson
+				artistUrl = popStation.urls[4];
+				break;
+			case 11: // Post Malone
+				artistUrl = hipHopStation.urls[2];
+				break;
+			case 12: // Taylor Swift
+				artistUrl = popStation.urls[9];
+				break;
+			case 13: // The Weeknd
+				artistUrl = popStation.urls[8];
+				break;
+			case 14: // 2Pac
+				artistUrl = hipHopStation.urls[1];
+				break;
+			default:
+				console.error("Artist not found");
+		}
+
+		if (artistUrl) {
+			fetchArtistStation(artistUrl);
+		}
 	});
 });

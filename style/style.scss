@@ -17,7 +17,7 @@
 	animation: textAnimation 15s ease-in-out infinite;
 }
 
-.genre-card.selected {
+.card.selected {
 	.line {
 		display: flex;
 	}
@@ -164,7 +164,4 @@ footer {
 	/* .cta-section {
 		grid-column: 2;
 	} */
-	.accordion-content.active {
-		max-height: 400px;
-	}
 }

@@ -40,21 +40,22 @@
 	overflow: hidden;
 
 	&.active {
-		max-height: 500px;
+		max-height: 500vh;
 		padding-bottom: 0;
 	}
 }
 
-// Genres
-.genres-section {
+//
+.genres-section,
+.artists-section {
 	display: flex;
 	flex-direction: column;
 	background: light-dark($secondary-color, lighten(#1c1f24, 5%));
 	border-radius: 0 0 $border-radius-general $border-radius-general;
 }
-.genre-card {
+.card {
 	padding: 1rem;
-	min-height: 1px;
+	min-height: 10px;
 	font-weight: bold;
 	color: white;
 	display: flex;
@@ -71,7 +72,7 @@
 		border-radius: 0 0 $border-radius-general $border-radius-general;
 	}
 }
-.genre-title {
+.card-title {
 	font-weight: 400;
 }
 .selected {

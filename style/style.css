@@ -153,20 +153,21 @@ body {
   overflow: hidden;
 }
 .accordion-content.active {
-  max-height: 500px;
+  max-height: 500vh;
   padding-bottom: 0;
 }
 
-.genres-section {
+.genres-section,
+.artists-section {
   display: flex;
   flex-direction: column;
   background: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
   border-radius: 0 0 25px 25px;
 }
 
-.genre-card {
+.card {
   padding: 1rem;
-  min-height: 1px;
+  min-height: 10px;
   font-weight: bold;
   color: white;
   display: flex;
@@ -174,16 +175,16 @@ body {
   align-items: center;
   gap: 5px;
 }
-.genre-card:hover {
+.card:hover {
   cursor: pointer;
   background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
   color: light-dark(white, black);
 }
-.genre-card:last-child {
+.card:last-child {
   border-radius: 0 0 25px 25px;
 }
 
-.genre-title {
+.card-title {
   font-weight: 400;
 }
 
@@ -353,7 +354,7 @@ body:has(.donate-section) .btn {
   animation: textAnimation 15s ease-in-out infinite;
 }
 
-.genre-card.selected .line {
+.card.selected .line {
   display: flex;
 }
 
@@ -499,9 +500,6 @@ footer .footer-links a:hover {
   /* .cta-section {
   	grid-column: 2;
   } */
-  .accordion-content.active {
-    max-height: 400px;
-  }
 }
 
 /*# sourceMappingURL=style.css.map */
