@@ -51,6 +51,7 @@
 
 ## 1.2.3
 
-### Opera
+### Opera and animation
 
 - Added Opera Stations.
+- Added an animation to the LIVE flag

@@ -260,6 +260,39 @@ body:has(.donate-section) .btn {
     min-width: 400px;
   }
 }
+@keyframes liveFirstAnimation {
+  from {
+    max-width: 35px;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  55% {
+    max-width: 35px;
+  }
+  to {
+    max-width: 100%;
+  }
+}
+@keyframes liveTextShow {
+  from {
+    opacity: 0;
+    translate: 100%;
+    filter: blur(20px);
+  }
+  50% {
+    opacity: 0;
+  }
+  60% {
+    translate: 20%;
+  }
+  to {
+    opacity: 1;
+    translate: 0%;
+    filter: blur(0px);
+  }
+}
 @keyframes infiniteRotation {
   from {
     transform: rotate(0deg);
@@ -350,11 +383,14 @@ body:has(.donate-section) .btn {
   right: 5%;
   display: flex;
   align-items: center;
-  gap: 5px;
   background-color: red;
-  padding: 0.1rem 0.3rem;
+  padding: 0.1rem 0.5rem;
   border-radius: 25px;
   color: white;
+  animation: liveFirstAnimation 2s ease-in-out;
+}
+.live-flag p {
+  animation: liveTextShow 2s ease-in-out;
 }
 
 .live-icon {

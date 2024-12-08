@@ -50,11 +50,15 @@
 	right: 5%;
 	display: flex;
 	align-items: center;
-	gap: 5px;
 	background-color: red;
-	padding: 0.1rem 0.3rem;
+	padding: 0.1rem 0.5rem;
 	border-radius: $border-radius-general;
 	color: white;
+	animation: liveFirstAnimation 2s ease-in-out;
+
+	p {
+		animation: liveTextShow 2s ease-in-out;
+	}
 }
 .live-icon {
 	width: 20px;
