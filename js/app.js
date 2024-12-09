@@ -270,55 +270,142 @@ artistCards.forEach((card, index) => {
 		switch (index) {
 			case 0: // AC/DC
 				artistUrl = rockStation.urls[2];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Rock"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 1: // Adele
 				artistUrl = popStation.urls[2];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Pop"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 2: // Bob Marley
 				artistUrl = reggaeStation.urls[0];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Reggae"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 3: // BTS
 				artistUrl = kpopStation.urls[0];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "K-Pop"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 4: // Guns N' Roses
 				artistUrl = rockStation.urls[5];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Rock"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 5: // Green Day
 				artistUrl = rockStation.urls[7];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Rock"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 6: // Iron Maiden
 				artistUrl = rockStation.urls[6];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Rock"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 7: // Justin Bieber
 				artistUrl = popStation.urls[6];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Pop"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 8: // Lana Del Rey
 				artistUrl = popStation.urls[7];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Pop"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 9: // Metallica
 				artistUrl = rockStation.urls[4];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Rock"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 10: // Michael Jackson
 				artistUrl = popStation.urls[4];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Pop"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 11: // Post Malone
 				artistUrl = hipHopStation.urls[2];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Hip-Hop"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 12: // Taylor Swift
 				artistUrl = popStation.urls[9];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Pop"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 13: // The Weeknd
 				artistUrl = popStation.urls[8];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Pop"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			case 14: // 2Pac
 				artistUrl = hipHopStation.urls[1];
+				currentGenreIndex = stations.findIndex(
+					(station) => station.genre === "Hip-Hop"
+				);
+				currentStationIndex = stations[currentGenreIndex].urls.findIndex(
+					(url) => url === artistUrl
+				);
 				break;
 			default:
 				console.error("Artist not found");
 		}
-
-		if (artistUrl) {
-			fetchArtistStation(artistUrl);
-		}
+		fetchArtistStation(artistUrl);
 	});
 });

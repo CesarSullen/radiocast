@@ -64,3 +64,5 @@
 ### Exclusives artists
 
 - Now there's a list of artists.
+- Now the stations are available by their respective id.
+- If you switch the station, now the index of the genre is updated and you can see the next stations.
