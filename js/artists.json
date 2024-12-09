@@ -8,6 +8,14 @@
 		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/751c4733-6b5a-4abb-8b31-198afb27f3a2"
 	},
 	{
+		"name": "Aerosmith",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/7f39d4e6-ef08-4298-94ea-709c912503ba"
+	},
+	{
+		"name": "Backstreet Boys",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e160390d-2e3a-42b0-8bdc-eb0d8be48d7b"
+	},
+	{
 		"name": "Bob Marley",
 		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/996a804e-c197-4b80-b19f-9019f72d32a8"
 	},
@@ -32,6 +40,10 @@
 		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/79dd25b0-0f7a-41eb-a9ff-a373b7abb553"
 	},
 	{
+		"name": "Kanye West",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/a00b92dd-3716-4d2b-9637-489e21bade98"
+	},
+	{
 		"name": "Lana Del Rey",
 		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/85817f91-210b-4ab8-b03c-b9b333b39874"
 	},
@@ -42,6 +54,10 @@
 	{
 		"name": "Michael Jackson",
 		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/c740d6d9-6482-4931-81a8-03ec1a631ede"
+	},
+	{
+		"name": "Nirvana",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/32f1ac32-3b5c-4209-be6c-bb612d384041"
 	},
 	{
 		"name": "Post Malone",
@@ -58,5 +74,9 @@
 	{
 		"name": "2Pac",
 		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e97a236a-f5d8-48fc-910b-dba9c39c6695"
+	},
+	{
+		"name": "50 Cent",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/28317be8-2e51-406e-9613-70ce124b633f"
 	}
 ]

@@ -29,8 +29,16 @@ function loadArtists() {
 
 function startPlaying(stationURL, stationName) {
 	console.log(`Reproduciendo: ${stationName} - URL: ${stationURL}`);
+
 	radioSource.src = stationURL;
 	radioName.textContent = stationName;
+
+	playBtn.classList.add("hidden");
+	playBtn.classList.remove("shown");
+
+	pauseBtn.classList.add("shown");
+	pauseBtn.classList.remove("hidden");
+
 	radioPlayer.load();
 	radioPlayer.play();
 }
@@ -89,6 +97,9 @@ function switchPrevStation() {
 
 playBtn.addEventListener("click", () => {
 	playBtn.classList.add("hidden");
+	playBtn.classList.remove("shown");
+
+	pauseBtn.classList.add("shown");
 	pauseBtn.classList.remove("hidden");
 
 	getStations();
@@ -97,6 +108,9 @@ playBtn.addEventListener("click", () => {
 
 pauseBtn.addEventListener("click", () => {
 	pauseBtn.classList.add("hidden");
+	pauseBtn.classList.remove("shown");
+
+	playBtn.classList.add("shown");
 	playBtn.classList.remove("hidden");
 
 	radioPlayer.pause();
@@ -121,11 +135,11 @@ function selectGenre(genreIndex) {
 	currentGenreIndex = genreIndex;
 	currentStationIndex = 0;
 
-	playBtn.classList.remove("shown");
+	/* playBtn.classList.remove("shown");
 	playBtn.classList.add("hidden");
 
 	pauseBtn.classList.remove("hidden");
-	pauseBtn.classList.add("shown");
+	pauseBtn.classList.add("shown"); */
 
 	getStations();
 }
