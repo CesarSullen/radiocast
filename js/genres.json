@@ -1,0 +1,107 @@
+[
+	{
+		"genre": "Lo-Fi",
+		"urls": [
+			"https://de1.api.radio-browser.info/json/stations/byuuid/2b2d80db-e0c8-42ad-89e4-7653ef3773f8",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/526b6bad-68f3-4197-9cfa-fa8b341830bb",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/ab9697c4-f1cf-48bc-b4d8-4d15ad5618fa",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/e6c3360f-46f9-4cc6-9a58-cf66902f8acf"
+		]
+	},
+	{
+		"genre": "Anime",
+		"urls": [
+			"https://de1.api.radio-browser.info/json/stations/byuuid/1adf1539-e647-44c3-85d8-b437b768fb8c",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/57f52194-0dce-4c4d-8b53-a2fc396777ba",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/2119387e-f76a-449f-b15d-315ba83c2dfe",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/a53d9e63-0cc6-4f37-83ed-d99119b504a8"
+		]
+	},
+	{
+		"genre": "K-Pop",
+		"urls": [
+			"https://de1.api.radio-browser.info/json/stations/byuuid/721b8f32-8071-4cca-a10f-c999d3b65346",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/43be83dc-340b-11e8-bb9b-52543be04c81",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/2e53ff8e-1d21-4e04-b0e9-f68257c4e7e9",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/2973ff08-fb80-4281-8b7a-33bd213b06d4"
+		]
+	},
+	{
+		"genre": "Rock",
+		"urls": [
+			"https://de1.api.radio-browser.info/json/stations/byuuid/77e606ea-bf7d-11e9-8502-52543be04c81",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/21f3ee29-812f-49bf-92c7-f56368ca86dc",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/ba93ec29-66c9-4bee-8f71-b71481001c8e",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/413e09ae-dbdc-48e8-a42a-81cd3e5dd176",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/c6cf12d2-1a28-4e68-9d7e-a6cbe15b9b99",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/32b2e232-8634-4eb5-a820-af28ae9709f2",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/f41fc2e8-94ef-4c9e-b799-97b90c99e85a",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/2528fcc2-7816-4e60-aa13-59e5bcc6dc50",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/32f1ac32-3b5c-4209-be6c-bb612d384041",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/7f39d4e6-ef08-4298-94ea-709c912503ba"
+		]
+	},
+	{
+		"genre": "EDM",
+		"urls": [
+			"https://de1.api.radio-browser.info/json/stations/byuuid/f3c8f36c-5543-4cf3-906f-0fa307420f18",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/be61261d-ba40-4ab1-a045-34f0c49b0ca6",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/9638a8de-0601-11e8-ae97-52543be04c81",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/d177cdd0-175c-11ea-a620-52543be04c81",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/910703ee-6c0e-4801-9ad4-cd073ca27409"
+		]
+	},
+	{
+		"genre": "Pop",
+		"urls": [
+			"https://de1.api.radio-browser.info/json/stations/byuuid/e160390d-2e3a-42b0-8bdc-eb0d8be48d7b",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/48ec5f27-c7e5-405a-9ddb-b1415f4f4c1d",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/751c4733-6b5a-4abb-8b31-198afb27f3a2",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/4c74c8b7-862a-441a-8e9b-9554e417f2b5",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/c740d6d9-6482-4931-81a8-03ec1a631ede",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/d6eb8a3e-27f3-11e8-91bf-52543be04c81",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/79dd25b0-0f7a-41eb-a9ff-a373b7abb553",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/85817f91-210b-4ab8-b03c-b9b333b39874",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/5c10f556-c26f-4b19-bb63-bff43aa626d4",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/29f29d98-c1f9-4d75-b96d-02d15a151fcf"
+		]
+	},
+	{
+		"genre": "Hip-Hop",
+		"urls": [
+			"https://de1.api.radio-browser.info/json/stations/byuuid/480a7506-d337-4364-9846-6948561b417f",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/e97a236a-f5d8-48fc-910b-dba9c39c6695",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/0b713eed-751c-4883-beb2-d5c3452013bc",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/1f52f655-7b5b-462a-89e9-8de28f7ad029",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/28317be8-2e51-406e-9613-70ce124b633f",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/45c721f1-debe-4bc5-9db4-f16174e7e60c",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/a00b92dd-3716-4d2b-9637-489e21bade98"
+		]
+	},
+	{
+		"genre": "Reggae",
+		"urls": [
+			"https://de1.api.radio-browser.info/json/stations/byuuid/996a804e-c197-4b80-b19f-9019f72d32a8",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/1ce33acf-2457-11e8-91bf-52543be04c81",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/0dadaba1-629d-11e8-b15b-52543be04c81",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/962f8fe4-0601-11e8-ae97-52543be04c81"
+		]
+	},
+	{
+		"genre": "Latino",
+		"urls": [
+			"https://de1.api.radio-browser.info/json/stations/byuuid/d7f67ff5-8103-406b-b168-5f8424babea3",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/21741ce7-2f1c-451d-b6dd-8ebb0cc7a884",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/d1b4a4ee-e101-4191-aecb-05ec78bb92d3",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/eabc2a6b-e71d-4282-a646-ba45bfbc7842"
+		]
+	},
+	{
+		"genre": "Opera",
+		"urls": [
+			"https://de1.api.radio-browser.info/json/stations/byuuid/13b45d2a-ef33-4b41-8eec-b206583eaccc",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/61cbd7d9-96f5-4200-9d3e-d1890ef84ead",
+			"https://de1.api.radio-browser.info/json/stations/byuuid/b9f8b7ee-a6dd-4c74-815b-ae8f5e7b77e5"
+		]
+	}
+]

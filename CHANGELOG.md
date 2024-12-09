@@ -66,3 +66,11 @@
 - Now there's a list of artists.
 - Now the stations are available by their respective id.
 - If you switch the station, now the index of the genre is updated and you can see the next stations.
+
+## 2.0.1
+
+### Optimizacions
+
+- Optimized JavaScript artist selection.
+- Now both arrays, genres and artists are served from a json file.
+- Fixed the issue that made the artist cards still selected when the user presses the next or prev buttons.

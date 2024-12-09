@@ -1,0 +1,62 @@
+[
+	{
+		"name": "AC/DC",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/ba93ec29-66c9-4bee-8f71-b71481001c8e"
+	},
+	{
+		"name": "Adele",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/751c4733-6b5a-4abb-8b31-198afb27f3a2"
+	},
+	{
+		"name": "Bob Marley",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/996a804e-c197-4b80-b19f-9019f72d32a8"
+	},
+	{
+		"name": "BTS",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/721b8f32-8071-4cca-a10f-c999d3b65346"
+	},
+	{
+		"name": "Guns N' Roses",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/32b2e232-8634-4eb5-a820-af28ae9709f2"
+	},
+	{
+		"name": "Green Day",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/2528fcc2-7816-4e60-aa13-59e5bcc6dc50"
+	},
+	{
+		"name": "Iron Maiden",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/f41fc2e8-94ef-4c9e-b799-97b90c99e85a"
+	},
+	{
+		"name": "Justin Bieber",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/79dd25b0-0f7a-41eb-a9ff-a373b7abb553"
+	},
+	{
+		"name": "Lana Del Rey",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/85817f91-210b-4ab8-b03c-b9b333b39874"
+	},
+	{
+		"name": "Metallica",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/c6cf12d2-1a28-4e68-9d7e-a6cbe15b9b99"
+	},
+	{
+		"name": "Michael Jackson",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/c740d6d9-6482-4931-81a8-03ec1a631ede"
+	},
+	{
+		"name": "Post Malone",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e97a236a-f5d8-48fc-910b-dba9c39c6695"
+	},
+	{
+		"name": "Taylor Swift",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/29f29d98-c1f9-4d75-b96d-02d15a151fcf"
+	},
+	{
+		"name": "The Weeknd",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/5c10f556-c26f-4b19-bb63-bff43aa626d4"
+	},
+	{
+		"name": "2Pac",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e97a236a-f5d8-48fc-910b-dba9c39c6695"
+	}
+]
