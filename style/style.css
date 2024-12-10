@@ -107,6 +107,7 @@ body {
   margin: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 }
 
@@ -153,7 +154,7 @@ body {
   overflow: hidden;
 }
 .accordion-content.active {
-  max-height: 500vh;
+  max-height: 1000vh;
   padding-bottom: 0;
 }
 
@@ -342,7 +343,6 @@ body:has(.donate-section) .btn {
 .slogan {
   width: 90%;
   align-self: center;
-  grid-column: span 2;
 }
 
 .slogan path {
@@ -413,6 +413,20 @@ body:has(.donate-section) .btn {
 
 .radio-name {
   text-transform: capitalize;
+}
+
+.radio-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.player-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 
 .btn-container {
@@ -495,11 +509,25 @@ footer .footer-links a:hover {
     justify-items: center;
   }
   .slogan {
+    grid-column: span 2;
     width: 70%;
   }
-  /* .cta-section {
-  	grid-column: 2;
-  } */
+  .audio-player {
+    grid-column: span 2;
+    width: 100%;
+    max-width: 890px;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .radio-name {
+    font-size: 1.3rem;
+  }
+  .control-btn {
+    width: 65px;
+  }
+  .volume-control {
+    width: 80%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

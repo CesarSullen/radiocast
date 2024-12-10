@@ -6,7 +6,6 @@
 .slogan {
 	width: 90%;
 	align-self: center;
-	grid-column: span 2;
 }
 .slogan path {
 	fill: transparent;
@@ -72,6 +71,18 @@
 }
 .radio-name {
 	text-transform: capitalize;
+}
+.radio-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+}
+.player-inputs {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 30px;
 }
 .btn-container {
 	display: flex;
@@ -159,9 +170,23 @@ footer {
 		justify-items: center;
 	}
 	.slogan {
+		grid-column: span 2;
 		width: 70%;
 	}
-	/* .cta-section {
-		grid-column: 2;
-	} */
+	.audio-player {
+		grid-column: span 2;
+		width: 100%;
+		max-width: 890px;
+		flex-direction: row;
+		justify-content: space-around;
+	}
+	.radio-name {
+		font-size: 1.3rem;
+	}
+	.control-btn {
+		width: 65px;
+	}
+	.volume-control {
+		width: 80%;
+	}
 }
