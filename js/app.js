@@ -1,126 +1,126 @@
+// DOM Elements
 const radioPlayer = document.getElementById("radioPlayer");
 const radioSource = document.getElementById("radioSource");
 const radioCover = document.getElementById("radioCover");
 const radioName = document.getElementById("radioName");
 
+const prevBtn = document.getElementById("prevBtn");
+const playBtn = document.getElementById("playBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+const nextBtn = document.getElementById("nextBtn");
+const volumeControl = document.getElementById("volumeControl");
+
+const genresSection = document.querySelector(".genres-section");
+const artistsSection = document.querySelector(".artists-section");
+
 let currentStationIndex = 0;
 let currentGenreIndex = 0;
-let currentStationUrl;
+let stations = [];
+let artistMap = [];
 
+// Load genres from the JSON file
 function loadGenres() {
 	fetch("./js/genres.json")
 		.then((response) => response.json())
 		.then((data) => {
 			stations = data;
-			console.log("Géneros cargados:", stations);
+			console.log("Genres loaded:", stations);
+			createGenreCards();
 		})
-		.catch((error) => console.error("Error al cargar los géneros:", error));
+		.catch((error) => console.error("Error loading genres:", error));
 }
 
+// Load artists from the JSON file
 function loadArtists() {
 	fetch("./js/artists.json")
 		.then((response) => response.json())
 		.then((data) => {
-			artistMap = data; // Guardar los artistas en la variable artistMap
-			console.log("Artistas cargados:", artistMap);
+			artistMap = data;
+			console.log("Artists loaded:", artistMap);
+			createArtistCards();
 		})
-		.catch((error) => console.error("Error al cargar los artistas:", error));
+		.catch((error) => console.error("Error loading artists:", error));
 }
 
+// Start playing a station
 function startPlaying(stationURL, stationName) {
-	console.log(`Reproduciendo: ${stationName} - URL: ${stationURL}`);
-
+	console.log(`Now playing: ${stationName} - URL: ${stationURL}`);
 	radioSource.src = stationURL;
 	radioName.textContent = stationName;
 
-	playBtn.classList.add("hidden");
-	playBtn.classList.remove("shown");
-
-	pauseBtn.classList.add("shown");
-	pauseBtn.classList.remove("hidden");
-
+	togglePlayPauseButtons(true);
 	radioPlayer.load();
 	radioPlayer.play();
 }
 
+// Toggle between play and pause buttons
+function togglePlayPauseButtons(isPlaying) {
+	if (isPlaying) {
+		playBtn.classList.add("hidden");
+		playBtn.classList.remove("shown");
+		pauseBtn.classList.add("shown");
+		pauseBtn.classList.remove("hidden");
+	} else {
+		pauseBtn.classList.add("hidden");
+		pauseBtn.classList.remove("shown");
+		playBtn.classList.add("shown");
+		playBtn.classList.remove("hidden");
+	}
+}
+
+// Get stations based on the selected genre
 function getStations() {
 	const currentGenre = stations[currentGenreIndex];
 	const selectedGenreIndicator = document.getElementById(
 		"selectedGenreIndicator"
 	);
+
 	selectedGenreIndicator.innerText = currentGenre.genre;
 	selectedGenreIndicator.classList.remove("hidden");
 
-	currentStationUrl = currentGenre.urls[currentStationIndex];
-	fetch(currentStationUrl, {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
+	const currentStationUrl = currentGenre.urls[currentStationIndex];
+
+	fetch(currentStationUrl)
 		.then((response) => response.json())
 		.then((data) => {
-			data.forEach((station) => {
-				const stationName = station.name;
-				const stationURL = station.url_resolved;
-
+			if (data.length > 0) {
+				const stationName = data[0].name;
+				const stationURL = data[0].url_resolved;
 				startPlaying(stationURL, stationName);
-			});
-		});
+			}
+		})
+		.catch((error) => console.error("Error fetching stations:", error));
 }
 
-// Control Buttons
-const prevBtn = document.getElementById("prevBtn");
-const playBtn = document.getElementById("playBtn");
-const pauseBtn = document.getElementById("pauseBtn");
-const nextBtn = document.getElementById("nextBtn");
+// Control buttons event listeners
+playBtn.addEventListener("click", () => {
+	togglePlayPauseButtons(true);
+	getStations();
+});
 
-function deselectArtistCards() {
-	const artistCards = document.querySelectorAll(".artist-cards .card");
-	artistCards.forEach((card) => card.classList.remove("selected"));
-}
+pauseBtn.addEventListener("click", () => {
+	togglePlayPauseButtons(false);
+	radioPlayer.pause();
+});
 
+// Functions for switching between stations
 function switchNextStation() {
-	deselectArtistCards();
 	currentStationIndex =
 		(currentStationIndex + 1) % stations[currentGenreIndex].urls.length;
 	getStations();
 }
 
 function switchPrevStation() {
-	deselectArtistCards();
 	currentStationIndex =
 		(currentStationIndex - 1 + stations[currentGenreIndex].urls.length) %
 		stations[currentGenreIndex].urls.length;
 	getStations();
 }
 
-playBtn.addEventListener("click", () => {
-	playBtn.classList.add("hidden");
-	playBtn.classList.remove("shown");
-
-	pauseBtn.classList.add("shown");
-	pauseBtn.classList.remove("hidden");
-
-	getStations();
-	radioPlayer.play();
-});
-
-pauseBtn.addEventListener("click", () => {
-	pauseBtn.classList.add("hidden");
-	pauseBtn.classList.remove("shown");
-
-	playBtn.classList.add("shown");
-	playBtn.classList.remove("hidden");
-
-	radioPlayer.pause();
-});
-
 prevBtn.addEventListener("click", switchPrevStation);
 nextBtn.addEventListener("click", switchNextStation);
 
-// Volume Control
-const volumeControl = document.getElementById("volumeControl");
+// Volume control setup
 radioPlayer.volume = 1;
 volumeControl.value = radioPlayer.volume;
 
@@ -128,43 +128,19 @@ volumeControl.addEventListener("input", function () {
 	radioPlayer.volume = this.value;
 });
 
-// Cards and genre selection
+// Genre selection handling
 const genreCards = document.querySelectorAll(".genres-section .card");
 
 function selectGenre(genreIndex) {
 	currentGenreIndex = genreIndex;
 	currentStationIndex = 0;
-
-	/* playBtn.classList.remove("shown");
-	playBtn.classList.add("hidden");
-
-	pauseBtn.classList.remove("hidden");
-	pauseBtn.classList.add("shown"); */
-
 	getStations();
-}
-function fetchArtistStation(url) {
-	fetch(url, {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			data.forEach((stationData) => {
-				const stationName = stationData.name;
-				const stationURL = stationData.url_resolved;
-
-				startPlaying(stationURL, stationName);
-			});
-		})
-		.catch((error) => console.error("Error fetching artist station:", error));
 }
 
 function deselectAllCards() {
-	genreCards.forEach((card) => card.classList.remove("selected"));
-	artistCards.forEach((card) => card.classList.remove("selected"));
+	document
+		.querySelectorAll(".card")
+		.forEach((card) => card.classList.remove("selected"));
 }
 
 genreCards.forEach((card, index) => {
@@ -175,35 +151,91 @@ genreCards.forEach((card, index) => {
 	});
 });
 
-const artistCards = document.querySelectorAll(".artist-cards .card");
+// Create audio waves
+function createAudioWaves() {
+	const audioWaves = document.createElement("div");
+	audioWaves.classList.add("audio-waves");
 
-artistCards.forEach((card, index) => {
-	card.addEventListener("click", function () {
-		deselectAllCards();
-		this.classList.add("selected");
+	for (let i = 0; i < 3; i++) {
+		const line = document.createElement("div");
+		line.classList.add("line", "hidden");
+		audioWaves.appendChild(line);
+	}
 
-		const artistInfo = artistMap[index];
+	return audioWaves;
+}
 
-		currentGenreIndex = stations.findIndex((station) =>
-			station.urls.includes(artistInfo.url)
-		);
-		currentStationIndex = stations[currentGenreIndex].urls.findIndex(
-			(url) => url === artistInfo.url
-		);
-		fetchArtistStation(artistInfo.url);
+// Function to create genre cards
+function createGenreCards() {
+	stations.forEach((genreInfo, index) => {
+		const genreCard = document.createElement("div");
+		genreCard.classList.add("card");
+
+		if (index === 0) genreCard.classList.add("selected");
+
+		const cardTitle = document.createElement("p");
+		cardTitle.classList.add("card-title");
+		cardTitle.textContent = genreInfo.genre;
+
+		genreCard.appendChild(createAudioWaves());
+		genreCard.appendChild(cardTitle);
+		genreCard.appendChild(createAudioWaves());
+
+		genreCard.addEventListener("click", function () {
+			deselectAllCards();
+			this.classList.add("selected");
+			selectGenre(index);
+			console.log(`Selected Genre: ${genreInfo.genre}`);
+		});
+
+		genresSection.appendChild(genreCard);
 	});
-});
+}
 
+// Function to create artist cards
+function createArtistCards() {
+	artistMap.forEach((artistInfo) => {
+		const artistCard = document.createElement("div");
+		artistCard.classList.add("card");
+
+		const cardTitle = document.createElement("p");
+		cardTitle.classList.add("card-title");
+
+		cardTitle.textContent = artistInfo.name;
+
+		artistCard.appendChild(cardTitle);
+
+		artistCard.addEventListener("click", function () {
+			deselectAllCards();
+			this.classList.add("selected");
+
+			const foundIndex = stations.findIndex((station) =>
+				artistInfo.genre.includes(station.genre)
+			);
+
+			if (foundIndex > -1) {
+				currentGenreIndex = foundIndex;
+				getStations();
+			}
+			fetchArtistStation(artistInfo.url);
+		});
+
+		artistsSection.appendChild(artistCard);
+	});
+}
+
+// Function to fetch and play a specific artist's station
 function fetchArtistStation(url) {
 	fetch(url)
 		.then((response) => response.json())
 		.then((data) => {
-			data.forEach((stationData) => {
-				startPlaying(stationData.url_resolved, stationData.name);
-			});
+			if (data.length > 0) {
+				startPlaying(data[0].url_resolved, data[0].name);
+			}
 		})
 		.catch((error) => console.error("Error fetching artist station:", error));
 }
 
+// Initial calls to load genres and artists
 loadGenres();
 loadArtists();

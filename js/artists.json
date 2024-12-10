@@ -1,82 +1,227 @@
 [
 	{
+		"name": "ABBA",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/13a10fcb-2a7c-4e94-8dcb-a18f9b5e54bd",
+		"genre": ["Pop"]
+	},
+	{
 		"name": "AC/DC",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/ba93ec29-66c9-4bee-8f71-b71481001c8e"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/ba93ec29-66c9-4bee-8f71-b71481001c8e",
+		"genre": ["Rock"]
 	},
 	{
 		"name": "Adele",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/751c4733-6b5a-4abb-8b31-198afb27f3a2"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/751c4733-6b5a-4abb-8b31-198afb27f3a2",
+		"genre": ["Pop"]
 	},
 	{
 		"name": "Aerosmith",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/7f39d4e6-ef08-4298-94ea-709c912503ba"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/7f39d4e6-ef08-4298-94ea-709c912503ba",
+		"genre": ["Rock"]
+	},
+	{
+		"name": "Amy Winehouse",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/9a0b16d2-e6da-4235-b7b0-175ec43eae18",
+		"genre": ["Soul"]
+	},
+	{
+		"name": "Andrea Bocelli",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/be5c49aa-e351-42eb-b733-536a678157cd",
+		"genre": ["Opera"]
 	},
 	{
 		"name": "Backstreet Boys",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e160390d-2e3a-42b0-8bdc-eb0d8be48d7b"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e160390d-2e3a-42b0-8bdc-eb0d8be48d7b",
+		"genre": ["Pop"]
+	},
+	{
+		"name": "Bee Gees",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/197bb600-d9e5-4cdc-8071-e65c798ae12f",
+		"genre": ["Disco"]
+	},
+	{
+		"name": "Beyonce",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/41ff1cdf-5d52-43e4-ae6e-2841fe4c4493",
+		"genre": ["R&B"]
 	},
 	{
 		"name": "Bob Marley",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/996a804e-c197-4b80-b19f-9019f72d32a8"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/996a804e-c197-4b80-b19f-9019f72d32a8",
+		"genre": ["Reggae"]
+	},
+	{
+		"name": "Britney Spears",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/02639ad0-b482-4abd-a342-434435d20bd0",
+		"genre": ["Pop"]
 	},
 	{
 		"name": "BTS",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/721b8f32-8071-4cca-a10f-c999d3b65346"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/721b8f32-8071-4cca-a10f-c999d3b65346",
+		"genre": ["K-Pop"]
+	},
+	{
+		"name": "Cher",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/f597209f-f524-4daa-a809-282988976b55",
+		"genre": ["Pop"]
+	},
+	{
+		"name": "Coldplay",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/b577d001-7e85-434d-bd32-0fd998d606d8",
+		"genre": ["Alternative Rock"]
+	},
+	{
+		"name": "Demi Lovato",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/907d4937-9a89-4339-a17b-33eb5171e95f",
+		"genre": ["Pop"]
+	},
+	{
+		"name": "Eagles",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/3f877a2c-8d74-4e32-b8fb-84a6dedb6987",
+		"genre": ["Rock"]
+	},
+	{
+		"name": "Elvis Presley",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e240cca5-20a3-45e8-9ea9-2b86d4ce3528",
+		"genre": ["Rock and Roll", "Rock"]
+	},
+	{
+		"name": "Enrique Iglesias",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/cf31588a-9edd-41f3-aad8-d6e297ac1468",
+		"genre": ["Pop"]
+	},
+	{
+		"name": "Frank Sinatra",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/8cdd871a-24c3-4902-8708-071580f9763b",
+		"genre": ["Jazz"]
 	},
 	{
 		"name": "Guns N' Roses",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/32b2e232-8634-4eb5-a820-af28ae9709f2"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/32b2e232-8634-4eb5-a820-af28ae9709f2",
+		"genre": ["Rock", "Hard Rock"]
 	},
 	{
 		"name": "Green Day",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/2528fcc2-7816-4e60-aa13-59e5bcc6dc50"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/2528fcc2-7816-4e60-aa13-59e5bcc6dc50",
+		"genre": ["Rock", "Punk Rock"]
 	},
 	{
 		"name": "Iron Maiden",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/f41fc2e8-94ef-4c9e-b799-97b90c99e85a"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/f41fc2e8-94ef-4c9e-b799-97b90c99e85a",
+		"genre": ["Rock", "Heavy Metal"]
+	},
+	{
+		"name": "John Lennon",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/c3564922-c7df-4722-b90e-b69eaa25494e",
+		"genre": ["Rock"]
 	},
 	{
 		"name": "Justin Bieber",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/79dd25b0-0f7a-41eb-a9ff-a373b7abb553"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/79dd25b0-0f7a-41eb-a9ff-a373b7abb553",
+		"genre": ["Pop"]
+	},
+	{
+		"name": "Justin Timberlake",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/c26ff54f-8ef4-472f-9d31-78bc1e8b68c4",
+		"genre": ["Pop"]
 	},
 	{
 		"name": "Kanye West",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/a00b92dd-3716-4d2b-9637-489e21bade98"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/a00b92dd-3716-4d2b-9637-489e21bade98",
+		"genre": ["Hip-Hop"]
 	},
 	{
 		"name": "Lana Del Rey",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/85817f91-210b-4ab8-b03c-b9b333b39874"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/85817f91-210b-4ab8-b03c-b9b333b39874",
+		"genre": ["Pop"]
+	},
+	{
+		"name": "Led Zeppelin",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/d8fc41a4-e013-4877-856c-77dc04f179a1",
+		"genre": ["Rock", "Hard Rock"]
 	},
 	{
 		"name": "Metallica",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/c6cf12d2-1a28-4e68-9d7e-a6cbe15b9b99"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/c6cf12d2-1a28-4e68-9d7e-a6cbe15b9b99",
+		"genre": ["Rock", "Heavy Metal"]
 	},
 	{
 		"name": "Michael Jackson",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/c740d6d9-6482-4931-81a8-03ec1a631ede"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/c740d6d9-6482-4931-81a8-03ec1a631ede",
+		"genre": ["Pop", "Soul"]
 	},
 	{
 		"name": "Nirvana",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/32f1ac32-3b5c-4209-be6c-bb612d384041"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/32f1ac32-3b5c-4209-be6c-bb612d384041",
+		"genre": ["Grunge", "Rock"]
+	},
+	{
+		"name": "Patsy Cline",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/85f01701-d154-4779-b092-44aaeb0b20fd",
+		"genre": ["Country"]
+	},
+	{
+		"name": "Paul McCartney",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/11e45095-74a0-45d7-a8d3-ce2498ea7c17",
+		"genre": ["Rock", "Pop"]
+	},
+	{
+		"name": "Pink Floyd",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/501e4f18-fd92-441e-b4c6-4bd4a8435672",
+		"genre": ["Rock", "Progressive Rock"]
 	},
 	{
 		"name": "Post Malone",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e97a236a-f5d8-48fc-910b-dba9c39c6695"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e97a236a-f5d8-48fc-910b-dba9c39c6695",
+		"genre": ["Hip-Hop"]
+	},
+	{
+		"name": "Queen",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/62ec5693-73e1-4177-9f2d-b1c84f299b3c",
+		"genre": ["Rock"]
+	},
+	{
+		"name": "Shakira",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/d52a564e-5117-4b65-a8ea-a84405ab7e86",
+		"genre": ["Pop"]
+	},
+	{
+		"name": "Shania Twain",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/d9f3f982-dcbe-43ba-92f2-bcc2c0638933",
+		"genre": ["Country"]
+	},
+	{
+		"name": "Sting",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/b107964a-4267-499c-b00f-1ddafac518ca",
+		"genre": ["Pop"]
 	},
 	{
 		"name": "Taylor Swift",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/29f29d98-c1f9-4d75-b96d-02d15a151fcf"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/29f29d98-c1f9-4d75-b96d-02d15a151fcf",
+		"genre": ["Country", "Pop"]
+	},
+	{
+		"name": "The Beatles",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/747ab08f-5573-45c7-b9ef-2baffba2eb2a",
+		"genre": ["Rock", "Pop"]
 	},
 	{
 		"name": "The Weeknd",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/5c10f556-c26f-4b19-bb63-bff43aa626d4"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/5c10f556-c26f-4b19-bb63-bff43aa626d4",
+		"genre": ["R&B", "Pop"]
+	},
+	{
+		"name": "Whitney Houston ",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/ef2dac34-be6c-4f6f-9408-88947e0219cb",
+		"genre": ["Pop", "Soul"]
 	},
 	{
 		"name": "2Pac",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e97a236a-f5d8-48fc-910b-dba9c39c6695"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/e97a236a-f5d8-48fc-910b-dba9c39c6695",
+		"genre": ["Hip-Hop", "Rap"]
 	},
 	{
 		"name": "50 Cent",
-		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/28317be8-2e51-406e-9613-70ce124b633f"
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/28317be8-2e51-406e-9613-70ce124b633f",
+		"genre": ["Hip-Hop", "Rap"]
 	}
 ]
