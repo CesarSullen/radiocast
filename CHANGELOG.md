@@ -76,3 +76,5 @@
 - Better UI in artists section.
 - Added artists pictures from Deezer.
 - Added genre indicator to the artists.
+- Artists pictures get blurred when their cards are selected, and inside there're the audio waves
+- Now the player shows the artists pictures.

@@ -43,10 +43,11 @@ function loadArtists() {
 }
 
 // Start playing a station
-function startPlaying(stationURL, stationName) {
+function startPlaying(stationURL, stationName, stationCover) {
 	console.log(`Now playing: ${stationName} - URL: ${stationURL}`);
 	radioSource.src = stationURL;
 	radioName.textContent = stationName;
+	radioCover.src = stationCover;
 
 	togglePlayPauseButtons(true);
 	radioPlayer.load();
@@ -86,7 +87,7 @@ function getStations() {
 			if (data.length > 0) {
 				const stationName = data[0].name;
 				const stationURL = data[0].url_resolved;
-				startPlaying(stationURL, stationName);
+				startPlaying(stationURL, stationName, "./assets/logo.JPG");
 			}
 		})
 		.catch((error) => console.error("Error fetching stations:", error));
@@ -190,7 +191,14 @@ function createArtistCards() {
 		artistCard.classList.add("card", "artist-card");
 		// HTML structure
 		artistCard.innerHTML = `
-		<img src="${artistInfo.img}" class="card-img" />
+		<div class = "img-container">
+			<img src = "${artistInfo.img}" class="card-img" />
+			<div class = "audio-waves">
+				<div class="line hidden"></div>
+				<div class="line hidden"></div>
+				<div class="line hidden"></div>
+			</div>
+		</div>
 		<div class="card-info">
 			<p class="cart-title">${artistInfo.name}</p>
 			<div class="card-genre">${artistInfo.genre[0]}</div>
@@ -208,7 +216,7 @@ function createArtistCards() {
 			if (foundIndex > -1) {
 				currentGenreIndex = foundIndex;
 			}
-			fetchArtistStation(artistInfo.url);
+			fetchArtistStation(artistInfo.url, artistInfo.img);
 		});
 
 		artistsSection.appendChild(artistCard);
@@ -216,12 +224,12 @@ function createArtistCards() {
 }
 
 // Function to fetch and play a specific artist's station
-function fetchArtistStation(url) {
+function fetchArtistStation(url, artistPicture) {
 	fetch(url)
 		.then((response) => response.json())
 		.then((data) => {
 			if (data.length > 0) {
-				startPlaying(data[0].url_resolved, data[0].name);
+				startPlaying(data[0].url_resolved, data[0].name, artistPicture);
 			}
 		})
 		.catch((error) => console.error("Error fetching artist station:", error));

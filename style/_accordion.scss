@@ -83,11 +83,29 @@
 	justify-content: left;
 	gap: 20px;
 
-	&:hover,
 	&.selected {
+		.card-img {
+			filter: blur(2px);
+		}
+	}
+	&.selected,
+	&:hover {
 		.card-genre {
 			background: light-dark($light, $dark);
 			color: white;
+		}
+		.img-container {
+			position: relative;
+		}
+		.audio-waves {
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%) scale(1.3);
+			position: absolute;
+			border-radius: 15px;
+		}
+		.line {
+			background: white;
 		}
 	}
 }
