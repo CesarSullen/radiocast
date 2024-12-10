@@ -193,6 +193,34 @@ body {
   color: light-dark(white, black);
 }
 
+.artist-card {
+  justify-content: left;
+  gap: 20px;
+}
+.artist-card:hover .card-genre, .artist-card.selected .card-genre {
+  background: light-dark(rgba(153, 152, 152, 0.356), rgb(39.15625, 43.3515625, 50.34375));
+  color: white;
+}
+
+.card-img {
+  border-radius: 15px;
+  width: 60px;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  font-weight: 200;
+}
+
+.card-genre {
+  background: light-dark(#6e07cf, #00ffb7);
+  color: light-dark(white, black);
+  border-radius: 8px;
+  text-align: center;
+  padding: 0.1rem 0.3rem;
+}
+
 body:has(.donate-section) {
   color-scheme: dark;
   background-color: light-dark(#3d036a, #1c1f23);

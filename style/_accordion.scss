@@ -45,7 +45,6 @@
 	}
 }
 
-//
 .genres-section,
 .artists-section {
 	display: flex;
@@ -78,4 +77,35 @@
 .selected {
 	background-color: light-dark(rgba(255, 255, 255, 0.356), $primary-color);
 	color: light-dark(white, black);
+}
+
+.artist-card {
+	justify-content: left;
+	gap: 20px;
+
+	&:hover,
+	&.selected {
+		.card-genre {
+			background: light-dark($light, $dark);
+			color: white;
+		}
+	}
+}
+
+.card-img {
+	border-radius: 15px;
+	width: 60px;
+}
+
+.card-info {
+	display: flex;
+	flex-direction: column;
+	font-weight: 200;
+}
+.card-genre {
+	background: $primary-color;
+	color: light-dark(white, black);
+	border-radius: 8px;
+	text-align: center;
+	padding: 0.1rem 0.3rem;
 }

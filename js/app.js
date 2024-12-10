@@ -151,35 +151,26 @@ genreCards.forEach((card, index) => {
 	});
 });
 
-// Create audio waves
-function createAudioWaves() {
-	const audioWaves = document.createElement("div");
-	audioWaves.classList.add("audio-waves");
-
-	for (let i = 0; i < 3; i++) {
-		const line = document.createElement("div");
-		line.classList.add("line", "hidden");
-		audioWaves.appendChild(line);
-	}
-
-	return audioWaves;
-}
-
 // Function to create genre cards
 function createGenreCards() {
 	stations.forEach((genreInfo, index) => {
 		const genreCard = document.createElement("div");
 		genreCard.classList.add("card");
-
 		if (index === 0) genreCard.classList.add("selected");
 
-		const cardTitle = document.createElement("p");
-		cardTitle.classList.add("card-title");
-		cardTitle.textContent = genreInfo.genre;
-
-		genreCard.appendChild(createAudioWaves());
-		genreCard.appendChild(cardTitle);
-		genreCard.appendChild(createAudioWaves());
+		genreCard.innerHTML = `
+		<div class="audio-waves">
+			<div class="line hidden"></div>
+			<div class="line hidden"></div>
+			<div class="line hidden"></div>
+		</div>
+		<p class="card-title">${genreInfo.genre}</p>
+		<div class="audio-waves">
+			<div class="line hidden"></div>
+			<div class="line hidden"></div>
+			<div class="line hidden"></div>
+		</div>
+		`;
 
 		genreCard.addEventListener("click", function () {
 			deselectAllCards();
@@ -196,14 +187,15 @@ function createGenreCards() {
 function createArtistCards() {
 	artistMap.forEach((artistInfo) => {
 		const artistCard = document.createElement("div");
-		artistCard.classList.add("card");
-
-		const cardTitle = document.createElement("p");
-		cardTitle.classList.add("card-title");
-
-		cardTitle.textContent = artistInfo.name;
-
-		artistCard.appendChild(cardTitle);
+		artistCard.classList.add("card", "artist-card");
+		// HTML structure
+		artistCard.innerHTML = `
+		<img src="${artistInfo.img}" class="card-img" />
+		<div class="card-info">
+			<p class="cart-title">${artistInfo.name}</p>
+			<div class="card-genre">${artistInfo.genre[0]}</div>
+		</div>
+		`;
 
 		artistCard.addEventListener("click", function () {
 			deselectAllCards();
