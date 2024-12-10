@@ -215,7 +215,6 @@ function createArtistCards() {
 
 			if (foundIndex > -1) {
 				currentGenreIndex = foundIndex;
-				getStations();
 			}
 			fetchArtistStation(artistInfo.url);
 		});
