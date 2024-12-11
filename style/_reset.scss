@@ -28,7 +28,7 @@ $light: rgba(153, 152, 152, 0.356);
 $dark: lighten(#1c1f24, 5%);
 
 $border-radius-general: 25px;
-
+$deep-shadow: 0 2px 12px #0f0f0f;
 // Utilities
 .important-text {
 	color: $primary-color;

@@ -13,7 +13,7 @@
 	stroke-width: 0.3;
 	stroke-dasharray: 50;
 	stroke-dashoffset: 50;
-	animation: textAnimation 15s ease-in-out infinite;
+	animation: svgDraw 15s ease-in-out infinite;
 }
 
 .card.selected {
@@ -39,6 +39,7 @@
 	border: solid 1px light-dark(white, $primary-color);
 	backdrop-filter: blur(30px);
 	max-width: 400px;
+	box-shadow: $deep-shadow;
 }
 .cover-container {
 	position: relative;
@@ -54,6 +55,7 @@
 	border-radius: $border-radius-general;
 	color: white;
 	animation: liveFirstAnimation 2s ease-in-out;
+	box-shadow: $deep-shadow;
 
 	p {
 		animation: liveTextShow 2s ease-in-out;
@@ -61,13 +63,14 @@
 }
 .live-icon {
 	width: 20px;
-	animation: infiniteRotation 10s infinite ease-in-out;
+	animation: infiniteRotation 8s infinite ease-in-out;
 }
 .radio-cover {
 	width: 250px;
 	border-radius: 10px;
-	border: solid 1px $primary-color;
-	box-shadow: 0 0 5px 0 $primary-color;
+	/* border: solid 1px $primary-color; */
+	/* box-shadow: 0 0 5px 0 $primary-color; */
+	box-shadow: $deep-shadow;
 }
 .radio-name {
 	text-transform: capitalize;

@@ -78,3 +78,9 @@
 - Added genre indicator to the artists.
 - Artists pictures get blurred when their cards are selected, and inside there're the audio waves
 - Now the player shows the artists pictures.
+
+## 2.1.2 UI and fav section
+
+- Improved shadow effect.
+- Added fav section (not working yet)
+- Added shadow effect to the cards.

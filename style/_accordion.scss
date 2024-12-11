@@ -12,7 +12,11 @@
 	justify-content: space-around;
 	align-items: center;
 	cursor: pointer;
+	padding-inline: 1rem;
 
+	.accordion-icon {
+		fill: light-dark(white, $primary-color);
+	}
 	.accordion-title {
 		color: light-dark(white, $primary-color);
 		text-transform: uppercase;
@@ -38,6 +42,7 @@
 .accordion-content {
 	max-height: 0px;
 	overflow: hidden;
+	transition: 0.5s;
 
 	&.active {
 		max-height: 1000vh;
@@ -46,11 +51,13 @@
 }
 
 .genres-section,
-.artists-section {
+.artists-section,
+.favs-section {
 	display: flex;
 	flex-direction: column;
 	background: light-dark($secondary-color, lighten(#1c1f24, 5%));
 	border-radius: 0 0 $border-radius-general $border-radius-general;
+	box-shadow: $deep-shadow;
 }
 .card {
 	padding: 1rem;
@@ -61,6 +68,7 @@
 	justify-content: center;
 	align-items: center;
 	gap: 5px;
+	filter: drop-shadow($deep-shadow);
 
 	&:hover {
 		cursor: pointer;
@@ -113,11 +121,13 @@
 .card-img {
 	border-radius: 15px;
 	width: 60px;
+	box-shadow: $deep-shadow;
 }
 
 .card-info {
 	display: flex;
 	flex-direction: column;
+	height: 60px;
 	font-weight: 200;
 }
 .card-genre {
@@ -126,4 +136,12 @@
 	border-radius: 8px;
 	text-align: center;
 	padding: 0.1rem 0.3rem;
+	box-shadow: $deep-shadow;
+}
+.favs-section {
+	img {
+		width: 100%;
+		padding: 1rem;
+		filter: drop-shadow($deep-shadow);
+	}
 }
