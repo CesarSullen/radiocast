@@ -82,5 +82,18 @@
 ## 2.1.2 UI and fav section
 
 - Improved shadow effect.
-- Added fav section (not working yet)
 - Added shadow effect to the cards.
+- Added fav section (not working yet).
+
+## 2.1.3 Stations, UI and javascript
+
+- Added more stations.
+  -Fixed the shadow behind the cards.
+- Deleted the volume input.
+- More block padding to the player.S
+- Fixed a bug with the play btn.
+- Remove the shadows from the tags.
+- Now images resolutions is 500x500.
+- Fixed the Post Malone issue.
+- Worked in fav section and fav button.
+- Added snow.

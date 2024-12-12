@@ -49,7 +49,22 @@
 							<p class="bold">LIVE</p>
 						</div>
 					</div>
-					<p id="radioName" class="radio-name bold">Presiona Play</p>
+					<div class="name-line">
+						<p id="radioName" class="radio-name bold">Presiona Play</p>
+						<svg
+							id="favIcon"
+							class="fav-icon"
+							xmlns="http://www.w3.org/2000/svg"
+							width="32"
+							height="32"
+							fill="#ffffff"
+							viewBox="0 0 256 256"
+						>
+							<path
+								d="M240,98a57.63,57.63,0,0,1-17,41L133.7,229.62a8,8,0,0,1-11.4,0L33,139a58,58,0,0,1,82-82.1L128,69.05l13.09-12.19A58,58,0,0,1,240,98Z"
+							></path>
+						</svg>
+					</div>
 				</div>
 
 				<div class="player-inputs">
@@ -102,16 +117,6 @@
 							></path>
 						</svg>
 					</div>
-
-					<input
-						type="range"
-						id="volumeControl"
-						class="volume-control"
-						min="0"
-						max="1"
-						step="0.1"
-						value="0.5"
-					/>
 				</div>
 			</div>
 			<div class="accordion section">
@@ -217,6 +222,7 @@
 					</div>
 				</div>
 			</div>
+			<div id="snow"></div>
 		</div>
 
 		<footer>

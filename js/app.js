@@ -8,8 +8,8 @@ const prevBtn = document.getElementById("prevBtn");
 const playBtn = document.getElementById("playBtn");
 const pauseBtn = document.getElementById("pauseBtn");
 const nextBtn = document.getElementById("nextBtn");
-const volumeControl = document.getElementById("volumeControl");
 
+const favIcon = document.getElementById("favIcon");
 const genresSection = document.querySelector(".genres-section");
 const artistsSection = document.querySelector(".artists-section");
 
@@ -17,6 +17,7 @@ let currentStationIndex = 0;
 let currentGenreIndex = 0;
 let stations = [];
 let artistMap = [];
+let favStations = [];
 
 // Load genres from the JSON file
 function loadGenres() {
@@ -49,6 +50,7 @@ function startPlaying(stationURL, stationName, stationCover) {
 	radioName.textContent = stationName;
 	radioCover.src = stationCover;
 
+	updateFavIcon();
 	togglePlayPauseButtons(true);
 	radioPlayer.load();
 	radioPlayer.play();
@@ -95,8 +97,12 @@ function getStations() {
 
 // Control buttons event listeners
 playBtn.addEventListener("click", () => {
-	togglePlayPauseButtons(true);
-	getStations();
+	if (currentStationIndex === 0 && currentGenreIndex === 0) {
+		getStations();
+	} else {
+		togglePlayPauseButtons(true);
+		radioPlayer.play();
+	}
 });
 
 pauseBtn.addEventListener("click", () => {
@@ -120,14 +126,6 @@ function switchPrevStation() {
 
 prevBtn.addEventListener("click", switchPrevStation);
 nextBtn.addEventListener("click", switchNextStation);
-
-// Volume control setup
-radioPlayer.volume = 1;
-volumeControl.value = radioPlayer.volume;
-
-volumeControl.addEventListener("input", function () {
-	radioPlayer.volume = this.value;
-});
 
 // Genre selection handling
 const genreCards = document.querySelectorAll(".genres-section .card");
@@ -235,6 +233,66 @@ function fetchArtistStation(url, artistPicture) {
 		.catch((error) => console.error("Error fetching artist station:", error));
 }
 
+favIcon.addEventListener("click", () => {
+	const currentStation = {
+		name: radioName.textContent,
+		url: radioSource.src,
+		cover: radioCover.src,
+	};
+
+	if (favIcon.classList.contains("favicon-selected")) {
+		favIcon.classList.remove("favicon-selected");
+
+		favStations = favStations.filter(
+			(station) => station.url !== currentStation.url
+		);
+	} else {
+		favIcon.classList.add("favicon-selected");
+		favStations.push(currentStation);
+	}
+
+	console.log("Estaciones favoritas:", favStations);
+});
+
+// Function to check if a station is marked as fav
+function updateFavIcon() {
+	const currentStation = {
+		url: radioSource.src,
+	};
+
+	if (favStations.some((station) => station.url === currentStation.url)) {
+		favIcon.classList.add("favicon-selected");
+	} else {
+		favIcon.classList.remove("favicon-selected");
+	}
+}
+
 // Initial calls to load genres and artists
 loadGenres();
 loadArtists();
+
+// Snow Theme
+const snowContainer = document.getElementById("snow");
+
+function createSnowflake() {
+	const snowflake = document.createElement("div");
+	snowflake.classList.add("snowflake");
+
+	const size = Math.random() * 10 - 2;
+	snowflake.style.width = `${size}px`;
+	snowflake.style.height = `${size}px`;
+
+	snowflake.style.left = Math.random() * window.innerWidth + "px";
+	snowflake.style.top = Math.random() * window.innerHeight + "px";
+	snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+	snowflake.style.opacity = Math.random();
+
+	snowContainer.appendChild(snowflake);
+
+	// Eliminar el copo de nieve después de que ha caído
+	setTimeout(() => {
+		snowflake.remove();
+	}, 5000); // Tiempo de vida del copo de nieve
+}
+
+setInterval(createSnowflake, 200); // Cada 200 ms

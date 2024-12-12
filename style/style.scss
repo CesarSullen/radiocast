@@ -35,6 +35,7 @@
 	width: 100%;
 	gap: 20px;
 	padding: 1.5rem;
+	padding-block: 2rem;
 	background: light-dark($light, $dark);
 	border: solid 1px light-dark(white, $primary-color);
 	backdrop-filter: blur(30px);
@@ -72,6 +73,29 @@
 	/* box-shadow: 0 0 5px 0 $primary-color; */
 	box-shadow: $deep-shadow;
 }
+.name-line {
+	display: flex;
+	gap: 60px;
+	text-align: left;
+	align-items: center;
+
+	.fav-icon {
+		width: 50px;
+		fill: transparent;
+		stroke: light-dark(white, $primary-color);
+		stroke-width: 15px;
+
+		&:hover {
+			cursor: pointer;
+			fill: light-dark(white, $primary-color);
+		}
+	}
+	.favicon-selected {
+		fill: light-dark(white, $primary-color);
+		filter: drop-shadow($deep-shadow);
+	}
+}
+
 .radio-name {
 	text-transform: capitalize;
 }
@@ -103,12 +127,6 @@
 	&:active {
 		transform: scale(0.8);
 		background-color: $secondary-color;
-	}
-}
-.volume-control {
-	&:hover {
-		cursor: pointer;
-		transform: scale(1.1);
 	}
 }
 
@@ -165,7 +183,20 @@ footer {
 		}
 	}
 }
+#snow {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	pointer-events: none; /* Permite interactuar con otros elementos */
+}
 
+.snowflake {
+	position: absolute;
+	top: -10px; /* Comienza fuera de la vista */
+	background-color: white;
+	border-radius: 50%;
+	opacity: 0.8;
+}
 @media screen and (min-width: 500px) {
 	.body-container {
 		display: grid;
@@ -188,8 +219,5 @@ footer {
 	}
 	.control-btn {
 		width: 65px;
-	}
-	.volume-control {
-		width: 80%;
 	}
 }

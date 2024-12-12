@@ -156,6 +156,7 @@ body {
   max-height: 0px;
   overflow: hidden;
   transition: 0.5s;
+  box-shadow: 0 2px 12px #0f0f0f;
 }
 .accordion-content.active {
   max-height: 1000vh;
@@ -169,7 +170,6 @@ body {
   flex-direction: column;
   background: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
   border-radius: 0 0 25px 25px;
-  box-shadow: 0 2px 12px #0f0f0f;
 }
 
 .card {
@@ -181,7 +181,6 @@ body {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  filter: drop-shadow(0 2px 12px #0f0f0f);
 }
 .card:hover {
   cursor: pointer;
@@ -199,11 +198,13 @@ body {
 .selected {
   background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
   color: light-dark(white, black);
+  filter: drop-shadow(0 2px 12px #0f0f0f);
 }
 
 .artist-card {
   justify-content: left;
   gap: 20px;
+  padding: 0.5rem;
 }
 .artist-card.selected .card-img {
   filter: blur(2px);
@@ -245,7 +246,6 @@ body {
   border-radius: 8px;
   text-align: center;
   padding: 0.1rem 0.3rem;
-  box-shadow: 0 2px 12px #0f0f0f;
 }
 
 .favs-section img {
@@ -433,6 +433,7 @@ body:has(.donate-section) .btn {
   width: 100%;
   gap: 20px;
   padding: 1.5rem;
+  padding-block: 2rem;
   background: light-dark(rgba(153, 152, 152, 0.356), rgb(39.15625, 43.3515625, 50.34375));
   border: solid 1px light-dark(white, light-dark(#6e07cf, #00ffb7));
   backdrop-filter: blur(30px);
@@ -474,6 +475,27 @@ body:has(.donate-section) .btn {
   box-shadow: 0 2px 12px #0f0f0f;
 }
 
+.name-line {
+  display: flex;
+  gap: 60px;
+  text-align: left;
+  align-items: center;
+}
+.name-line .fav-icon {
+  width: 50px;
+  fill: transparent;
+  stroke: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  stroke-width: 15px;
+}
+.name-line .fav-icon:hover {
+  cursor: pointer;
+  fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+}
+.name-line .favicon-selected {
+  fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  filter: drop-shadow(0 2px 12px #0f0f0f);
+}
+
 .radio-name {
   text-transform: capitalize;
 }
@@ -509,11 +531,6 @@ body:has(.donate-section) .btn {
 .control-btn:active {
   transform: scale(0.8);
   background-color: light-dark(#3d036a, #1c1f23);
-}
-
-.volume-control:hover {
-  cursor: pointer;
-  transform: scale(1.1);
 }
 
 .audio-waves {
@@ -565,6 +582,21 @@ footer .footer-links a:hover {
   color: light-dark(#6e07cf, #00ffb7);
 }
 
+#snow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Permite interactuar con otros elementos */
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px; /* Comienza fuera de la vista */
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
 @media screen and (min-width: 500px) {
   .body-container {
     display: grid;
@@ -587,9 +619,6 @@ footer .footer-links a:hover {
   }
   .control-btn {
     width: 65px;
-  }
-  .volume-control {
-    width: 80%;
   }
 }
 
