@@ -71,3 +71,11 @@
 		stroke-dashoffset: 50;
 	}
 }
+@keyframes fallingSnow {
+	from {
+		transform: translate(0vh, 0vh);
+	}
+	to {
+		transform: translate(20vh, 100vh);
+	}
+}

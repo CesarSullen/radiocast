@@ -97,3 +97,11 @@
 - Fixed the Post Malone issue.
 - Worked in fav section and fav button.
 - Added snow.
+
+## 2.2.0
+
+- Snow flakes now have an animation
+- Snow flakes are bigger.
+- Better animation at clicking fav icon.
+- Now you can see the stations marked as favorites in their accordion.
+- Favorite stations are automatically loaded from the local storage.

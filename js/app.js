@@ -12,6 +12,7 @@ const nextBtn = document.getElementById("nextBtn");
 const favIcon = document.getElementById("favIcon");
 const genresSection = document.querySelector(".genres-section");
 const artistsSection = document.querySelector(".artists-section");
+const favsSection = document.querySelector(".favs-section");
 
 let currentStationIndex = 0;
 let currentGenreIndex = 0;
@@ -41,6 +42,15 @@ function loadArtists() {
 			createArtistCards();
 		})
 		.catch((error) => console.error("Error loading artists:", error));
+}
+
+// Load fav stations from the local storage
+function loadFavStations() {
+	const storedFavs = localStorage.getItem("favStations");
+	if (storedFavs) {
+		favStations = JSON.parse(storedFavs);
+		createFavsCards();
+	}
 }
 
 // Start playing a station
@@ -233,6 +243,37 @@ function fetchArtistStation(url, artistPicture) {
 		.catch((error) => console.error("Error fetching artist station:", error));
 }
 
+// Function to show the favs cards
+function createFavsCards() {
+	favsSection.innerHTML = "";
+
+	favStations.forEach((station) => {
+		const favCard = document.createElement("div");
+		favCard.classList.add("card", "fav-card");
+		favCard.innerHTML = `
+		<div class="audio-waves">
+			<div class="line hidden"></div>
+			<div class="line hidden"></div>
+			<div class="line hidden"></div>
+		</div>
+		<p class="card-title">${station.name}</p>
+		<div class="audio-waves">
+			<div class="line hidden"></div>
+			<div class="line hidden"></div>
+			<div class="line hidden"></div>
+		</div>
+		`;
+
+		favCard.addEventListener("click", function () {
+			deselectAllCards();
+			this.classList.add("selected");
+
+			startPlaying(station.url, station.name, station.cover);
+		});
+
+		favsSection.appendChild(favCard);
+	});
+}
 favIcon.addEventListener("click", () => {
 	const currentStation = {
 		name: radioName.textContent,
@@ -246,30 +287,39 @@ favIcon.addEventListener("click", () => {
 		favStations = favStations.filter(
 			(station) => station.url !== currentStation.url
 		);
+		favsSection.innerHTML = "";
 	} else {
 		favIcon.classList.add("favicon-selected");
 		favStations.push(currentStation);
 	}
 
-	console.log("Estaciones favoritas:", favStations);
+	createFavsCards();
 });
+
+function saveFavStations() {
+	localStorage.setItem("favStations", JSON.stringify(favStations));
+}
 
 // Function to check if a station is marked as fav
 function updateFavIcon() {
-	const currentStation = {
+	currentStation = {
 		url: radioSource.src,
 	};
 
 	if (favStations.some((station) => station.url === currentStation.url)) {
 		favIcon.classList.add("favicon-selected");
+		createFavsCards();
 	} else {
 		favIcon.classList.remove("favicon-selected");
+		createFavsCards();
 	}
+	saveFavStations();
 }
 
 // Initial calls to load genres and artists
 loadGenres();
 loadArtists();
+loadFavStations();
 
 // Snow Theme
 const snowContainer = document.getElementById("snow");
@@ -278,21 +328,21 @@ function createSnowflake() {
 	const snowflake = document.createElement("div");
 	snowflake.classList.add("snowflake");
 
-	const size = Math.random() * 10 - 2;
+	const size = Math.random() * 8 + 2;
 	snowflake.style.width = `${size}px`;
 	snowflake.style.height = `${size}px`;
 
 	snowflake.style.left = Math.random() * window.innerWidth + "px";
-	snowflake.style.top = Math.random() * window.innerHeight + "px";
-	snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+	/* snowflake.style.top = Math.random() * window.innerHeight + "px"; */
+	snowflake.style.animationDuration = Math.random() * 13 + 2 + "s";
 	snowflake.style.opacity = Math.random();
 
 	snowContainer.appendChild(snowflake);
 
-	// Eliminar el copo de nieve después de que ha caído
+	// Delete the fallen snowflake
 	setTimeout(() => {
 		snowflake.remove();
-	}, 5000); // Tiempo de vida del copo de nieve
+	}, 10000);
 }
 
-setInterval(createSnowflake, 200); // Cada 200 ms
+setInterval(createSnowflake, 200);

@@ -48,6 +48,7 @@
 	&.active {
 		max-height: 1000vh;
 		padding-bottom: 0;
+		transition: 2s;
 	}
 }
 
@@ -139,9 +140,6 @@
 	padding: 0.1rem 0.3rem;
 }
 .favs-section {
-	img {
-		width: 100%;
-		padding: 1rem;
-		filter: drop-shadow($deep-shadow);
+	.card {
 	}
 }

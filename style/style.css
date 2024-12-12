@@ -161,6 +161,7 @@ body {
 .accordion-content.active {
   max-height: 1000vh;
   padding-bottom: 0;
+  transition: 2s;
 }
 
 .genres-section,
@@ -246,12 +247,6 @@ body {
   border-radius: 8px;
   text-align: center;
   padding: 0.1rem 0.3rem;
-}
-
-.favs-section img {
-  width: 100%;
-  padding: 1rem;
-  filter: drop-shadow(0 2px 12px #0f0f0f);
 }
 
 body:has(.donate-section) {
@@ -400,6 +395,14 @@ body:has(.donate-section) .btn {
     stroke-dashoffset: 50;
   }
 }
+@keyframes fallingSnow {
+  from {
+    transform: translate(0vh, 0vh);
+  }
+  to {
+    transform: translate(20vh, 100vh);
+  }
+}
 .slogan {
   width: 90%;
   align-self: center;
@@ -470,8 +473,6 @@ body:has(.donate-section) .btn {
 .radio-cover {
   width: 250px;
   border-radius: 10px;
-  /* border: solid 1px $primary-color; */
-  /* box-shadow: 0 0 5px 0 $primary-color; */
   box-shadow: 0 2px 12px #0f0f0f;
 }
 
@@ -479,7 +480,7 @@ body:has(.donate-section) .btn {
   display: flex;
   gap: 60px;
   text-align: left;
-  align-items: center;
+  align-content: space-around;
 }
 .name-line .fav-icon {
   width: 50px;
@@ -490,10 +491,13 @@ body:has(.donate-section) .btn {
 .name-line .fav-icon:hover {
   cursor: pointer;
   fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  transform: scale(1.2);
+}
+.name-line .fav-icon:active {
+  transform: scale(0.9);
 }
 .name-line .favicon-selected {
   fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
-  filter: drop-shadow(0 2px 12px #0f0f0f);
 }
 
 .radio-name {
@@ -586,15 +590,16 @@ footer .footer-links a:hover {
   position: absolute;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Permite interactuar con otros elementos */
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .snowflake {
   position: absolute;
-  top: -10px; /* Comienza fuera de la vista */
   background-color: white;
   border-radius: 50%;
   opacity: 0.8;
+  animation: fallingSnow ease-in infinite;
 }
 
 @media screen and (min-width: 500px) {
