@@ -73,9 +73,9 @@
 }
 @keyframes fallingSnow {
 	from {
-		transform: translate(0vh, 0vh);
+		transform: translate(-10vh, 0vh);
 	}
 	to {
-		transform: translate(20vh, 100vh);
+		transform: translate(0vh, 100vh);
 	}
 }

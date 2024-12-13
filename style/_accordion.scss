@@ -14,7 +14,7 @@
 	cursor: pointer;
 	padding-inline: 1rem;
 
-	.accordion-icon {
+	.accordion-icon path {
 		fill: light-dark(white, $primary-color);
 	}
 	.accordion-title {
@@ -139,7 +139,6 @@
 	text-align: center;
 	padding: 0.1rem 0.3rem;
 }
-.favs-section {
-	.card {
-	}
+.fav-card:first-child {
+	border-top: solid 1px light-dark(white, $primary-color);
 }

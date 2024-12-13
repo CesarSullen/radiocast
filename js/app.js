@@ -294,6 +294,7 @@ favIcon.addEventListener("click", () => {
 	}
 
 	createFavsCards();
+	saveFavStations();
 });
 
 function saveFavStations() {
@@ -308,12 +309,10 @@ function updateFavIcon() {
 
 	if (favStations.some((station) => station.url === currentStation.url)) {
 		favIcon.classList.add("favicon-selected");
-		createFavsCards();
 	} else {
 		favIcon.classList.remove("favicon-selected");
-		createFavsCards();
 	}
-	saveFavStations();
+	createFavsCards();
 }
 
 // Initial calls to load genres and artists
@@ -325,15 +324,15 @@ loadFavStations();
 const snowContainer = document.getElementById("snow");
 
 function createSnowflake() {
-	const snowflake = document.createElement("div");
+	const snowflake = document.createElement("img");
 	snowflake.classList.add("snowflake");
+	snowflake.src = "./assets/snowflake.svg";
 
-	const size = Math.random() * 8 + 2;
+	const size = Math.random() * 13 + 2;
 	snowflake.style.width = `${size}px`;
 	snowflake.style.height = `${size}px`;
 
-	snowflake.style.left = Math.random() * window.innerWidth + "px";
-	/* snowflake.style.top = Math.random() * window.innerHeight + "px"; */
+	snowflake.style.left = Math.random() * 100 + "%";
 	snowflake.style.animationDuration = Math.random() * 13 + 2 + "s";
 	snowflake.style.opacity = Math.random();
 

@@ -56,7 +56,6 @@
 	border-radius: $border-radius-general;
 	color: white;
 	animation: liveFirstAnimation 2s ease-in-out;
-	box-shadow: $deep-shadow;
 
 	p {
 		animation: liveTextShow 2s ease-in-out;
@@ -85,7 +84,6 @@
 
 		&:hover {
 			cursor: pointer;
-			fill: light-dark(white, $primary-color);
 			transform: scale(1.2);
 		}
 		&:active {
@@ -194,9 +192,6 @@ footer {
 
 .snowflake {
 	position: absolute;
-	background-color: white;
-	border-radius: 50%;
-	opacity: 0.8;
 	animation: fallingSnow ease-in infinite;
 }
 @media screen and (min-width: 500px) {

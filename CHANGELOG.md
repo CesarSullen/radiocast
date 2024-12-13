@@ -105,3 +105,9 @@
 - Better animation at clicking fav icon.
 - Now you can see the stations marked as favorites in their accordion.
 - Favorite stations are automatically loaded from the local storage.
+
+# 2.2.1
+
+- Fixed the animation of the fav icon.
+- Fixed the local storage issue, now the favorites are saved inmediately.
+- Now the snowflakes are svgs.

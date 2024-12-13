@@ -97,7 +97,6 @@ hr {
 
 body {
   background-color: light-dark(light-dark(#6e07cf, #00ffb7), light-dark(#3d036a, #1c1f23));
-  overflow-x: hidden;
 }
 
 .body-container {
@@ -128,7 +127,7 @@ body {
   cursor: pointer;
   padding-inline: 1rem;
 }
-.accordion-header .accordion-icon {
+.accordion-header .accordion-icon path {
   fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
 }
 .accordion-header .accordion-title {
@@ -247,6 +246,10 @@ body {
   border-radius: 8px;
   text-align: center;
   padding: 0.1rem 0.3rem;
+}
+
+.fav-card:first-child {
+  border-top: solid 1px light-dark(white, light-dark(#6e07cf, #00ffb7));
 }
 
 body:has(.donate-section) {
@@ -397,10 +400,10 @@ body:has(.donate-section) .btn {
 }
 @keyframes fallingSnow {
   from {
-    transform: translate(0vh, 0vh);
+    transform: translate(-10vh, 0vh);
   }
   to {
-    transform: translate(20vh, 100vh);
+    transform: translate(0vh, 100vh);
   }
 }
 .slogan {
@@ -459,7 +462,6 @@ body:has(.donate-section) .btn {
   border-radius: 25px;
   color: white;
   animation: liveFirstAnimation 2s ease-in-out;
-  box-shadow: 0 2px 12px #0f0f0f;
 }
 .live-flag p {
   animation: liveTextShow 2s ease-in-out;
@@ -490,7 +492,6 @@ body:has(.donate-section) .btn {
 }
 .name-line .fav-icon:hover {
   cursor: pointer;
-  fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
   transform: scale(1.2);
 }
 .name-line .fav-icon:active {
@@ -596,9 +597,6 @@ footer .footer-links a:hover {
 
 .snowflake {
   position: absolute;
-  background-color: white;
-  border-radius: 50%;
-  opacity: 0.8;
   animation: fallingSnow ease-in infinite;
 }
 
