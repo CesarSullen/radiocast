@@ -84,6 +84,12 @@
 		"genre": ["Alternative Rock"]
 	},
 	{
+		"name": "Daft Punk",
+		"img": "https://cdn-images.dzcdn.net/images/artist/f2bc007e9133c946ac3c3907ddc5d2ea/500x500-000000-80-0-0.jpg",
+		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/be61261d-ba40-4ab1-a045-34f0c49b0ca6",
+		"genre": ["EDM"]
+	},
+	{
 		"name": "Demi Lovato",
 		"img": "https://cdn-images.dzcdn.net/images/artist/fba1cc929490c37d7a836a644c0383ea/500x500-000000-80-0-0.jpg",
 		"url": "https://de1.api.radio-browser.info/json/stations/byuuid/907d4937-9a89-4339-a17b-33eb5171e95f",
