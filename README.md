@@ -9,7 +9,7 @@
 
 ## Version
 
-This is the version 2.1.0. More improvements are coming soon.
+This is the version 2.2.2. More improvements are coming soon.
 
 ## Credits
 

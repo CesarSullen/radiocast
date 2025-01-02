@@ -319,29 +319,3 @@ function updateFavIcon() {
 loadGenres();
 loadArtists();
 loadFavStations();
-
-// Snow Theme
-const snowContainer = document.getElementById("snow");
-
-function createSnowflake() {
-	const snowflake = document.createElement("img");
-	snowflake.classList.add("snowflake");
-	snowflake.src = "./assets/snowflake.svg";
-
-	const size = Math.random() * 13 + 2;
-	snowflake.style.width = `${size}px`;
-	snowflake.style.height = `${size}px`;
-
-	snowflake.style.left = Math.random() * 100 + "%";
-	snowflake.style.animationDuration = Math.random() * 13 + 2 + "s";
-	snowflake.style.opacity = Math.random();
-
-	snowContainer.appendChild(snowflake);
-
-	// Delete the fallen snowflake
-	setTimeout(() => {
-		snowflake.remove();
-	}, 10000);
-}
-
-setInterval(createSnowflake, 200);

@@ -111,3 +111,7 @@
 - Fixed the animation of the fav icon.
 - Fixed the local storage issue, now the favorites are saved inmediately.
 - Now the snowflakes are svgs.
+
+# 2.2.2
+
+- Removed snow theme.
