@@ -1,18 +1,13 @@
-const CACHE_NAME = "radiocast-static-v1";
+const CACHE_NAME = "radiocast-static-v2";
 const STATIC_ASSETS = [
 	// HTML
 	"./index.html",
-	"./index-es.html",
 
 	// CSS
 	"./css/style.css",
 
 	// JS
 	"./js/main.js",
-
-	// JSON
-	"./js/genres.json",
-	"./js/artists.json",
 
 	// Manifest
 	"./manifest.json",

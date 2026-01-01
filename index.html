@@ -51,7 +51,7 @@
 						</div>
 					</div>
 					<div class="name-line">
-						<p id="radioName" class="radio-name bold">Presiona Play</p>
+						<p id="radioName" class="radio-name bold">Press Play</p>
 						<svg
 							id="favIcon"
 							class="fav-icon"
@@ -166,43 +166,7 @@
 								d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"
 							></path>
 						</svg>
-						<h3 class="accordion-title">Genres</h3>
-						<span
-							id="selectedGenreIndicator"
-							class="selected-genre-indicator hidden"
-						></span>
-						<svg
-							class="accordion-toggle"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="#e6e6e6"
-							viewBox="0 0 256 256"
-						>
-							<path
-								d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"
-							></path>
-						</svg>
-					</div>
-					<div class="accordion-content section genres-section">
-						<hr />
-					</div>
-				</div>
-			</div>
-
-			<div class="accordion section">
-				<div class="accordion-item">
-					<div class="accordion-header">
-						<svg
-							class="accordion-icon"
-							xmlns="http://www.w3.org/2000/svg"
-							width="30"
-							height="30"
-							viewBox="0 0 256 256"
-						>
-							<path
-								d="M172,120a44,44,0,1,1-44-44A44.05,44.05,0,0,1,172,120Zm60,8A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88.09,88.09,0,0,0-91.47-87.93C77.43,41.89,39.87,81.12,40,128.25a87.65,87.65,0,0,0,22.24,58.16A79.71,79.71,0,0,1,84,165.1a4,4,0,0,1,4.83.32,59.83,59.83,0,0,0,78.28,0,4,4,0,0,1,4.83-.32,79.71,79.71,0,0,1,21.79,21.31A87.62,87.62,0,0,0,216,128Z"
-							></path>
-						</svg>
-						<h3 class="accordion-title">Artists</h3>
+						<h3 class="accordion-title">Stations</h3>
 
 						<svg
 							class="accordion-toggle"
@@ -215,9 +179,8 @@
 							></path>
 						</svg>
 					</div>
-					<div class="accordion-content section artists-section">
+					<div class="accordion-content section stations-section">
 						<hr />
-						<div class="artist-cards"></div>
 					</div>
 				</div>
 			</div>
@@ -233,15 +196,5 @@
 			</div>
 		</footer>
 		<script src="./js/main.js"></script>
-		<script>
-			function detectLanguage() {
-				const language = navigator.language || navigator.userLanguage;
-				if (language.startsWith("es")) {
-					window.location.href = "index-es.html";
-				}
-			}
-
-			// window.onload = detectLanguage;
-		</script>
 	</body>
 </html>

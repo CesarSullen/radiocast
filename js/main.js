@@ -1,324 +1,225 @@
-// DOM Elements
-const radioPlayer = document.getElementById("radioPlayer");
-const radioSource = document.getElementById("radioSource");
-const radioCover = document.getElementById("radioCover");
-const radioName = document.getElementById("radioName");
+/* ===================== GLOBAL STATE ==================== */
+const audio = document.getElementById("radioPlayer");
 
-const prevBtn = document.getElementById("prevBtn");
 const playBtn = document.getElementById("playBtn");
 const pauseBtn = document.getElementById("pauseBtn");
 const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
 
+const radioName = document.getElementById("radioName");
+const radioCover = document.getElementById("radioCover");
 const favIcon = document.getElementById("favIcon");
-const genresSection = document.querySelector(".genres-section");
-const artistsSection = document.querySelector(".artists-section");
+
+const stationsSection = document.querySelector(".stations-section");
 const favsSection = document.querySelector(".favs-section");
 
+let lofiStations = [];
 let currentStationIndex = 0;
-let currentGenreIndex = 0;
-let stations = [];
-let artistMap = [];
-let favStations = [];
+let isPlaying = false;
 
-// Load genres and artists
-const GENRES_URL = "./js/genres.json";
-const ARTISTS_URL = "./js/artists.json";
+let favStations = JSON.parse(localStorage.getItem("favStations")) || [];
 
-function loadGenres() {
-	fetch(GENRES_URL)
-		.then((res) => res.json())
-		.then((data) => {
-			stations = data;
-			createGenreCards();
-			console.log("Genres loaded:", stations);
-		})
-		.catch((err) => console.error("Error loading genres:", err));
-}
+/* ===================== LOAD STATIONS ==================== */
+async function loadStations() {
+	try {
+		const data = {
+			stations: [
+				{
+					id: 1,
+					name: "MoE Lofi",
+					url: "https://all.api.radio-browser.info/json/stations/byuuid/526b6bad-68f3-4197-9cfa-fa8b341830bb",
+					cover: "./assets/logo.png",
+				},
+				{
+					id: 2,
+					name: "NIA Radio Lo-Fi",
+					url: "https://all.api.radio-browser.info/json/stations/byuuid/ab9697c4-f1cf-48bc-b4d8-4d15ad5618fa",
+					cover: "./assets/logo.png",
+				},
+				{
+					id: 3,
+					name: "Nightwave Plaza",
+					url: "https://all.api.radio-browser.info/json/stations/byuuid/e35e3676-58e2-48ba-94bf-e32cc024b7cb",
+					cover: "./assets/logo.png",
+				},
+				{
+					id: 4,
+					name: "Laut LoFi",
+					url: "https://all.api.radio-browser.info/json/stations/byuuid/ef52b56c-6830-4346-b4d3-e42e5ae5d928",
+					cover: "./assets/logo.png",
+				},
+			],
+		};
 
-function loadArtists() {
-	fetch(ARTISTS_URL)
-		.then((res) => res.json())
-		.then((data) => {
-			artistMap = data;
-			createArtistCards();
-			console.log("Artists loaded:", artistMap);
-		})
-		.catch((err) => console.error("Error loading artists:", err));
-}
-
-// LOAD FAVORITES
-function loadFavStations() {
-	const storedFavs = localStorage.getItem("favStations");
-	if (storedFavs) {
-		favStations = JSON.parse(storedFavs);
-		createFavsCards();
+		lofiStations = data.stations;
+		createStationsAccordion();
+		renderFavs();
+	} catch (err) {
+		console.error("Error loading stations:", err);
 	}
 }
 
-// PLAYBACK FUNCTIONS
-function startPlaying(stationURL, stationName, stationCover) {
-	radioSource.src = stationURL;
-	radioName.textContent = stationName;
-	radioCover.src = stationCover;
+/* ===================== AUDIO CONTROL ==================== */
+async function playCurrentStation() {
+	const station = lofiStations[currentStationIndex];
+	if (!station) return;
 
-	updateFavIcon();
-	radioPlayer.load();
-	radioPlayer.play().catch((err) => console.error("Playback blocked:", err));
+	try {
+		const response = await fetch(station.url);
+		const data = await response.json();
+		const streamUrl = data[0].url_resolved;
+
+		audio.src = streamUrl;
+		audio.play();
+
+		isPlaying = true;
+		updatePlayUI();
+		updateRadioInfo(station);
+		updateAccordionSelection(station);
+	} catch (err) {
+		console.error("Error fetching stream URL:", err);
+		radioName.textContent = "Error al cargar";
+	}
 }
 
-function togglePlayPauseButtons(isPlaying) {
-	if (isPlaying) {
-		playBtn.classList.add("hidden");
-		playBtn.classList.remove("shown");
-		pauseBtn.classList.add("shown");
-		pauseBtn.classList.remove("hidden");
+function togglePlay() {
+	if (audio.src === "" || !isPlaying) {
+		if (audio.src === "") {
+			playCurrentStation();
+		} else {
+			audio.play();
+			isPlaying = true;
+			updatePlayUI();
+		}
 	} else {
-		pauseBtn.classList.add("hidden");
-		pauseBtn.classList.remove("shown");
-		playBtn.classList.add("shown");
-		playBtn.classList.remove("hidden");
+		audio.pause();
+		isPlaying = false;
+		updatePlayUI();
 	}
 }
 
-// STATIONS FUNCTIONS
-function getStations() {
-	if (!stations.length) {
-		console.error("Stations not loaded yet");
-		return;
-	}
-	const currentGenre = stations[currentGenreIndex];
-	const selectedGenreIndicator = document.getElementById(
-		"selectedGenreIndicator"
-	);
-	if (selectedGenreIndicator) {
-		selectedGenreIndicator.innerText = currentGenre.genre;
-		selectedGenreIndicator.classList.remove("hidden");
-	}
-
-	const currentStationUrl = currentGenre.urls[currentStationIndex];
-	fetch(currentStationUrl)
-		.then((res) => res.json())
-		.then((data) => {
-			if (data.length > 0) {
-				startPlaying(data[0].url_resolved, data[0].name, "./assets/logo.png");
-			}
-		})
-		.catch((err) => console.error("Error fetching stations:", err));
+function updatePlayUI() {
+	playBtn.classList.toggle("hidden", isPlaying);
+	pauseBtn.classList.toggle("hidden", !isPlaying);
 }
 
-// SWITCH STATIONS
 function switchNextStation() {
-	if (!stations.length) return;
-	currentStationIndex =
-		(currentStationIndex + 1) % stations[currentGenreIndex].urls.length;
-	getStations();
+	currentStationIndex = (currentStationIndex + 1) % lofiStations.length;
+	playCurrentStation();
 }
 
 function switchPrevStation() {
-	if (!stations.length) return;
 	currentStationIndex =
-		(currentStationIndex - 1 + stations[currentGenreIndex].urls.length) %
-		stations[currentGenreIndex].urls.length;
-	getStations();
+		(currentStationIndex - 1 + lofiStations.length) % lofiStations.length;
+	playCurrentStation();
 }
 
-// EVENT LISTENERS
-playBtn.addEventListener("click", () => {
-	if (currentStationIndex === 0 && currentGenreIndex === 0) {
-		getStations();
-	} else {
-		radioPlayer.play().catch((err) => console.error("Playback blocked:", err));
-		togglePlayPauseButtons(true);
-	}
-});
+/* ===================== UI UPDATE ==================== */
+function updateRadioInfo(station) {
+	radioName.textContent = station.name;
+	radioCover.src = station.cover || "./assets/logo.png";
 
-pauseBtn.addEventListener("click", () => {
-	radioPlayer.pause();
-	togglePlayPauseButtons(false);
-});
-
-prevBtn.addEventListener("click", switchPrevStation);
-nextBtn.addEventListener("click", switchNextStation);
-
-// SYNC BUTTONS AND AUDIO EVENTS
-radioPlayer.addEventListener("play", () => togglePlayPauseButtons(true));
-radioPlayer.addEventListener("pause", () => togglePlayPauseButtons(false));
-
-// FAVORITES
-
-favIcon.addEventListener("click", () => {
-	const currentStation = {
-		name: radioName.textContent,
-		url: radioSource.src,
-		cover: radioCover.src,
-	};
-
-	if (favIcon.classList.contains("favicon-selected")) {
-		favIcon.classList.remove("favicon-selected");
-		favStations = favStations.filter((st) => st.url !== currentStation.url);
-	} else {
-		favIcon.classList.add("favicon-selected");
-		favStations.push(currentStation);
-	}
-
-	createFavsCards();
-	saveFavStations();
-});
-
-function updateFavIcon() {
-	const currentStation = { url: radioSource.src };
-	if (favStations.some((st) => st.url === currentStation.url)) {
-		favIcon.classList.add("favicon-selected");
-	} else {
-		favIcon.classList.remove("favicon-selected");
-	}
+	favIcon.classList.toggle(
+		"active",
+		favStations.some((fav) => fav.url === station.url)
+	);
 }
 
-function saveFavStations() {
+function updateAccordionSelection(station) {
+	document.querySelectorAll(".station-item").forEach((item) => {
+		const stationUrl = item.dataset.url;
+		item.classList.toggle("selected", stationUrl === station.url);
+	});
+}
+
+/* ===================== ACCORDION: STATIONS ==================== */
+function createStationsAccordion() {
+	stationsSection.innerHTML = "<hr />";
+
+	lofiStations.forEach((station, index) => {
+		const item = document.createElement("div");
+		item.classList.add("station-item");
+		item.textContent = station.name;
+
+		item.dataset.url = station.url;
+
+		item.addEventListener("click", () => {
+			currentStationIndex = index;
+			playCurrentStation();
+		});
+
+		stationsSection.appendChild(item);
+	});
+}
+
+/* ===================== FAVORITES ==================== */
+function toggleFavorite() {
+	const station = lofiStations[currentStationIndex];
+	if (!station) return;
+
+	const exists = favStations.find((fav) => fav.url === station.url);
+
+	if (exists) {
+		favStations = favStations.filter((fav) => fav.url !== station.url);
+	} else {
+		favStations.push(station);
+	}
+
 	localStorage.setItem("favStations", JSON.stringify(favStations));
+	renderFavs();
+	updateRadioInfo(station);
 }
 
-// CREATE CARDS
-function deselectAllCards() {
-	document
-		.querySelectorAll(".card")
-		.forEach((card) => card.classList.remove("selected"));
-}
-
-function selectGenre(index) {
-	currentGenreIndex = index;
-	currentStationIndex = 0;
-	getStations();
-}
-
-function createGenreCards() {
-	genresSection.innerHTML = "";
-	stations.forEach((genreInfo, index) => {
-		const genreCard = document.createElement("div");
-		genreCard.classList.add("card");
-		if (index === 0) genreCard.classList.add("selected");
-
-		genreCard.innerHTML = `
-            <div class="audio-waves">
-                <div class="line hidden"></div>
-                <div class="line hidden"></div>
-                <div class="line hidden"></div>
-            </div>
-            <p class="card-title">${genreInfo.genre}</p>
-            <div class="audio-waves">
-                <div class="line hidden"></div>
-                <div class="line hidden"></div>
-                <div class="line hidden"></div>
-            </div>
-        `;
-
-		genreCard.addEventListener("click", function () {
-			deselectAllCards();
-			this.classList.add("selected");
-			selectGenre(index);
-		});
-
-		genresSection.appendChild(genreCard);
-	});
-}
-
-function createArtistCards() {
-	artistsSection.innerHTML = "";
-	artistMap.forEach((artist) => {
-		const artistCard = document.createElement("div");
-		artistCard.classList.add("card", "artist-card");
-		artistCard.innerHTML = `
-            <div class="img-container">
-                <img src="${artist.img}" class="card-img"/>
-                <div class="audio-waves">
-                    <div class="line hidden"></div>
-                    <div class="line hidden"></div>
-                    <div class="line hidden"></div>
-                </div>
-            </div>
-            <div class="card-info">
-                <p class="card-title">${artist.name}</p>
-                <div class="card-genre">${artist.genre[0]}</div>
-            </div>
-        `;
-
-		artistCard.addEventListener("click", function () {
-			deselectAllCards();
-			this.classList.add("selected");
-
-			const foundIndex = stations.findIndex((station) =>
-				artist.genre.includes(station.genre)
-			);
-			if (foundIndex > -1) currentGenreIndex = foundIndex;
-
-			fetchArtistStation(artist.url, artist.img);
-		});
-
-		artistsSection.appendChild(artistCard);
-	});
-}
-
-function fetchArtistStation(url, img) {
-	fetch(url)
-		.then((res) => res.json())
-		.then((data) => {
-			if (data.length > 0)
-				startPlaying(data[0].url_resolved, data[0].name, img);
-		})
-		.catch((err) => console.error("Error fetching artist station:", err));
-}
-
-function createFavsCards() {
+function renderFavs() {
 	favsSection.innerHTML = "";
-	favStations.forEach((station) => {
-		const favCard = document.createElement("div");
-		favCard.classList.add("card", "fav-card");
-		favCard.innerHTML = `
-            <div class="audio-waves">
-                <div class="line hidden"></div>
-                <div class="line hidden"></div>
-                <div class="line hidden"></div>
-            </div>
-            <p class="card-title">${station.name}</p>
-            <div class="audio-waves">
-                <div class="line hidden"></div>
-                <div class="line hidden"></div>
-                <div class="line hidden"></div>
-            </div>
-        `;
 
-		favCard.addEventListener("click", function () {
-			deselectAllCards();
-			this.classList.add("selected");
-			startPlaying(station.url, station.name, station.cover);
+	favStations.forEach((station) => {
+		const item = document.createElement("div");
+		item.classList.add("station-item");
+		item.textContent = station.name;
+
+		item.addEventListener("click", () => {
+			const index = lofiStations.findIndex((s) => s.url === station.url);
+			if (index !== -1) {
+				currentStationIndex = index;
+				playCurrentStation();
+			}
 		});
 
-		favsSection.appendChild(favCard);
+		favsSection.appendChild(item);
 	});
 }
 
-// INITIALIZATION
-loadGenres();
-loadArtists();
-loadFavStations();
+/* ===================== ACCORDION TOGGLE ==================== */
+function initAccordion() {
+	const items = document.querySelectorAll(".accordion-item");
 
-// ACCORDION LOGIC
-const items = document.querySelectorAll(".accordion-item");
+	items.forEach((item) => {
+		const header = item.querySelector(".accordion-header");
 
-items.forEach((item) => {
-	const header = item.querySelector(".accordion-header");
-
-	header.addEventListener("click", () => {
-		const content = item.querySelector(".accordion-content");
-		const toggle = item.querySelector(".accordion-toggle");
-
-		content.classList.toggle("active");
-		toggle.classList.toggle("turned");
+		header.addEventListener("click", () => {
+			item.querySelector(".accordion-content").classList.toggle("active");
+			item.querySelector(".accordion-toggle").classList.toggle("turned");
+		});
 	});
+}
+
+/* ===================== EVENTS ==================== */
+playBtn.addEventListener("click", togglePlay);
+pauseBtn.addEventListener("click", togglePlay);
+nextBtn.addEventListener("click", switchNextStation);
+prevBtn.addEventListener("click", switchPrevStation);
+favIcon.addEventListener("click", toggleFavorite);
+
+/* ===================== INIT ==================== */
+document.addEventListener("DOMContentLoaded", () => {
+	initAccordion();
+	loadStations();
 });
 
-// SERVICE WORKER
-if ("serviceWorker" in navigator) {
+// SERVICE WORKER (opcional)
+
+/* if ("serviceWorker" in navigator) {
 	window.addEventListener("load", () => {
 		navigator.serviceWorker
 			.register("./sw.js")
@@ -326,3 +227,4 @@ if ("serviceWorker" in navigator) {
 			.catch((err) => console.error("SW registration failed:", err));
 	});
 }
+ */

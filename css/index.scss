@@ -15,7 +15,7 @@
 	animation: svgDraw 15s ease-in-out infinite;
 }
 
-.card.selected {
+.station-item.selected {
 	.line {
 		display: flex;
 	}
@@ -89,7 +89,7 @@
 			transform: scale(0.9);
 		}
 	}
-	.favicon-selected {
+	.fav-icon.active {
 		fill: light-dark(white, $primary-color);
 	}
 }
