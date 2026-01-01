@@ -1,0 +1,15 @@
+{
+	"name": "RadioCast",
+	"short_name": "RadioCast",
+	"start_url": "./index.html",
+	"display": "standalone",
+	"background_color": "#1c1f23",
+	"theme_color": "#00ffb7",
+	"icons": [
+		{
+			"src": "./assets/logo.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
+}

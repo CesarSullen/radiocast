@@ -115,3 +115,7 @@
 # 2.2.2
 
 - Removed snow theme.
+
+# 3.0.0
+
+- Now it's a PWA.

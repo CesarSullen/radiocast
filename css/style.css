@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: "Poppins";
-  src: url("../typography/Poppins/Poppins-Regular.ttf") format("truetype");
+  src: url("../typography/Poppins-Regular.ttf") format("truetype");
   font-weight: 400;
 }
 .important-text {
@@ -252,79 +252,6 @@ body {
   border-top: solid 1px light-dark(white, light-dark(#6e07cf, #00ffb7));
 }
 
-body:has(.donate-section) {
-  color-scheme: dark;
-  background-color: light-dark(#3d036a, #1c1f23);
-  color: white;
-}
-body:has(.donate-section) .btn {
-  padding: 0.7rem;
-  border-radius: 8px;
-}
-
-.crypto-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-}
-.crypto-list li {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  text-wrap: wrap;
-}
-
-.crypto-logo {
-  width: 30px;
-}
-
-.copy-icon {
-  cursor: pointer;
-}
-.copy-icon:active path {
-  fill: white;
-}
-
-.copied-alert {
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  background-color: #00ffb7;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  width: 100%;
-  max-width: 400px;
-  max-height: 50px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: black;
-  opacity: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-@media screen and (min-width: 500px) {
-  .donate-section {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-  .donate-section .btn {
-    min-width: 400px;
-  }
-}
 @keyframes liveFirstAnimation {
   from {
     max-width: 35px;

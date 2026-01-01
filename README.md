@@ -1,4 +1,4 @@
-# Pokedex
+# RadioCast
 
 ### Welcome to my radiocast, a web application where you can listen to free music all around the world.
 
@@ -6,10 +6,11 @@
 
 - You can listen to free music.
 - Background music is available.
+- PWA
 
 ## Version
 
-This is the version 2.2.2. More improvements are coming soon.
+This is the version 3.0.0.
 
 ## Credits
 
