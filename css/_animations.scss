@@ -59,10 +59,10 @@
 	}
 	25% {
 		stroke-dashoffset: 0;
-		fill: light-dark(white, $primary-color);
+		fill: $primary-color;
 	}
 	50% {
-		fill: light-dark(white, $primary-color);
+		fill: $primary-color;
 	}
 	70% {
 		fill: transparent;

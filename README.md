@@ -8,10 +8,6 @@
 - Background music is available.
 - PWA
 
-## Version
-
-This is the version 3.0.0.
-
 ## Credits
 
 This project uses Radio Browser API to fetch the stations. You can visit it [here](https://de1.api.radio-browser.info/).

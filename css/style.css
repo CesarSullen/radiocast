@@ -21,11 +21,11 @@
   font-weight: 400;
 }
 .important-text {
-  color: light-dark(#6e07cf, #00ffb7);
+  color: #00ffb7;
 }
 
 .important-text-2 {
-  color: light-dark(#3d036a, #1c1f23);
+  color: #1c1f23;
 }
 
 .bold {
@@ -43,7 +43,7 @@
 hr {
   width: 100%;
   height: 1px;
-  background-color: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  background-color: #00ffb7;
 }
 
 /* .section {
@@ -61,7 +61,7 @@ hr {
 .btn {
   padding: 1rem 2rem;
   border-radius: 25px;
-  background-color: light-dark(#6e07cf, #00ffb7);
+  background-color: #00ffb7;
   font-size: 1rem;
   cursor: pointer;
   width: 100%;
@@ -77,18 +77,18 @@ hr {
 }
 
 .ghost-btn {
-  background: light-dark(rgba(153, 152, 152, 0.356), rgb(39.15625, 43.3515625, 50.34375));
-  border: solid 1px light-dark(white, light-dark(#6e07cf, #00ffb7));
-  color: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  background: rgb(39.15625, 43.3515625, 50.34375);
+  border: solid 1px #00ffb7;
+  color: #00ffb7;
 }
 .ghost-btn a {
-  color: light-dark(#6e07cf, #00ffb7);
+  color: #00ffb7;
 }
 .ghost-btn:hover {
-  background-color: light-dark(light-dark(#3d036a, #1c1f23), light-dark(#6e07cf, #00ffb7));
+  background-color: #00ffb7;
   box-shadow: none;
   opacity: 1;
-  color: light-dark(white, black);
+  color: black;
 }
 
 .warning-text {
@@ -96,7 +96,7 @@ hr {
 }
 
 body {
-  background-color: light-dark(light-dark(#6e07cf, #00ffb7), light-dark(#3d036a, #1c1f23));
+  background-color: #1c1f23;
 }
 
 .body-container {
@@ -116,8 +116,8 @@ body {
 
 .accordion-item {
   border-radius: 25px;
-  border: 1px solid light-dark(white, light-dark(#6e07cf, #00ffb7));
-  background: light-dark(rgba(153, 152, 152, 0.356), rgb(39.15625, 43.3515625, 50.34375));
+  border: 1px solid #00ffb7;
+  background: rgb(39.15625, 43.3515625, 50.34375);
 }
 
 .accordion-header {
@@ -128,10 +128,10 @@ body {
   padding-inline: 1rem;
 }
 .accordion-header .accordion-icon path {
-  fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  fill: #00ffb7;
 }
 .accordion-header .accordion-title {
-  color: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  color: #00ffb7;
   text-transform: uppercase;
   letter-spacing: 3px;
   padding: 1rem 2rem;
@@ -139,7 +139,7 @@ body {
 .accordion-header .accordion-toggle {
   width: 25px;
   height: 25px;
-  fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  fill: #00ffb7;
 }
 .accordion-header .accordion-toggle.turned {
   transform: rotate(180deg);
@@ -161,7 +161,7 @@ body {
 .favs-section {
   display: flex;
   flex-direction: column;
-  background: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
+  background: rgb(39.15625, 43.3515625, 50.34375);
   border-radius: 0 0 25px 25px;
 }
 
@@ -177,8 +177,8 @@ body {
 }
 .station-item:hover {
   cursor: pointer;
-  background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
-  color: light-dark(white, black);
+  background-color: #00ffb7;
+  color: black;
 }
 .station-item:last-child {
   border-radius: 0 0 25px 25px;
@@ -189,8 +189,8 @@ body {
 }
 
 .selected {
-  background-color: light-dark(rgba(255, 255, 255, 0.356), light-dark(#6e07cf, #00ffb7));
-  color: light-dark(white, black);
+  background-color: #00ffb7;
+  color: black;
   filter: drop-shadow(0 2px 12px #0f0f0f);
 }
 
@@ -208,15 +208,15 @@ body {
 }
 
 .station-item-genre {
-  background: light-dark(#6e07cf, #00ffb7);
-  color: light-dark(white, black);
+  background: #00ffb7;
+  color: black;
   border-radius: 8px;
   text-align: center;
   padding: 0.1rem 0.3rem;
 }
 
 .station-item:first-child {
-  border-top: solid 1px light-dark(white, light-dark(#6e07cf, #00ffb7));
+  border-top: solid 1px #00ffb7;
 }
 
 @keyframes liveFirstAnimation {
@@ -280,10 +280,10 @@ body {
   }
   25% {
     stroke-dashoffset: 0;
-    fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+    fill: #00ffb7;
   }
   50% {
-    fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+    fill: #00ffb7;
   }
   70% {
     fill: transparent;
@@ -307,7 +307,7 @@ body {
 
 .slogan path {
   fill: transparent;
-  stroke: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  stroke: #00ffb7;
   stroke-width: 0.3;
   stroke-dasharray: 50;
   stroke-dashoffset: 50;
@@ -319,12 +319,12 @@ body {
 }
 
 .section-title {
-  color: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  color: #00ffb7;
 }
 
 .audio-player {
   border-radius: 25px;
-  color: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  color: #00ffb7;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -334,8 +334,8 @@ body {
   gap: 20px;
   padding: 1.5rem;
   padding-block: 2rem;
-  background: light-dark(rgba(153, 152, 152, 0.356), rgb(39.15625, 43.3515625, 50.34375));
-  border: solid 1px light-dark(white, light-dark(#6e07cf, #00ffb7));
+  background: rgb(39.15625, 43.3515625, 50.34375);
+  border: solid 1px #00ffb7;
   backdrop-filter: blur(30px);
   max-width: 400px;
   box-shadow: 0 2px 12px #0f0f0f;
@@ -381,7 +381,7 @@ body {
 .name-line .fav-icon {
   width: 50px;
   fill: transparent;
-  stroke: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  stroke: #00ffb7;
   stroke-width: 15px;
 }
 .name-line .fav-icon:hover {
@@ -392,7 +392,7 @@ body {
   transform: scale(0.9);
 }
 .name-line .fav-icon.active {
-  fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  fill: #00ffb7;
 }
 
 .radio-name {
@@ -420,7 +420,7 @@ body {
 
 .control-btn {
   width: 40px;
-  fill: light-dark(white, light-dark(#6e07cf, #00ffb7));
+  fill: #00ffb7;
   border-radius: 25px;
 }
 .control-btn:hover {
@@ -429,7 +429,7 @@ body {
 }
 .control-btn:active {
   transform: scale(0.8);
-  background-color: light-dark(#3d036a, #1c1f23);
+  background-color: #1c1f23;
 }
 
 .audio-waves {
@@ -437,7 +437,7 @@ body {
   gap: 3px;
 }
 .audio-waves .line {
-  background-color: light-dark(white, black);
+  background-color: black;
   border-radius: 25px;
   width: 4px;
   height: 5px;
@@ -456,18 +456,7 @@ body {
 
 footer {
   padding: 1rem;
-  background-color: light-dark(light-dark(#3d036a, #1c1f23), rgb(39.15625, 43.3515625, 50.34375));
-  /* 	.footer-content {
-  	display: flex;
-  	flex-direction: column;
-  	align-items: center;
-  }
-
-  .footer-image {
-  	width: 100px;
-  	border-radius: $border-radius-general;
-  }
-  */
+  background-color: rgb(39.15625, 43.3515625, 50.34375);
 }
 footer .footer-links {
   display: flex;
@@ -478,7 +467,7 @@ footer .footer-links a {
   color: white;
 }
 footer .footer-links a:hover {
-  color: light-dark(#6e07cf, #00ffb7);
+  color: #00ffb7;
 }
 
 @media screen and (min-width: 500px) {

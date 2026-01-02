@@ -218,8 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // SERVICE WORKER (opcional)
-
-/* if ("serviceWorker" in navigator) {
+if ("serviceWorker" in navigator) {
 	window.addEventListener("load", () => {
 		navigator.serviceWorker
 			.register("./sw.js")
@@ -227,4 +226,3 @@ document.addEventListener("DOMContentLoaded", () => {
 			.catch((err) => console.error("SW registration failed:", err));
 	});
 }
- */

@@ -8,7 +8,7 @@
 }
 .slogan path {
 	fill: transparent;
-	stroke: light-dark(white, $primary-color);
+	stroke: $primary-color;
 	stroke-width: 0.3;
 	stroke-dasharray: 50;
 	stroke-dashoffset: 50;
@@ -21,11 +21,11 @@
 	}
 }
 .section-title {
-	color: light-dark(white, $primary-color);
+	color: $primary-color;
 }
 .audio-player {
 	border-radius: $border-radius-general;
-	color: light-dark(white, $primary-color);
+	color: $primary-color;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -35,8 +35,8 @@
 	gap: 20px;
 	padding: 1.5rem;
 	padding-block: 2rem;
-	background: light-dark($light, $dark);
-	border: solid 1px light-dark(white, $primary-color);
+	background: $dark;
+	border: solid 1px $primary-color;
 	backdrop-filter: blur(30px);
 	max-width: 400px;
 	box-shadow: $deep-shadow;
@@ -78,7 +78,7 @@
 	.fav-icon {
 		width: 50px;
 		fill: transparent;
-		stroke: light-dark(white, $primary-color);
+		stroke: $primary-color;
 		stroke-width: 15px;
 
 		&:hover {
@@ -90,7 +90,7 @@
 		}
 	}
 	.fav-icon.active {
-		fill: light-dark(white, $primary-color);
+		fill: $primary-color;
 	}
 }
 
@@ -115,7 +115,7 @@
 }
 .control-btn {
 	width: 40px;
-	fill: light-dark(white, $primary-color);
+	fill: $primary-color;
 	border-radius: $border-radius-general;
 
 	&:hover {
@@ -132,7 +132,7 @@
 	display: flex;
 	gap: 3px;
 	.line {
-		background-color: light-dark(white, black);
+		background-color: black;
 		border-radius: $border-radius-general;
 		width: 4px;
 		height: 5px;
@@ -154,19 +154,8 @@
 // Footer
 footer {
 	padding: 1rem;
-	background-color: light-dark($secondary-color, $dark);
+	background-color: $dark;
 
-	/* 	.footer-content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.footer-image {
-		width: 100px;
-		border-radius: $border-radius-general;
-	}
- */
 	.footer-links {
 		display: flex;
 		flex-direction: column;

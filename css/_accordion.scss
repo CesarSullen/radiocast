@@ -4,8 +4,8 @@
 }
 .accordion-item {
 	border-radius: $border-radius-general;
-	border: 1px solid light-dark(white, $primary-color);
-	background: light-dark($light, $dark);
+	border: 1px solid $primary-color;
+	background: $dark;
 }
 .accordion-header {
 	display: flex;
@@ -15,10 +15,10 @@
 	padding-inline: 1rem;
 
 	.accordion-icon path {
-		fill: light-dark(white, $primary-color);
+		fill: $primary-color;
 	}
 	.accordion-title {
-		color: light-dark(white, $primary-color);
+		color: $primary-color;
 		text-transform: uppercase;
 		letter-spacing: 3px;
 		padding: 1rem 2rem;
@@ -26,7 +26,7 @@
 	.accordion-toggle {
 		width: 25px;
 		height: 25px;
-		fill: light-dark(white, $primary-color);
+		fill: $primary-color;
 
 		&.turned {
 			transform: rotate(180deg);
@@ -50,7 +50,7 @@
 .favs-section {
 	display: flex;
 	flex-direction: column;
-	background: light-dark($secondary-color, lighten(#1c1f24, 5%));
+	background: lighten(#1c1f24, 5%);
 	border-radius: 0 0 $border-radius-general $border-radius-general;
 }
 .station-item {
@@ -65,8 +65,8 @@
 
 	&:hover {
 		cursor: pointer;
-		background-color: light-dark(rgba(255, 255, 255, 0.356), $primary-color);
-		color: light-dark(white, black);
+		background-color: $primary-color;
+		color: black;
 	}
 	&:last-child {
 		border-radius: 0 0 $border-radius-general $border-radius-general;
@@ -76,8 +76,8 @@
 	font-weight: 400;
 }
 .selected {
-	background-color: light-dark(rgba(255, 255, 255, 0.356), $primary-color);
-	color: light-dark(white, black);
+	background-color: $primary-color;
+	color: black;
 	filter: drop-shadow($deep-shadow);
 }
 
@@ -95,11 +95,11 @@
 }
 .station-item-genre {
 	background: $primary-color;
-	color: light-dark(white, black);
+	color: black;
 	border-radius: 8px;
 	text-align: center;
 	padding: 0.1rem 0.3rem;
 }
 .station-item:first-child {
-	border-top: solid 1px light-dark(white, $primary-color);
+	border-top: solid 1px $primary-color;
 }

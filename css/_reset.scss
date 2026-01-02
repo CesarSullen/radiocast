@@ -22,8 +22,8 @@
 }
 
 // Colors
-$primary-color: light-dark(#6e07cf, #00ffb7);
-$secondary-color: light-dark(#3d036a, #1c1f23);
+$primary-color: #00ffb7;
+$secondary-color: #1c1f23;
 $light: rgba(153, 152, 152, 0.356);
 $dark: lighten(#1c1f24, 5%);
 
@@ -48,7 +48,7 @@ $deep-shadow: 0 2px 12px #0f0f0f;
 hr {
 	width: 100%;
 	height: 1px;
-	background-color: light-dark(white, $primary-color);
+	background-color: $primary-color;
 }
 /* .section {
 	margin-bottom: 2rem;
@@ -80,26 +80,26 @@ hr {
 	}
 }
 .ghost-btn {
-	background: light-dark($light, $dark);
-	border: solid 1px light-dark(white, $primary-color);
-	color: light-dark(white, $primary-color);
+	background: $dark;
+	border: solid 1px $primary-color;
+	color: $primary-color;
 
 	a {
 		color: $primary-color;
 	}
 
 	&:hover {
-		background-color: (light-dark($secondary-color, $primary-color));
+		background-color: $primary-color;
 		box-shadow: none;
 		opacity: 1;
-		color: light-dark(white, black);
+		color: black;
 	}
 }
 .warning-text {
 	color: red;
 }
 body {
-	background-color: light-dark($primary-color, $secondary-color);
+	background-color: $secondary-color;
 }
 .body-container {
 	padding: 1rem;

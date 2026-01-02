@@ -1,4 +1,4 @@
-const CACHE_NAME = "radiocast-static-v2";
+const CACHE_NAME = "radiocast-static-v3";
 const STATIC_ASSETS = [
 	// HTML
 	"./index.html",
@@ -11,6 +11,9 @@ const STATIC_ASSETS = [
 
 	// Manifest
 	"./manifest.json",
+
+	// Fonts
+	"./typography/Poppins-Regular.ttf",
 
 	// Icons and assets
 	"./assets/logo.png",
@@ -26,7 +29,7 @@ const STATIC_ASSETS = [
 	"./assets/slogan.svg",
 ];
 
-// Install event: precache
+// Install: precache
 self.addEventListener("install", (event) => {
 	self.skipWaiting();
 	event.waitUntil(
@@ -36,7 +39,7 @@ self.addEventListener("install", (event) => {
 	);
 });
 
-// Activate event: clean old caches
+// Activate: clean old caches
 self.addEventListener("activate", (event) => {
 	event.waitUntil(
 		(async () => {
@@ -49,32 +52,21 @@ self.addEventListener("activate", (event) => {
 	);
 });
 
-// Fetch
+// Fetch: cache-first strategy
 self.addEventListener("fetch", (event) => {
 	if (event.request.method !== "GET") return;
 
 	event.respondWith(
 		caches.match(event.request).then((cachedResponse) => {
-			if (cachedResponse) return cachedResponse;
-
-			return fetch(event.request)
-				.then((networkResponse) => {
+			return (
+				cachedResponse ||
+				fetch(event.request).then((networkResponse) => {
 					return caches.open(CACHE_NAME).then((cache) => {
 						cache.put(event.request, networkResponse.clone());
 						return networkResponse;
 					});
 				})
-				.catch(() => {
-					// Optional fallback for offline JSON requests or HTML pages
-					if (event.request.url.endsWith(".json")) {
-						return new Response("[]", {
-							headers: { "Content-Type": "application/json" },
-						});
-					}
-					if (event.request.headers.get("accept")?.includes("text/html")) {
-						return caches.match("./index.html");
-					}
-				});
+			);
 		})
 	);
 });
