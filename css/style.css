@@ -122,24 +122,16 @@ body {
 
 .accordion-header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
   padding-inline: 1rem;
-}
-.accordion-header .accordion-icon path {
-  fill: #00ffb7;
 }
 .accordion-header .accordion-title {
   color: #00ffb7;
   text-transform: uppercase;
   letter-spacing: 3px;
   padding: 1rem 2rem;
-}
-.accordion-header .accordion-toggle {
-  width: 25px;
-  height: 25px;
-  fill: #00ffb7;
 }
 .accordion-header .accordion-toggle.turned {
   transform: rotate(180deg);
@@ -183,15 +175,17 @@ body {
 .station-item:last-child {
   border-radius: 0 0 25px 25px;
 }
-
-.station-item-title {
-  font-weight: 400;
-}
-
-.selected {
+.station-item.selected {
   background-color: #00ffb7;
   color: black;
   filter: drop-shadow(0 2px 12px #0f0f0f);
+}
+.station-item.selected .audio-waves {
+  display: flex;
+}
+
+.station-item-title {
+  font-weight: 400;
 }
 
 .station-item-img {
@@ -217,6 +211,28 @@ body {
 
 .station-item:first-child {
   border-top: solid 1px #00ffb7;
+}
+
+.audio-waves {
+  display: none;
+  gap: 3px;
+}
+.audio-waves .line {
+  background-color: black;
+  border-radius: 25px;
+  width: 4px;
+  height: 5px;
+  animation: audioWaveEnabled 1s infinite;
+  place-self: end;
+}
+.audio-waves .line:nth-child(1) {
+  animation-delay: 0.3s;
+}
+.audio-waves .line:nth-child(2) {
+  animation-delay: 0.5s;
+}
+.audio-waves .line:nth-child(3) {
+  animation-delay: 0.1s;
 }
 
 @keyframes liveFirstAnimation {
@@ -290,14 +306,6 @@ body {
   }
   100% {
     stroke-dashoffset: 50;
-  }
-}
-@keyframes fallingSnow {
-  from {
-    transform: translate(-10vh, 0vh);
-  }
-  to {
-    transform: translate(0vh, 100vh);
   }
 }
 .slogan {
@@ -375,8 +383,9 @@ body {
 .name-line {
   display: flex;
   gap: 60px;
-  text-align: left;
-  align-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 .name-line .fav-icon {
   width: 50px;
@@ -420,7 +429,6 @@ body {
 
 .control-btn {
   width: 40px;
-  fill: #00ffb7;
   border-radius: 25px;
 }
 .control-btn:hover {
@@ -430,28 +438,6 @@ body {
 .control-btn:active {
   transform: scale(0.8);
   background-color: #1c1f23;
-}
-
-.audio-waves {
-  display: flex;
-  gap: 3px;
-}
-.audio-waves .line {
-  background-color: black;
-  border-radius: 25px;
-  width: 4px;
-  height: 5px;
-  animation: audioWaveEnabled 1s infinite;
-  place-self: end;
-}
-.audio-waves .line:nth-child(1) {
-  animation-delay: 0.3s;
-}
-.audio-waves .line:nth-child(2) {
-  animation-delay: 0.5s;
-}
-.audio-waves .line:nth-child(3) {
-  animation-delay: 0.1s;
 }
 
 footer {

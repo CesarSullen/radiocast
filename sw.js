@@ -1,4 +1,4 @@
-const CACHE_NAME = "radiocast-static-v3";
+const CACHE_NAME = "radiocast-static-v4";
 const STATIC_ASSETS = [
 	// HTML
 	"./index.html",
@@ -17,7 +17,6 @@ const STATIC_ASSETS = [
 
 	// Icons and assets
 	"./assets/logo.png",
-	"./assets/user-circle-fill.svg",
 	"./assets/next-fill.svg",
 	"./assets/prev-fill.svg",
 	"./assets/play-fill.svg",

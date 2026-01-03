@@ -4,9 +4,9 @@
 
 ## Features
 
-- You can listen to free music.
-- Background music is available.
-- PWA
+- Listen to free music.
+- Background playing is available.
+- Install it as an app.
 
 ## Credits
 
@@ -16,4 +16,4 @@ This project uses Radio Browser API to fetch the stations. You can visit it [her
 
 You can try the application at the following link: [cesarsullen.github.io/radiocast](https://cesarsullen.github.io/radiocast).
 
-I hope you enjoy!
+I hope you enjoy! <3
