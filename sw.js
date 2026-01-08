@@ -1,4 +1,4 @@
-const CACHE_NAME = "radiocast-static-v5";
+const CACHE_NAME = "radiocast-static-v5.1";
 const STATIC_ASSETS = [
 	// HTML
 	"./index.html",
