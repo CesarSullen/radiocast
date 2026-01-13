@@ -17,3 +17,7 @@ This project uses Radio Browser API to fetch the stations. You can visit it [her
 You can try the application at the following link: [cesarsullen.github.io/radiocast](https://cesarsullen.github.io/radiocast).
 
 I hope you enjoy! <3
+
+# License
+
+Licensed under the MIT License. See the [License](LICENSE.md) file for details.
