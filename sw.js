@@ -1,4 +1,4 @@
-const CACHE_NAME = "radiocast-static-v5.1";
+const CACHE_NAME = "radiocast-static-v5.2";
 const STATIC_ASSETS = [
 	// HTML
 	"./index.html",
@@ -26,6 +26,11 @@ const STATIC_ASSETS = [
 	"./assets/caret-down.svg",
 	"./assets/music-notes-fill.svg",
 	"./assets/slogan.svg",
+
+	// Screenshots
+	"./assets/screenshots/mobile-1.png",
+	"./assets/screenshots/mobile-2.png",
+	"./assets/screenshots/desktop-1.png",
 ];
 
 // Install: precache

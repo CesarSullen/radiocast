@@ -1,16 +1,41 @@
 {
 	"name": "RadioCast",
 	"short_name": "RadioCast",
-	"description": "A Lo-Fi radio player",
+	"description": "Radio Lo-Fi en streaming – música relajante, beats chill y ambiente cozy para estudiar, trabajar o desconectar. Reproductor simple y sin interrupciones.",
 	"start_url": "./index.html",
 	"display": "standalone",
+	"scope": "./",
 	"background_color": "#1c1f23",
 	"theme_color": "#1c1f23",
 	"icons": [
 		{
 			"src": "./assets/logo.png",
 			"sizes": "1024x1024",
-			"type": "image/png"
+			"type": "image/png",
+			"purpose": "any"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "./assets/screenshots/mobile-1.png",
+			"sizes": "750x1334",
+			"type": "image/png",
+			"form_factor": "narrow",
+			"label": "Mobile view 1"
+		},
+		{
+			"src": "./assets/screenshots/mobile-2.png",
+			"sizes": "750x1334",
+			"type": "image/png",
+			"form_factor": "narrow",
+			"label": "Mobile view 2"
+		},
+		{
+			"src": "./assets/screenshots/desktop-1.png",
+			"sizes": "857x681",
+			"type": "image/png",
+			"form_factor": "wide",
+			"label": "Desktop view"
 		}
 	]
 }
