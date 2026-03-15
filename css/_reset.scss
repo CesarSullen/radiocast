@@ -10,10 +10,21 @@
 	text-decoration: none;
 	outline: none;
 	font-family: "Poppins";
+	-webkit-tap-highlight-color: transparent;
 }
 :root {
 	color-scheme: light dark;
 }
+
+html,
+body {
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	-webkit-touch-callout: none;
+}
+
 // Typography
 @font-face {
 	font-family: "Poppins";

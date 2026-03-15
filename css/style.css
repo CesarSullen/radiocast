@@ -9,10 +9,19 @@
   text-decoration: none;
   outline: none;
   font-family: "Poppins";
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
   color-scheme: light dark;
+}
+
+html,
+body {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 @font-face {
@@ -448,6 +457,7 @@ footer .footer-links {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
 }
 footer .footer-links a {
   color: white;

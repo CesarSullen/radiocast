@@ -1,4 +1,4 @@
-const CACHE_NAME = "radiocast-static-v5.2";
+const CACHE_NAME = "radiocast-static-v5.3";
 const STATIC_ASSETS = [
 	// HTML
 	"./index.html",
@@ -39,7 +39,7 @@ self.addEventListener("install", (event) => {
 	event.waitUntil(
 		caches.open(CACHE_NAME).then((cache) => {
 			return cache.addAll(STATIC_ASSETS);
-		})
+		}),
 	);
 });
 
@@ -49,10 +49,10 @@ self.addEventListener("activate", (event) => {
 		(async () => {
 			const keys = await caches.keys();
 			await Promise.all(
-				keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
+				keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)),
 			);
 			await self.clients.claim();
-		})()
+		})(),
 	);
 });
 
@@ -71,6 +71,6 @@ self.addEventListener("fetch", (event) => {
 					});
 				})
 			);
-		})
+		}),
 	);
 });
