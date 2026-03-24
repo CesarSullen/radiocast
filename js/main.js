@@ -143,7 +143,7 @@ function updateRadioInfo(station) {
 
 	favIcon.classList.toggle(
 		"active",
-		favStations.some((fav) => fav.url === station.url)
+		favStations.some((fav) => fav.url === station.url),
 	);
 }
 
@@ -263,7 +263,21 @@ document.addEventListener("DOMContentLoaded", () => {
 	loadStations();
 });
 
-// SERVICE WORKER (opcional)
+async function trackProjectActivity(projectName) {
+	try {
+		const { error } = await _supabase.rpc("increment_visit", {
+			name_param: projectName,
+		});
+
+		if (error) throw error;
+	} catch (err) {
+		console.warn("Offline mode");
+	}
+}
+
+trackProjectActivity("RadioCast");
+
+// SERVICE WORKER
 if ("serviceWorker" in navigator) {
 	window.addEventListener("load", () => {
 		navigator.serviceWorker

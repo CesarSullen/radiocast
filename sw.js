@@ -1,4 +1,4 @@
-const CACHE_NAME = "radiocast-static-v5.3";
+const CACHE_NAME = "radiocast-static-v5.4";
 const STATIC_ASSETS = [
 	// HTML
 	"./index.html",
@@ -8,6 +8,7 @@ const STATIC_ASSETS = [
 
 	// JS
 	"./js/main.js",
+	"./js/supabase-config.js",
 
 	// Manifest
 	"./manifest.json",
