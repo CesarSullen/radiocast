@@ -1,268 +1,444 @@
-/* ===================== GLOBAL STATE ==================== */
+/* ===================== ELEMENTS ===================== */
 const audio = document.getElementById("radioPlayer");
+const player = document.querySelector(".audio-player");
 
 const playBtn = document.getElementById("playBtn");
 const pauseBtn = document.getElementById("pauseBtn");
 const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
+const favBtn = document.getElementById("favBtn");
 
 const radioName = document.getElementById("radioName");
+const radioStatus = document.getElementById("radioStatus");
 const radioCover = document.getElementById("radioCover");
-const favIcon = document.getElementById("favIcon");
+const ambient = document.getElementById("ambient");
 
-const stationsSection = document.querySelector(".stations-section");
-const favsSection = document.querySelector(".favs-section");
+const stationsList = document.getElementById("stationsList");
+const favsList = document.getElementById("favsList");
+const sleepOptions = document.getElementById("sleepOptions");
+const sleepLabel = document.getElementById("sleepLabel");
+const sleepRemaining = document.getElementById("sleepRemaining");
 
-let lofiStations = [];
-let currentStationIndex = 0;
-let isPlaying = false;
+/* ===================== CONSTANTS ===================== */
+const FALLBACK_COVER = "./assets/logo.png";
+const FAVS_KEY = "favStations";
+const SLEEP_MINUTES = [15, 30, 45, 60];
+const STATUS_TEXT = {
+	loading: "Connecting…",
+	error: "Connection failed. Press play to retry.",
+};
 
-let favStations = JSON.parse(localStorage.getItem("favStations")) || [];
+// Empty WAV used once to unlock programmatic playback on iOS
+const SILENCE =
+	"data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=";
 
-/* ===================== LOAD STATIONS ==================== */
-async function loadStations() {
-	try {
-		const data = {
-			stations: [
-				{
-					id: 1,
-					name: "Epic Lounge",
-					url: "https://all.api.radio-browser.info/json/stations/byuuid/c72d442a-d73b-40f1-b741-e143b620eecf",
-					cover: "https://i.ibb.co/9Hc5TxR/Jazz-Hop-Lounge.jpg",
-				},
-				{
-					id: 2,
-					name: "MoE Lofi",
-					url: "https://all.api.radio-browser.info/json/stations/byuuid/526b6bad-68f3-4197-9cfa-fa8b341830bb",
-					cover:
-						"https://zeno.fm/_ipx/_/https://images.zeno.fm/DDbFNwXFnMQZpksowdmNPcLxdS0gZ9hM7iK0g7BWHjs/rs:fill:288:288/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYWd4emZucGxibTh0YzNSaGRITnlNZ3NTQ2tGMWRHaERiR2xsYm5RWWdJRElnTEdVdkFvTUN4SU9VM1JoZEdsdmJsQnliMlpwYkdVWWdJQ0luLXZkbFFnTW9nRUVlbVZ1YncvaW1hZ2UvP3U9MTY2MTg2NzkwMjAwMA.webp",
-				},
-				{
-					id: 3,
-					name: "BGMVibes",
-					url: "https://all.api.radio-browser.info/json/stations/byuuid/a1e34b61-f532-4308-b2b9-b44c69f8507d",
-					cover:
-						"https://radio.sutekihost.com/static/uploads/album_art.1743805787.jpg",
-				},
-				{
-					id: 4,
-					name: "Hunter FM",
-					url: "https://all.api.radio-browser.info/json/stations/byuuid/5008eff6-2ad8-4b72-8d08-ea92b316abbe",
-					cover:
-						"https://cdn.hunter.fm/image/thumb/station/lo-fi-third/400x400ht.jpg",
-				},
-				{
-					id: 5,
-					name: "Radio Record",
-					url: "https://all.api.radio-browser.info/json/stations/byuuid/251e6b0c-2536-4a15-a948-2f6bbf5fb14b",
-					cover: "https://cdn-profiles.tunein.com/s255374/images/logog.png",
-				},
-				{
-					id: 6,
-					name: "Radio ZUM4",
-					url: "https://all.api.radio-browser.info/json/stations/byuuid/938ba257-1ac8-49a5-bf60-eb26f0fe75ec",
-					cover:
-						"https://res.cloudinary.com/super7/image/upload/v1698337048/rz-api-prod/images/radio_zum_4_study_work.jpg",
-				},
-				{
-					id: 7,
-					name: "NIA Radio",
-					url: "https://all.api.radio-browser.info/json/stations/byuuid/ab9697c4-f1cf-48bc-b4d8-4d15ad5618fa",
-					cover: "https://nia.nc/static/preloader-logo.svg",
-				},
-			],
-		};
+/* ===================== STATE ===================== */
+let currentIndex = 0;
+let activeId = null;
+let status = "idle"; // idle | loading | playing | paused | error
+let requestId = 0;
+let audioUnlocked = false;
+let favIds = loadFavs();
 
-		lofiStations = data.stations;
-		createStationsAccordion();
-		renderFavs();
-	} catch (err) {
-		console.error("Error loading stations:", err);
+const streamCache = new Map();
+
+/* ===================== STATUS ===================== */
+function setStatus(next) {
+	status = next;
+	const busy = next === "loading" || next === "playing";
+
+	playBtn.classList.toggle("hidden", busy);
+	pauseBtn.classList.toggle("hidden", !busy);
+	player.classList.toggle("is-loading", next === "loading");
+	document.body.classList.toggle("is-playing", next === "playing");
+
+	radioStatus.textContent = STATUS_TEXT[next] || "";
+	radioStatus.classList.toggle("is-error", next === "error");
+
+	if ("mediaSession" in navigator) {
+		navigator.mediaSession.playbackState =
+			next === "playing" ? "playing" : "paused";
 	}
 }
 
-/* ===================== AUDIO CONTROL ==================== */
-async function playCurrentStation() {
-	const station = lofiStations[currentStationIndex];
-	if (!station) return;
+/* ===================== AUDIO ===================== */
+function hasStream() {
+	const src = audio.getAttribute("src");
+	return Boolean(src) && !src.startsWith("data:");
+}
+
+function unlockAudio() {
+	if (audioUnlocked) return;
+	audioUnlocked = true;
+	audio.src = SILENCE;
+	audio.play().catch(() => {});
+}
+
+// Closing the connection is what stops the data usage
+function releaseStream() {
+	audio.pause();
+	audio.removeAttribute("src");
+	audio.load();
+}
+
+async function resolveStream(station) {
+	const cached = streamCache.get(station.id);
+	if (cached) return cached;
+
+	const response = await fetch(station.url);
+	if (!response.ok) throw new Error(`Radio Browser error ${response.status}`);
+
+	const [info] = await response.json();
+	const streamUrl = info?.url_resolved || info?.url;
+	if (!streamUrl) throw new Error("Station without stream URL");
+
+	streamCache.set(station.id, streamUrl);
+	return streamUrl;
+}
+
+async function playStation(index = currentIndex) {
+	currentIndex = index;
+	const station = STATIONS[currentIndex];
+	const id = ++requestId;
+
+	unlockAudio();
+	showStation(station);
+	setStatus("loading");
 
 	try {
-		const response = await fetch(station.url);
-		const data = await response.json();
-		const streamUrl = data[0].url;
+		const streamUrl = await resolveStream(station);
+		if (id !== requestId) return;
 
 		audio.src = streamUrl;
-		audio.play();
-
-		isPlaying = true;
-		updatePlayUI();
-		updateRadioInfo(station);
-		updateAccordionSelection(station);
+		await audio.play();
 	} catch (err) {
-		console.error("Error fetching stream URL:", err);
-		radioName.textContent = "Error al cargar";
+		if (id !== requestId) return;
+		console.error("Could not play station:", err);
+		streamCache.delete(station.id);
+		releaseStream();
+		setStatus("error");
 	}
+}
+
+function stopPlayback() {
+	requestId++;
+	releaseStream();
+	setStatus("paused");
 }
 
 function togglePlay() {
-	if (audio.src === "" || !isPlaying) {
-		if (audio.src === "") {
-			playCurrentStation();
-		} else {
-			audio.play();
-			isPlaying = true;
-			updatePlayUI();
-		}
-	} else {
-		audio.pause();
-		isPlaying = false;
-		updatePlayUI();
+	if (status === "playing" || status === "loading") stopPlayback();
+	else playStation();
+}
+
+function switchStation(step) {
+	playStation((currentIndex + step + STATIONS.length) % STATIONS.length);
+}
+
+audio.addEventListener("playing", () => {
+	if (hasStream()) setStatus("playing");
+});
+
+audio.addEventListener("waiting", () => {
+	if (hasStream() && status === "playing") setStatus("loading");
+});
+
+// A live stream that errors or ends has dropped the connection
+function handleStreamLost() {
+	if (!hasStream()) return;
+	if (activeId !== null) streamCache.delete(activeId);
+	releaseStream();
+	setStatus("error");
+}
+
+audio.addEventListener("error", handleStreamLost);
+audio.addEventListener("ended", handleStreamLost);
+
+/* ===================== STATION DISPLAY ===================== */
+function setCover(src) {
+	if (radioCover.getAttribute("src") === src) return;
+
+	radioCover.classList.add("is-swapping");
+	ambient.classList.add("is-swapping");
+
+	setTimeout(() => {
+		radioCover.src = src;
+		ambient.style.setProperty("--cover", `url(${JSON.stringify(src)})`);
+		ambient.classList.remove("is-swapping");
+	}, 200);
+}
+
+radioCover.addEventListener("load", () => {
+	radioCover.classList.remove("is-swapping");
+});
+
+radioCover.addEventListener("error", () => {
+	if (radioCover.getAttribute("src") !== FALLBACK_COVER) {
+		radioCover.src = FALLBACK_COVER;
 	}
-}
+});
 
-function updatePlayUI() {
-	playBtn.classList.toggle("hidden", isPlaying);
-	pauseBtn.classList.toggle("hidden", !isPlaying);
-}
-
-function switchNextStation() {
-	currentStationIndex = (currentStationIndex + 1) % lofiStations.length;
-	playCurrentStation();
-}
-
-function switchPrevStation() {
-	currentStationIndex =
-		(currentStationIndex - 1 + lofiStations.length) % lofiStations.length;
-	playCurrentStation();
-}
-
-/* ===================== UI UPDATE ==================== */
-function updateRadioInfo(station) {
+function showStation(station) {
+	activeId = station.id;
 	radioName.textContent = station.name;
-	radioCover.src = station.cover || "./assets/logo.png";
-
-	favIcon.classList.toggle(
-		"active",
-		favStations.some((fav) => fav.url === station.url),
-	);
+	setCover(station.cover || FALLBACK_COVER);
+	updateFavButton();
+	markSelected();
+	updateMediaSession(station);
 }
 
-function updateAccordionSelection(station) {
+function markSelected() {
 	document.querySelectorAll(".station-item").forEach((item) => {
-		const stationUrl = item.dataset.url;
-		item.classList.toggle("selected", stationUrl === station.url);
+		item.classList.toggle("selected", Number(item.dataset.id) === activeId);
 	});
 }
 
-/* ===================== ACCORDION: STATIONS ==================== */
-function createStationsAccordion() {
-	stationsSection.innerHTML = "<hr />";
+/* ===================== STATION LISTS ===================== */
+const WAVES_HTML = `<span class="audio-waves" aria-hidden="true"><span class="line"></span><span class="line"></span><span class="line"></span></span>`;
 
-	lofiStations.forEach((station, index) => {
-		const item = document.createElement("div");
-		item.classList.add("station-item");
-		item.innerHTML = `
-            <div class="audio-waves left">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-            <span class="station-name">${station.name}</span>
-            <div class="audio-waves right">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-        `;
-		item.dataset.url = station.url;
+function createStationItem(station) {
+	const item = document.createElement("button");
+	item.type = "button";
+	item.className = "station-item";
+	item.dataset.id = station.id;
 
-		item.addEventListener("click", () => {
-			currentStationIndex = index;
-			playCurrentStation();
-		});
+	const name = document.createElement("span");
+	name.className = "station-name";
+	name.textContent = station.name;
 
-		stationsSection.appendChild(item);
+	item.insertAdjacentHTML("beforeend", WAVES_HTML);
+	item.append(name);
+	item.insertAdjacentHTML("beforeend", WAVES_HTML);
+
+	item.addEventListener("click", () => {
+		const isActive = station.id === activeId;
+		if (isActive && (status === "playing" || status === "loading")) return;
+		playStation(STATIONS.indexOf(station));
 	});
+
+	return item;
 }
 
-/* ===================== FAVORITES ==================== */
-function toggleFavorite() {
-	const station = lofiStations[currentStationIndex];
-	if (!station) return;
-
-	const exists = favStations.find((fav) => fav.url === station.url);
-
-	if (exists) {
-		favStations = favStations.filter((fav) => fav.url !== station.url);
-	} else {
-		favStations.push(station);
-	}
-
-	localStorage.setItem("favStations", JSON.stringify(favStations));
-	renderFavs();
-	updateRadioInfo(station);
+function renderStations() {
+	stationsList.replaceChildren(...STATIONS.map(createStationItem));
 }
 
 function renderFavs() {
-	favsSection.innerHTML = "";
+	const favs = favIds
+		.map((id) => STATIONS.find((station) => station.id === id))
+		.filter(Boolean);
 
-	favStations.forEach((station) => {
-		const item = document.createElement("div");
-		item.classList.add("station-item");
-		item.innerHTML = `
-            <div class="audio-waves left">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-            <span class="station-name">${station.name}</span>
-            <div class="audio-waves right">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-        `;
-		item.dataset.url = station.url;
+	if (favs.length === 0) {
+		const note = document.createElement("p");
+		note.className = "empty-note";
+		note.textContent = "Tap the heart to save a station.";
+		favsList.replaceChildren(note);
+		return;
+	}
 
-		item.addEventListener("click", () => {
-			const index = lofiStations.findIndex((s) => s.url === station.url);
-			if (index !== -1) {
-				currentStationIndex = index;
-				playCurrentStation();
-			}
-		});
+	favsList.replaceChildren(...favs.map(createStationItem));
+	markSelected();
+}
 
-		favsSection.appendChild(item);
+/* ===================== FAVORITES ===================== */
+function loadFavs() {
+	try {
+		const raw = JSON.parse(localStorage.getItem(FAVS_KEY));
+		if (!Array.isArray(raw)) return [];
+
+		// Older versions stored the whole station object
+		const ids = raw.map((fav) => (fav && typeof fav === "object" ? fav.id : fav));
+		return [...new Set(ids)].filter((id) =>
+			STATIONS.some((station) => station.id === id),
+		);
+	} catch {
+		return [];
+	}
+}
+
+function saveFavs() {
+	try {
+		localStorage.setItem(FAVS_KEY, JSON.stringify(favIds));
+	} catch {
+		// Storage unavailable (private mode or full)
+	}
+}
+
+function updateFavButton() {
+	favBtn.disabled = activeId === null;
+	favBtn.classList.toggle("active", favIds.includes(activeId));
+	favBtn.setAttribute(
+		"aria-label",
+		favIds.includes(activeId) ? "Remove from favorites" : "Add to favorites",
+	);
+}
+
+function toggleFavorite() {
+	if (activeId === null) return;
+
+	favIds = favIds.includes(activeId)
+		? favIds.filter((id) => id !== activeId)
+		: [...favIds, activeId];
+
+	saveFavs();
+	renderFavs();
+	updateFavButton();
+
+	favBtn.classList.remove("pop");
+	void favBtn.offsetWidth;
+	favBtn.classList.add("pop");
+}
+
+/* ===================== SLEEP TIMER ===================== */
+let sleepMinutes = null;
+let sleepEndsAt = null;
+let sleepTick = null;
+
+function formatRemaining(ms) {
+	const total = Math.max(0, Math.ceil(ms / 1000));
+	const minutes = Math.floor(total / 60);
+	const seconds = String(total % 60).padStart(2, "0");
+	return `${minutes}:${seconds}`;
+}
+
+function renderSleepOptions() {
+	sleepOptions.querySelectorAll(".sleep-chip").forEach((chip) => {
+		const minutes = chip.dataset.minutes ? Number(chip.dataset.minutes) : null;
+		const selected = minutes === sleepMinutes;
+		chip.classList.toggle("selected", selected);
+		chip.setAttribute("aria-pressed", String(selected));
 	});
 }
 
-/* ===================== ACCORDION TOGGLE ==================== */
-function initAccordion() {
-	const items = document.querySelectorAll(".accordion-item");
+// While active, the time pill replaces the "Sleep" word in the header
+function renderSleepRemaining() {
+	const active = sleepEndsAt !== null;
+	sleepLabel.classList.toggle("hidden", active);
+	sleepRemaining.classList.toggle("hidden", !active);
+	sleepRemaining.textContent = active
+		? formatRemaining(sleepEndsAt - Date.now())
+		: "";
+}
 
-	items.forEach((item) => {
-		const header = item.querySelector(".accordion-header");
+function checkSleepTimer() {
+	if (sleepEndsAt === null) return;
+
+	if (Date.now() >= sleepEndsAt) {
+		setSleepTimer(null);
+		if (status === "playing" || status === "loading") stopPlayback();
+		return;
+	}
+	renderSleepRemaining();
+}
+
+function setSleepTimer(minutes) {
+	clearInterval(sleepTick);
+	sleepTick = null;
+
+	sleepMinutes = minutes;
+	sleepEndsAt = minutes ? Date.now() + minutes * 60000 : null;
+
+	if (sleepEndsAt !== null) sleepTick = setInterval(checkSleepTimer, 1000);
+
+	renderSleepOptions();
+	renderSleepRemaining();
+}
+
+function createSleepChip(minutes) {
+	const chip = document.createElement("button");
+	chip.type = "button";
+	chip.className = "sleep-chip";
+	chip.textContent = minutes === 60 ? "1h" : minutes ? `${minutes}m` : "Off";
+	chip.setAttribute("aria-label", minutes ? `${minutes} minutes` : "Turn off sleep timer");
+	if (minutes) chip.dataset.minutes = minutes;
+
+	chip.addEventListener("click", () => setSleepTimer(minutes));
+	return chip;
+}
+
+function renderSleep() {
+	sleepOptions.replaceChildren(
+		...[...SLEEP_MINUTES, null].map(createSleepChip),
+	);
+	renderSleepOptions();
+}
+
+/* ===================== MEDIA SESSION ===================== */
+function updateMediaSession(station) {
+	if (!("mediaSession" in navigator)) return;
+
+	const cover = new URL(station.cover || FALLBACK_COVER, location.href).href;
+	navigator.mediaSession.metadata = new MediaMetadata({
+		title: station.name,
+		artist: "RadioCast",
+		artwork: [{ src: cover }],
+	});
+}
+
+function initMediaSession() {
+	if (!("mediaSession" in navigator)) return;
+
+	const handlers = {
+		play: () => playStation(),
+		pause: () => stopPlayback(),
+		nexttrack: () => switchStation(1),
+		previoustrack: () => switchStation(-1),
+	};
+
+	for (const [action, handler] of Object.entries(handlers)) {
+		try {
+			navigator.mediaSession.setActionHandler(action, handler);
+		} catch {
+			// Action not supported by this browser
+		}
+	}
+}
+
+/* ===================== ACCORDION ===================== */
+function initAccordion() {
+	document.querySelectorAll(".accordion-header").forEach((header) => {
+		const panel = header.nextElementSibling;
 
 		header.addEventListener("click", () => {
-			item.querySelector(".accordion-content").classList.toggle("active");
-			item.querySelector(".accordion-toggle").classList.toggle("turned");
+			const open = header.getAttribute("aria-expanded") !== "true";
+			header.setAttribute("aria-expanded", String(open));
+
+			// "auto" can't be transitioned, so animate between pixel heights
+			panel.style.height = `${panel.getBoundingClientRect().height}px`;
+			panel.classList.toggle("is-open", open);
+			void panel.offsetHeight;
+			panel.style.height = open ? `${panel.scrollHeight}px` : "0px";
+		});
+
+		panel.addEventListener("transitionend", (event) => {
+			const done = event.target === panel && event.propertyName === "height";
+			if (done && panel.classList.contains("is-open")) {
+				panel.style.height = "auto";
+			}
 		});
 	});
 }
 
-/* ===================== EVENTS ==================== */
+/* ===================== EVENTS ===================== */
 playBtn.addEventListener("click", togglePlay);
 pauseBtn.addEventListener("click", togglePlay);
-nextBtn.addEventListener("click", switchNextStation);
-prevBtn.addEventListener("click", switchPrevStation);
-favIcon.addEventListener("click", toggleFavorite);
+nextBtn.addEventListener("click", () => switchStation(1));
+prevBtn.addEventListener("click", () => switchStation(-1));
+favBtn.addEventListener("click", toggleFavorite);
 
-/* ===================== INIT ==================== */
-document.addEventListener("DOMContentLoaded", () => {
-	initAccordion();
-	loadStations();
-});
+favBtn.addEventListener("animationend", () => favBtn.classList.remove("pop"));
+document.addEventListener("visibilitychange", checkSleepTimer);
 
+/* ===================== INIT ===================== */
+initAccordion();
+initMediaSession();
+renderStations();
+renderFavs();
+renderSleep();
+updateFavButton();
+setStatus("idle");
+
+/* ===================== VISIT COUNTER ===================== */
 async function trackProjectActivity(projectName) {
 	try {
 		const { error } = await _supabase.rpc("increment_visit", {
@@ -270,19 +446,18 @@ async function trackProjectActivity(projectName) {
 		});
 
 		if (error) throw error;
-	} catch (err) {
+	} catch {
 		console.warn("Offline mode");
 	}
 }
 
 trackProjectActivity("RadioCast");
 
-// SERVICE WORKER
+/* ===================== SERVICE WORKER ===================== */
 if ("serviceWorker" in navigator) {
 	window.addEventListener("load", () => {
 		navigator.serviceWorker
 			.register("./sw.js")
-			.then(() => console.log("Service Worker registered"))
 			.catch((err) => console.error("SW registration failed:", err));
 	});
 }

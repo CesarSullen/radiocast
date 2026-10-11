@@ -4,12 +4,15 @@
 		<meta charset="UTF-8" />
 		<meta
 			name="viewport"
-			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
 		/>
 
 		<meta property="og:title" content="RadioCast" />
 		<meta property="og:type" content="website" />
-		<meta property="og:image" content="./assets/logo.png" />
+		<meta
+			property="og:image"
+			content="https://cesarsullen.github.io/radiocast/assets/logo.png"
+		/>
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="mobile-web-app-capable" content="yes" />
@@ -20,7 +23,7 @@
 			content="black-translucent"
 		/>
 
-		<link rel="icon" type="image/jpg" href="./assets/logo.png" />
+		<link rel="icon" type="image/png" href="./assets/logo.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="./assets/logo.png" />
 
 		<link rel="manifest" href="./manifest.json" />
@@ -28,11 +31,11 @@
 		<title>RadioCast</title>
 	</head>
 	<body>
-		<audio id="radioPlayer" controls class="hidden">
-			<source id="radioSource" src="" type="audio/mpeg" />
+		<audio id="radioPlayer" preload="none" class="hidden">
 			Your browser doesn't support my power B)
 		</audio>
-		<div class="body-container">
+
+		<main class="body-container">
 			<svg
 				class="slogan"
 				viewBox="0 0 104 12"
@@ -43,114 +46,121 @@
 					fill="white"
 				/>
 			</svg>
-			<div class="section audio-player">
+
+			<section class="audio-player">
+				<div class="ambient" id="ambient" aria-hidden="true"></div>
 				<div class="radio-info">
 					<div class="cover-container">
 						<img
 							src="./assets/logo.png"
-							alt="cover"
+							alt="Station cover"
 							id="radioCover"
 							class="radio-cover"
 						/>
 						<div class="live-flag">
-							<img
-								src="./assets/live-vector.svg"
-								alt="live"
-								class="live-icon"
-							/>
+							<img src="./assets/live-vector.svg" alt="" class="live-icon" />
 							<p class="bold">LIVE</p>
 						</div>
 					</div>
 					<div class="name-line">
 						<p id="radioName" class="radio-name bold">Press Play</p>
-						<svg
-							id="favIcon"
-							class="fav-icon"
-							xmlns="http://www.w3.org/2000/svg"
-							width="32"
-							height="32"
-							fill="#ffffff"
-							viewBox="0 0 256 256"
+						<button
+							type="button"
+							id="favBtn"
+							class="fav-btn"
+							aria-label="Add to favorites"
+							disabled
 						>
-							<path
-								d="M240,98a57.63,57.63,0,0,1-17,41L133.7,229.62a8,8,0,0,1-11.4,0L33,139a58,58,0,0,1,82-82.1L128,69.05l13.09-12.19A58,58,0,0,1,240,98Z"
-							></path>
-						</svg>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 256 256"
+								aria-hidden="true"
+							>
+								<path d="M240,98a57.63,57.63,0,0,1-17,41L133.7,229.62a8,8,0,0,1-11.4,0L33,139a58,58,0,0,1,82-82.1L128,69.05l13.09-12.19A58,58,0,0,1,240,98Z"></path>
+							</svg>
+						</button>
 					</div>
+					<p id="radioStatus" class="radio-status" role="status"></p>
 				</div>
 
 				<div class="player-inputs">
 					<div class="btn-container">
-						<img
-							src="./assets/prev-fill.svg"
-							id="prevBtn"
-							class="control-btn"
-						/>
-
-						<img
-							src="./assets/play-fill.svg"
-							id="playBtn"
-							class="control-btn"
-						/>
-
-						<img
-							src="./assets/pause-fill.svg"
-							id="pauseBtn"
-							class="control-btn hidden"
-						/>
-
-						<img
-							src="./assets/next-fill.svg"
-							id="nextBtn"
-							class="control-btn"
-						/>
+						<button type="button" id="prevBtn" class="control-btn" aria-label="Previous station">
+							<img src="./assets/prev-fill.svg" alt="" />
+						</button>
+						<button type="button" id="playBtn" class="control-btn" aria-label="Play">
+							<img src="./assets/play-fill.svg" alt="" />
+						</button>
+						<button type="button" id="pauseBtn" class="control-btn hidden" aria-label="Pause">
+							<img src="./assets/pause-fill.svg" alt="" />
+						</button>
+						<button type="button" id="nextBtn" class="control-btn" aria-label="Next station">
+							<img src="./assets/next-fill.svg" alt="" />
+						</button>
 					</div>
 				</div>
-			</div>
+			</section>
 
-			<div class="accordion section">
+			<section class="accordion">
 				<div class="accordion-item">
-					<div class="accordion-header">
-						<img
-							src="./assets/heart-straight-fill.svg"
-							class="accordion-icon"
-						/>
-						<h3 class="accordion-title">Favs</h3>
-						<img src="./assets/caret-down.svg" class="accordion-toggle" />
+					<button type="button" class="accordion-header" aria-expanded="false" aria-controls="favsPanel">
+						<img src="./assets/heart-straight-fill.svg" alt="" class="accordion-icon" />
+						<span class="accordion-title">Favs</span>
+						<img src="./assets/caret-down.svg" alt="" class="accordion-toggle" />
+					</button>
+					<div class="accordion-panel" id="favsPanel">
+						<div class="station-list" id="favsList"></div>
 					</div>
-					<div class="accordion-content section favs-section"></div>
 				</div>
-			</div>
+			</section>
 
-			<div class="accordion section">
+			<section class="accordion">
 				<div class="accordion-item">
-					<div class="accordion-header">
-						<img src="./assets/music-notes-fill.svg" class="accordion-icon" />
-						<h3 class="accordion-title">Stations</h3>
-						<img src="./assets/caret-down.svg" class="accordion-toggle" />
-					</div>
-					<div class="accordion-content section stations-section">
-						<hr />
+					<button type="button" class="accordion-header" aria-expanded="false" aria-controls="stationsPanel">
+						<img src="./assets/music-notes-fill.svg" alt="" class="accordion-icon" />
+						<span class="accordion-title">Stations</span>
+						<img src="./assets/caret-down.svg" alt="" class="accordion-toggle" />
+					</button>
+					<div class="accordion-panel" id="stationsPanel">
+						<div class="station-list" id="stationsList"></div>
 					</div>
 				</div>
-			</div>
-		</div>
+			</section>
+
+			<section class="accordion accordion-wide">
+				<div class="accordion-item">
+					<button type="button" class="accordion-header" aria-expanded="false" aria-controls="sleepPanel">
+						<img src="./assets/moon-stars-fill.svg" alt="" class="accordion-icon" />
+						<span class="accordion-title">
+							<span id="sleepLabel">Sleep</span>
+							<span id="sleepRemaining" class="time-pill hidden"></span>
+						</span>
+						<img src="./assets/caret-down.svg" alt="" class="accordion-toggle" />
+					</button>
+					<div class="accordion-panel" id="sleepPanel">
+						<div class="sleep-options" id="sleepOptions"></div>
+					</div>
+				</div>
+			</section>
+		</main>
+
 		<footer>
-			<div class="footer-content">
-				<nav class="footer-links">
-					<a href="https://cesarsullen.github.io">About the Developer</a>
-					<a href="https://cesarsullen.github.io/views/pwa-install"
-						>How to Install?</a
-					>
-					<a href="https://cesarsullen.github.io/views/donations">Support Me</a>
-					<a href="https://de1.api.radio-browser.info/" target="_blank"
-						>Radio Browser API</a
-					>
-				</nav>
-			</div>
+			<nav class="footer-links">
+				<a href="https://cesarsullen.github.io">About the Developer</a>
+				<a href="https://cesarsullen.github.io/views/pwa-install">How to Install?</a>
+				<a href="https://cesarsullen.github.io/views/donations">Support Me</a>
+				<a href="https://de1.api.radio-browser.info/" target="_blank" rel="noopener">Radio Browser API</a>
+			</nav>
+			<p class="app-version">RadioCast v1.0.0</p>
 		</footer>
-		<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"
+			integrity="sha384-Rj26LVGvoeRVR6+mwQmFfcR3QOBEwT+ZmuCWpuiqeTzJpCs0ER4ITAWGb4Hiy3Ok"
+			crossorigin="anonymous"
+		></script>
 		<script src="./js/supabase-config.js"></script>
+		<script src="./js/stations.js"></script>
 		<script src="./js/main.js"></script>
 	</body>
 </html>

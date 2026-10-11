@@ -7,6 +7,8 @@
 - Listen to free music.
 - Background playing is available.
 - Install it as an app.
+- Sleep timer to stop the music automatically.
+- Lock screen controls (play, pause, next and previous).
 
 ## Credits
 

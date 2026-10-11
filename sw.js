@@ -1,22 +1,21 @@
-const CACHE_NAME = "radiocast-static-v5.4";
+// Cache version
+const CACHE_NAME = "radiocast-static-v1.0.0";
+
 const STATIC_ASSETS = [
-	// HTML
+	// Page
 	"./index.html",
-
-	// CSS
-	"./css/style.css",
-
-	// JS
-	"./js/main.js",
-	"./js/supabase-config.js",
-
-	// Manifest
 	"./manifest.json",
 
-	// Fonts
+	// Styles and scripts
+	"./css/style.css",
+	"./js/stations.js",
+	"./js/supabase-config.js",
+	"./js/main.js",
+
+	// Font
 	"./typography/Poppins-Regular.ttf",
 
-	// Icons and assets
+	// Icons and images
 	"./assets/logo.png",
 	"./assets/next-fill.svg",
 	"./assets/prev-fill.svg",
@@ -26,6 +25,7 @@ const STATIC_ASSETS = [
 	"./assets/live-vector.svg",
 	"./assets/caret-down.svg",
 	"./assets/music-notes-fill.svg",
+	"./assets/moon-stars-fill.svg",
 	"./assets/slogan.svg",
 
 	// Screenshots
@@ -34,44 +34,47 @@ const STATIC_ASSETS = [
 	"./assets/screenshots/desktop-1.png",
 ];
 
-// Install: precache
+// Install: precache the app shell
 self.addEventListener("install", (event) => {
 	self.skipWaiting();
 	event.waitUntil(
-		caches.open(CACHE_NAME).then((cache) => {
-			return cache.addAll(STATIC_ASSETS);
-		}),
+		caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS)),
 	);
 });
 
-// Activate: clean old caches
+// Activate: remove old caches
 self.addEventListener("activate", (event) => {
 	event.waitUntil(
 		(async () => {
 			const keys = await caches.keys();
 			await Promise.all(
-				keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)),
+				keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)),
 			);
 			await self.clients.claim();
 		})(),
 	);
 });
 
-// Fetch: cache-first strategy
+// Fetch: cache-first for same-origin static files only (never streams or APIs)
 self.addEventListener("fetch", (event) => {
-	if (event.request.method !== "GET") return;
+	const { request } = event;
+	const sameOrigin = new URL(request.url).origin === self.location.origin;
+
+	if (request.method !== "GET" || !sameOrigin || request.headers.has("range")) {
+		return;
+	}
 
 	event.respondWith(
-		caches.match(event.request).then((cachedResponse) => {
-			return (
-				cachedResponse ||
-				fetch(event.request).then((networkResponse) => {
-					return caches.open(CACHE_NAME).then((cache) => {
-						cache.put(event.request, networkResponse.clone());
-						return networkResponse;
-					});
-				})
-			);
+		caches.match(request).then((cached) => {
+			if (cached) return cached;
+
+			return fetch(request).then((response) => {
+				if (response.ok) {
+					const copy = response.clone();
+					caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+				}
+				return response;
+			});
 		}),
 	);
 });
