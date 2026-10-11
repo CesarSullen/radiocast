@@ -19,8 +19,15 @@
 
 @font-face {
 	font-family: "Poppins";
-	src: url("../typography/Poppins-Regular.ttf") format("truetype");
+	src: url("../typography/poppins-400.woff2") format("woff2");
 	font-weight: 400;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../typography/poppins-600.woff2") format("woff2");
+	font-weight: 600;
 	font-display: swap;
 }
 
@@ -89,24 +96,6 @@ a {
 }
 
 /* ===================== LAYOUT ===================== */
-.ambient {
-	position: absolute;
-	inset: 0;
-	z-index: -1;
-	background-image: var(--cover, none);
-	background-position: center;
-	background-size: cover;
-	filter: blur(40px) saturate(1.4);
-	transform: scale(1.4);
-	opacity: 0.35;
-	transition: opacity 0.4s ease;
-	pointer-events: none;
-}
-
-.ambient.is-swapping {
-	opacity: 0;
-}
-
 .body-container {
 	flex: 1;
 	width: 100%;
@@ -153,9 +142,6 @@ a {
 	backdrop-filter: blur(30px);
 	-webkit-backdrop-filter: blur(30px);
 	box-shadow: var(--shadow);
-	position: relative;
-	overflow: hidden;
-	isolation: isolate;
 }
 
 .radio-info {

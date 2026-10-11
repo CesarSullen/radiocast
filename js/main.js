@@ -11,7 +11,6 @@ const favBtn = document.getElementById("favBtn");
 const radioName = document.getElementById("radioName");
 const radioStatus = document.getElementById("radioStatus");
 const radioCover = document.getElementById("radioCover");
-const ambient = document.getElementById("ambient");
 
 const stationsList = document.getElementById("stationsList");
 const favsList = document.getElementById("favsList");
@@ -23,6 +22,16 @@ const sleepRemaining = document.getElementById("sleepRemaining");
 const FALLBACK_COVER = "./assets/logo.png";
 const FAVS_KEY = "favStations";
 const SLEEP_MINUTES = [15, 30, 45, 60];
+
+// Mirrors of the Radio Browser API; any of them may be down at a given time
+const API_MIRRORS = [
+	"https://de1.api.radio-browser.info",
+	"https://de2.api.radio-browser.info",
+	"https://fi1.api.radio-browser.info",
+	"https://nl1.api.radio-browser.info",
+	"https://at1.api.radio-browser.info",
+];
+const MIRROR_TIMEOUT = 4000;
 const STATUS_TEXT = {
 	loading: "Connecting…",
 	error: "Connection failed. Press play to retry.",
@@ -81,19 +90,54 @@ function releaseStream() {
 	audio.load();
 }
 
-async function resolveStream(station) {
+function shuffled(list) {
+	const copy = [...list];
+	for (let i = copy.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[copy[i], copy[j]] = [copy[j], copy[i]];
+	}
+	return copy;
+}
+
+async function fetchStationInfo(mirror, uuid) {
+	const controller = new AbortController();
+	const timer = setTimeout(() => controller.abort(), MIRROR_TIMEOUT);
+
+	try {
+		const response = await fetch(`${mirror}/json/stations/byuuid/${uuid}`, {
+			signal: controller.signal,
+		});
+		if (!response.ok) throw new Error(`${mirror} answered ${response.status}`);
+
+		const [info] = await response.json();
+		if (!info) throw new Error(`${mirror} returned no station`);
+		return info;
+	} finally {
+		clearTimeout(timer);
+	}
+}
+
+// Tries the mirrors in random order until one answers
+async function resolveStream(station, id) {
 	const cached = streamCache.get(station.id);
 	if (cached) return cached;
 
-	const response = await fetch(station.url);
-	if (!response.ok) throw new Error(`Radio Browser error ${response.status}`);
+	for (const mirror of shuffled(API_MIRRORS)) {
+		if (id !== requestId) break;
 
-	const [info] = await response.json();
-	const streamUrl = info?.url_resolved || info?.url;
-	if (!streamUrl) throw new Error("Station without stream URL");
+		try {
+			const info = await fetchStationInfo(mirror, station.uuid);
+			const streamUrl = info.url_resolved || info.url;
+			if (!streamUrl) throw new Error("Station without stream URL");
 
-	streamCache.set(station.id, streamUrl);
-	return streamUrl;
+			streamCache.set(station.id, streamUrl);
+			return streamUrl;
+		} catch (err) {
+			console.warn("Mirror failed:", err.message);
+		}
+	}
+
+	throw new Error("No Radio Browser mirror answered");
 }
 
 async function playStation(index = currentIndex) {
@@ -106,7 +150,7 @@ async function playStation(index = currentIndex) {
 	setStatus("loading");
 
 	try {
-		const streamUrl = await resolveStream(station);
+		const streamUrl = await resolveStream(station, id);
 		if (id !== requestId) return;
 
 		audio.src = streamUrl;
@@ -159,12 +203,8 @@ function setCover(src) {
 	if (radioCover.getAttribute("src") === src) return;
 
 	radioCover.classList.add("is-swapping");
-	ambient.classList.add("is-swapping");
-
 	setTimeout(() => {
 		radioCover.src = src;
-		ambient.style.setProperty("--cover", `url(${JSON.stringify(src)})`);
-		ambient.classList.remove("is-swapping");
 	}, 200);
 }
 

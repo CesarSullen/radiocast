@@ -1,5 +1,5 @@
 // Cache version
-const CACHE_NAME = "radiocast-static-v1.0.0";
+const CACHE_NAME = "radiocast-static-v1.1.0";
 
 const STATIC_ASSETS = [
 	// Page
@@ -13,7 +13,8 @@ const STATIC_ASSETS = [
 	"./js/main.js",
 
 	// Font
-	"./typography/Poppins-Regular.ttf",
+	"./typography/poppins-400.woff2",
+	"./typography/poppins-600.woff2",
 
 	// Icons and images
 	"./assets/logo.png",
@@ -26,12 +27,6 @@ const STATIC_ASSETS = [
 	"./assets/caret-down.svg",
 	"./assets/music-notes-fill.svg",
 	"./assets/moon-stars-fill.svg",
-	"./assets/slogan.svg",
-
-	// Screenshots
-	"./assets/screenshots/mobile-1.png",
-	"./assets/screenshots/mobile-2.png",
-	"./assets/screenshots/desktop-1.png",
 ];
 
 // Install: precache the app shell
