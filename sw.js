@@ -1,5 +1,5 @@
 // Cache version
-const CACHE_NAME = "radiocast-static-v1.1.0";
+const CACHE_NAME = "radiocast-v1.1.1";
 
 const STATIC_ASSETS = [
 	// Page

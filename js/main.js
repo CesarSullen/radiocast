@@ -121,6 +121,7 @@ async function fetchStationInfo(mirror, uuid) {
 async function resolveStream(station, id) {
 	const cached = streamCache.get(station.id);
 	if (cached) return cached;
+	if (!navigator.onLine) throw new Error("No internet connection");
 
 	for (const mirror of shuffled(API_MIRRORS)) {
 		if (id !== requestId) break;
@@ -480,18 +481,26 @@ setStatus("idle");
 
 /* ===================== VISIT COUNTER ===================== */
 async function trackProjectActivity(projectName) {
+	if (!navigator.onLine) return;
+
+	const controller = new AbortController();
+	const timer = setTimeout(() => controller.abort(), 8000);
+
 	try {
-		const { error } = await _supabase.rpc("increment_visit", {
-			name_param: projectName,
-		});
+		const { error } = await _supabase
+			.rpc("increment_visit", { name_param: projectName })
+			.abortSignal(controller.signal);
 
 		if (error) throw error;
 	} catch {
 		console.warn("Offline mode");
+	} finally {
+		clearTimeout(timer);
 	}
 }
 
-trackProjectActivity("RadioCast");
+// Runs after the deferred scripts, so it never competes with the app
+window.addEventListener("load", () => trackProjectActivity("RadioCast"));
 
 /* ===================== SERVICE WORKER ===================== */
 if ("serviceWorker" in navigator) {
