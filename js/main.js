@@ -1,22 +1,18 @@
+/* ===================== HELPERS ===================== */
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
+
 /* ===================== ELEMENTS ===================== */
-const audio = document.getElementById("radioPlayer");
-const player = document.querySelector(".audio-player");
+const audio = $("#radioPlayer");
+const segmented = $("#segmented");
+const fullPlayer = $("#fullPlayer");
+const sleepSheet = $("#sleepSheet");
+const sleepOptions = $("#sleepOptions");
 
-const playBtn = document.getElementById("playBtn");
-const pauseBtn = document.getElementById("pauseBtn");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
-const favBtn = document.getElementById("favBtn");
-
-const radioName = document.getElementById("radioName");
-const radioStatus = document.getElementById("radioStatus");
-const radioCover = document.getElementById("radioCover");
-
-const stationsList = document.getElementById("stationsList");
-const favsList = document.getElementById("favsList");
-const sleepOptions = document.getElementById("sleepOptions");
-const sleepLabel = document.getElementById("sleepLabel");
-const sleepRemaining = document.getElementById("sleepRemaining");
+const lists = {
+	stations: { view: $("#stationsView"), list: $("#stationsList"), dots: $("#stationsDots") },
+	favs: { view: $("#favsView"), list: $("#favsList"), dots: $("#favsDots") },
+};
 
 /* ===================== CONSTANTS ===================== */
 const FALLBACK_COVER = "./assets/logo.png";
@@ -44,6 +40,7 @@ const SILENCE =
 /* ===================== STATE ===================== */
 let currentIndex = 0;
 let activeId = null;
+let currentView = "stations";
 let status = "idle"; // idle | loading | playing | paused | error
 let requestId = 0;
 let audioUnlocked = false;
@@ -52,21 +49,28 @@ let favIds = loadFavs();
 const streamCache = new Map();
 
 /* ===================== STATUS ===================== */
+function isBusy() {
+	return status === "playing" || status === "loading";
+}
+
 function setStatus(next) {
 	status = next;
-	const busy = next === "loading" || next === "playing";
+	const busy = isBusy();
 
-	playBtn.classList.toggle("hidden", busy);
-	pauseBtn.classList.toggle("hidden", !busy);
-	player.classList.toggle("is-loading", next === "loading");
+	document.body.classList.toggle("is-busy", busy);
+	document.body.classList.toggle("is-loading", next === "loading");
 	document.body.classList.toggle("is-playing", next === "playing");
 
-	radioStatus.textContent = STATUS_TEXT[next] || "";
-	radioStatus.classList.toggle("is-error", next === "error");
+	$$("[data-bind='status']").forEach((el) => {
+		el.textContent = STATUS_TEXT[next] || "";
+		el.classList.toggle("is-error", next === "error");
+	});
+	$$(".play-toggle").forEach((btn) => {
+		btn.setAttribute("aria-label", busy ? "Pause" : "Play");
+	});
 
 	if ("mediaSession" in navigator) {
-		navigator.mediaSession.playbackState =
-			next === "playing" ? "playing" : "paused";
+		navigator.mediaSession.playbackState = next === "playing" ? "playing" : "paused";
 	}
 }
 
@@ -172,7 +176,7 @@ function stopPlayback() {
 }
 
 function togglePlay() {
-	if (status === "playing" || status === "loading") stopPlayback();
+	if (isBusy()) stopPlayback();
 	else playStation();
 }
 
@@ -201,67 +205,70 @@ audio.addEventListener("ended", handleStreamLost);
 
 /* ===================== STATION DISPLAY ===================== */
 function setCover(src) {
-	if (radioCover.getAttribute("src") === src) return;
+	$$(".player-cover").forEach((img) => {
+		if (img.getAttribute("src") === src) return;
 
-	radioCover.classList.add("is-swapping");
-	setTimeout(() => {
-		radioCover.src = src;
-	}, 200);
+		img.classList.add("is-swapping");
+		setTimeout(() => {
+			img.src = src;
+		}, 200);
+	});
 }
 
-radioCover.addEventListener("load", () => {
-	radioCover.classList.remove("is-swapping");
-});
-
-radioCover.addEventListener("error", () => {
-	if (radioCover.getAttribute("src") !== FALLBACK_COVER) {
-		radioCover.src = FALLBACK_COVER;
-	}
+$$(".player-cover").forEach((img) => {
+	img.addEventListener("load", () => img.classList.remove("is-swapping"));
+	img.addEventListener("error", () => {
+		if (img.getAttribute("src") !== FALLBACK_COVER) img.src = FALLBACK_COVER;
+	});
 });
 
 function showStation(station) {
 	activeId = station.id;
-	radioName.textContent = station.name;
+	document.body.classList.add("has-player");
+
+	$$("[data-bind='name']").forEach((el) => {
+		el.textContent = station.name;
+	});
 	setCover(station.cover || FALLBACK_COVER);
-	updateFavButton();
+	updateFavButtons();
 	markSelected();
+	scrollToActiveCard();
 	updateMediaSession(station);
 }
 
 function markSelected() {
-	document.querySelectorAll(".station-item").forEach((item) => {
-		item.classList.toggle("selected", Number(item.dataset.id) === activeId);
+	$$(".station-card").forEach((card) => {
+		card.classList.toggle("selected", Number(card.dataset.id) === activeId);
 	});
+}
+
+function scrollToActiveCard() {
+	const card = lists[currentView].list.querySelector(".station-card.selected");
+	card?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
 }
 
 /* ===================== STATION LISTS ===================== */
 const WAVES_HTML = `<span class="audio-waves" aria-hidden="true"><span class="line"></span><span class="line"></span><span class="line"></span></span>`;
 
-function createStationItem(station) {
-	const item = document.createElement("button");
-	item.type = "button";
-	item.className = "station-item";
-	item.dataset.id = station.id;
+function createStationCard(station) {
+	const card = document.createElement("button");
+	card.type = "button";
+	card.className = "station-card";
+	card.dataset.action = "play-station";
+	card.dataset.id = station.id;
+	card.innerHTML = `<span class="station-cover-wrap"><img class="station-cover" alt="" loading="lazy" /></span><span class="station-title">${WAVES_HTML}<span class="station-name"></span></span>`;
 
-	const name = document.createElement("span");
-	name.className = "station-name";
-	name.textContent = station.name;
+	const cover = card.querySelector(".station-cover");
+	cover.src = station.cover || FALLBACK_COVER;
+	cover.addEventListener("error", () => (cover.src = FALLBACK_COVER), { once: true });
+	card.querySelector(".station-name").textContent = station.name;
 
-	item.insertAdjacentHTML("beforeend", WAVES_HTML);
-	item.append(name);
-	item.insertAdjacentHTML("beforeend", WAVES_HTML);
-
-	item.addEventListener("click", () => {
-		const isActive = station.id === activeId;
-		if (isActive && (status === "playing" || status === "loading")) return;
-		playStation(STATIONS.indexOf(station));
-	});
-
-	return item;
+	return card;
 }
 
 function renderStations() {
-	stationsList.replaceChildren(...STATIONS.map(createStationItem));
+	lists.stations.list.replaceChildren(...STATIONS.map(createStationCard));
+	renderDots("stations");
 }
 
 function renderFavs() {
@@ -273,12 +280,74 @@ function renderFavs() {
 		const note = document.createElement("p");
 		note.className = "empty-note";
 		note.textContent = "Tap the heart to save a station.";
-		favsList.replaceChildren(note);
-		return;
+		lists.favs.list.replaceChildren(note);
+	} else {
+		lists.favs.list.replaceChildren(...favs.map(createStationCard));
+		markSelected();
 	}
+	renderDots("favs");
+}
 
-	favsList.replaceChildren(...favs.map(createStationItem));
-	markSelected();
+function renderDots(name) {
+	const { list, dots } = lists[name];
+	const count = list.querySelectorAll(".station-card").length;
+
+	dots.replaceChildren(
+		...Array.from({ length: count > 1 ? count : 0 }, () => {
+			const dot = document.createElement("span");
+			dot.className = "dot";
+			return dot;
+		}),
+	);
+	updateDots(name);
+}
+
+// The active dot follows the card closest to the center of the carousel
+function updateDots(name) {
+	const { list, dots } = lists[name];
+	const cards = [...list.querySelectorAll(".station-card")];
+	if (cards.length === 0) return;
+
+	const center = list.scrollLeft + list.clientWidth / 2;
+	let nearest = 0;
+	let best = Infinity;
+	cards.forEach((card, index) => {
+		const distance = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center);
+		if (distance < best) {
+			best = distance;
+			nearest = index;
+		}
+	});
+
+	[...dots.children].forEach((dot, index) => {
+		dot.classList.toggle("active", index === nearest);
+	});
+}
+
+Object.keys(lists).forEach((name) => {
+	let frame = null;
+	lists[name].list.addEventListener("scroll", () => {
+		cancelAnimationFrame(frame);
+		frame = requestAnimationFrame(() => updateDots(name));
+	});
+});
+
+function setView(view) {
+	if (view === currentView) return;
+	currentView = view;
+
+	segmented.dataset.view = view;
+	segmented.querySelectorAll(".segment").forEach((segment) => {
+		const selected = segment.dataset.view === view;
+		segment.classList.toggle("selected", selected);
+		segment.setAttribute("aria-selected", String(selected));
+	});
+
+	Object.entries(lists).forEach(([name, { view: section }]) => {
+		section.classList.toggle("hidden", name !== view);
+	});
+	updateDots(view);
+	scrollToActiveCard();
 }
 
 /* ===================== FAVORITES ===================== */
@@ -305,13 +374,14 @@ function saveFavs() {
 	}
 }
 
-function updateFavButton() {
-	favBtn.disabled = activeId === null;
-	favBtn.classList.toggle("active", favIds.includes(activeId));
-	favBtn.setAttribute(
-		"aria-label",
-		favIds.includes(activeId) ? "Remove from favorites" : "Add to favorites",
-	);
+function updateFavButtons() {
+	const isFav = favIds.includes(activeId);
+
+	$$(".fav-btn").forEach((btn) => {
+		btn.disabled = activeId === null;
+		btn.classList.toggle("active", isFav);
+		btn.setAttribute("aria-label", isFav ? "Remove from favorites" : "Add to favorites");
+	});
 }
 
 function toggleFavorite() {
@@ -323,12 +393,18 @@ function toggleFavorite() {
 
 	saveFavs();
 	renderFavs();
-	updateFavButton();
+	updateFavButtons();
 
-	favBtn.classList.remove("pop");
-	void favBtn.offsetWidth;
-	favBtn.classList.add("pop");
+	$$(".fav-btn").forEach((btn) => {
+		btn.classList.remove("pop");
+		void btn.offsetWidth;
+		btn.classList.add("pop");
+	});
 }
+
+$$(".fav-btn").forEach((btn) => {
+	btn.addEventListener("animationend", () => btn.classList.remove("pop"));
+});
 
 /* ===================== SLEEP TIMER ===================== */
 let sleepMinutes = null;
@@ -351,14 +427,15 @@ function renderSleepOptions() {
 	});
 }
 
-// While active, the time pill replaces the "Sleep" word in the header
+// While active, the remaining time shows inside every sleep button
 function renderSleepRemaining() {
 	const active = sleepEndsAt !== null;
-	sleepLabel.classList.toggle("hidden", active);
-	sleepRemaining.classList.toggle("hidden", !active);
-	sleepRemaining.textContent = active
-		? formatRemaining(sleepEndsAt - Date.now())
-		: "";
+	const text = active ? formatRemaining(sleepEndsAt - Date.now()) : "";
+
+	$$(".sleep-btn").forEach((btn) => {
+		btn.classList.toggle("is-active", active);
+		btn.querySelector(".sleep-time").textContent = text;
+	});
 }
 
 function checkSleepTimer() {
@@ -366,7 +443,7 @@ function checkSleepTimer() {
 
 	if (Date.now() >= sleepEndsAt) {
 		setSleepTimer(null);
-		if (status === "playing" || status === "loading") stopPlayback();
+		if (isBusy()) stopPlayback();
 		return;
 	}
 	renderSleepRemaining();
@@ -393,16 +470,36 @@ function createSleepChip(minutes) {
 	chip.setAttribute("aria-label", minutes ? `${minutes} minutes` : "Turn off sleep timer");
 	if (minutes) chip.dataset.minutes = minutes;
 
-	chip.addEventListener("click", () => setSleepTimer(minutes));
+	chip.addEventListener("click", () => {
+		setSleepTimer(minutes);
+		toggleSheet(false);
+	});
 	return chip;
 }
 
 function renderSleep() {
-	sleepOptions.replaceChildren(
-		...[...SLEEP_MINUTES, null].map(createSleepChip),
-	);
+	sleepOptions.replaceChildren(...[...SLEEP_MINUTES, null].map(createSleepChip));
 	renderSleepOptions();
 }
+
+/* ===================== PLAYER SCREEN AND SHEET ===================== */
+function togglePlayerScreen(open) {
+	fullPlayer.classList.toggle("is-open", open);
+	fullPlayer.setAttribute("aria-hidden", String(!open));
+	document.body.classList.toggle("player-open", open);
+}
+
+function toggleSheet(open) {
+	sleepSheet.classList.toggle("is-open", open);
+	sleepSheet.setAttribute("aria-hidden", String(!open));
+}
+
+document.addEventListener("keydown", (event) => {
+	if (event.key !== "Escape") return;
+
+	if (sleepSheet.classList.contains("is-open")) toggleSheet(false);
+	else if (fullPlayer.classList.contains("is-open")) togglePlayerScreen(false);
+});
 
 /* ===================== MEDIA SESSION ===================== */
 function updateMediaSession(station) {
@@ -435,48 +532,37 @@ function initMediaSession() {
 	}
 }
 
-/* ===================== ACCORDION ===================== */
-function initAccordion() {
-	document.querySelectorAll(".accordion-header").forEach((header) => {
-		const panel = header.nextElementSibling;
-
-		header.addEventListener("click", () => {
-			const open = header.getAttribute("aria-expanded") !== "true";
-			header.setAttribute("aria-expanded", String(open));
-
-			// "auto" can't be transitioned, so animate between pixel heights
-			panel.style.height = `${panel.getBoundingClientRect().height}px`;
-			panel.classList.toggle("is-open", open);
-			void panel.offsetHeight;
-			panel.style.height = open ? `${panel.scrollHeight}px` : "0px";
-		});
-
-		panel.addEventListener("transitionend", (event) => {
-			const done = event.target === panel && event.propertyName === "height";
-			if (done && panel.classList.contains("is-open")) {
-				panel.style.height = "auto";
-			}
-		});
-	});
-}
-
 /* ===================== EVENTS ===================== */
-playBtn.addEventListener("click", togglePlay);
-pauseBtn.addEventListener("click", togglePlay);
-nextBtn.addEventListener("click", () => switchStation(1));
-prevBtn.addEventListener("click", () => switchStation(-1));
-favBtn.addEventListener("click", toggleFavorite);
+const actions = {
+	"play-station": (el) => {
+		const index = STATIONS.findIndex((station) => station.id === Number(el.dataset.id));
+		if (STATIONS[index].id === activeId && isBusy()) return;
+		playStation(index);
+	},
+	"toggle-play": togglePlay,
+	prev: () => switchStation(-1),
+	next: () => switchStation(1),
+	fav: toggleFavorite,
+	"set-view": (el) => setView(el.dataset.view),
+	"open-player": () => togglePlayerScreen(true),
+	"close-player": () => togglePlayerScreen(false),
+	"open-sleep": () => toggleSheet(true),
+	"close-sleep": () => toggleSheet(false),
+};
 
-favBtn.addEventListener("animationend", () => favBtn.classList.remove("pop"));
+document.addEventListener("click", (event) => {
+	const el = event.target.closest("[data-action]");
+	if (el) actions[el.dataset.action]?.(el);
+});
+
 document.addEventListener("visibilitychange", checkSleepTimer);
 
 /* ===================== INIT ===================== */
-initAccordion();
 initMediaSession();
 renderStations();
 renderFavs();
 renderSleep();
-updateFavButton();
+updateFavButtons();
 setStatus("idle");
 
 /* ===================== VISIT COUNTER ===================== */

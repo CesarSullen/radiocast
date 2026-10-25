@@ -23,9 +23,10 @@ const STATIC_ASSETS = [
 	"./assets/play-fill.svg",
 	"./assets/pause-fill.svg",
 	"./assets/heart-straight-fill.svg",
-	"./assets/live-vector.svg",
 	"./assets/caret-down.svg",
-	"./assets/music-notes-fill.svg",
+	"./assets/cell-tower.svg",
+	"./assets/heart-straight.svg",
+	"./assets/caret-up.svg",
 	"./assets/moon-stars-fill.svg",
 ];
 
