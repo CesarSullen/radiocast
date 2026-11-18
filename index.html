@@ -23,8 +23,8 @@
 			content="black-translucent"
 		/>
 
-		<link rel="icon" type="image/png" href="./assets/logo.png" />
-		<link rel="apple-touch-icon" sizes="180x180" href="./assets/logo.png" />
+		<link rel="icon" type="image/png" href="./assets/icon-192.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="./assets/icon-192.png" />
 
 		<link rel="manifest" href="./manifest.json" />
 		<link rel="stylesheet" href="./css/style.css" />
@@ -86,7 +86,7 @@
 
 		<div class="mini-player" id="miniPlayer">
 			<button type="button" class="mini-open" data-action="open-player" aria-label="Open player">
-				<img class="player-cover mini-thumb" src="./assets/logo.png" alt="" />
+				<img class="player-cover mini-thumb" src="./assets/icon-512.png" alt="" />
 				<span class="mini-text">
 					<span class="mini-name" data-bind="name"></span>
 					<span class="player-status" data-bind="status" role="status"></span>
@@ -131,7 +131,7 @@
 				</div>
 
 				<div class="full-cover-wrap">
-					<img class="player-cover full-cover" src="./assets/logo.png" alt="Station cover" />
+					<img class="player-cover full-cover" src="./assets/icon-512.png" alt="Station cover" />
 				</div>
 
 				<div class="live-pill">
@@ -172,13 +172,7 @@
 			</div>
 		</div>
 
-		<script
-			src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"
-			integrity="sha384-Rj26LVGvoeRVR6+mwQmFfcR3QOBEwT+ZmuCWpuiqeTzJpCs0ER4ITAWGb4Hiy3Ok"
-			crossorigin="anonymous"
-			defer
-		></script>
-		<script src="./js/supabase-config.js" defer></script>
+		<script src="./js/supabase-config.js"></script>
 		<script src="./js/stations.js"></script>
 		<script src="./js/main.js"></script>
 	</body>

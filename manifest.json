@@ -1,41 +1,95 @@
 {
+	"id": "/radiocast/",
 	"name": "RadioCast",
 	"short_name": "RadioCast",
 	"description": "Radio Lo-Fi en streaming – música relajante, beats chill y ambiente cozy para estudiar, trabajar o desconectar. Reproductor simple y sin interrupciones.",
-	"start_url": "./index.html",
-	"display": "standalone",
+	"lang": "en",
+	"dir": "ltr",
+	"start_url": "./",
 	"scope": "./",
+	"display": "standalone",
+	"display_override": [
+		"standalone",
+		"minimal-ui"
+	],
+	"orientation": "portrait",
 	"background_color": "#111a27",
 	"theme_color": "#111a27",
+	"categories": [
+		"music",
+		"entertainment"
+	],
+	"launch_handler": {
+		"client_mode": "focus-existing"
+	},
+	"prefer_related_applications": false,
+	"related_applications": [],
 	"icons": [
 		{
-			"src": "./assets/logo.png",
-			"sizes": "1024x1024",
+			"src": "./assets/icon-192.png",
+			"sizes": "192x192",
 			"type": "image/png",
 			"purpose": "any"
+		},
+		{
+			"src": "./assets/icon-512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "./assets/icon-512-maskable.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
 		}
 	],
 	"screenshots": [
 		{
 			"src": "./assets/screenshots/mobile-1.png",
-			"sizes": "750x1334",
+			"sizes": "750x1624",
 			"type": "image/png",
 			"form_factor": "narrow",
-			"label": "Mobile view 1"
+			"label": "Elige una emisora de radio lo-fi"
 		},
 		{
 			"src": "./assets/screenshots/mobile-2.png",
-			"sizes": "750x1334",
+			"sizes": "750x1624",
 			"type": "image/png",
 			"form_factor": "narrow",
-			"label": "Mobile view 2"
+			"label": "Reproductor con controles y temporizador"
 		},
 		{
 			"src": "./assets/screenshots/desktop-1.png",
-			"sizes": "857x681",
+			"sizes": "1280x720",
 			"type": "image/png",
 			"form_factor": "wide",
-			"label": "Desktop view"
+			"label": "RadioCast en escritorio"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "Favoritas",
+			"url": "./?view=favs",
+			"icons": [
+				{
+					"src": "./assets/icon-192.png",
+					"sizes": "192x192",
+					"type": "image/png"
+				}
+			]
+		},
+		{
+			"name": "Temporizador de sueño",
+			"short_name": "Sueño",
+			"url": "./?action=sleep",
+			"icons": [
+				{
+					"src": "./assets/icon-192.png",
+					"sizes": "192x192",
+					"type": "image/png"
+				}
+			]
 		}
 	]
 }

@@ -15,7 +15,7 @@ const lists = {
 };
 
 /* ===================== CONSTANTS ===================== */
-const FALLBACK_COVER = "./assets/logo.png";
+const FALLBACK_COVER = "./assets/icon-512.png";
 const FAVS_KEY = "favStations";
 const SLEEP_MINUTES = [15, 30, 45, 60];
 
@@ -573,7 +573,8 @@ async function trackProjectActivity(projectName) {
 	const timer = setTimeout(() => controller.abort(), 8000);
 
 	try {
-		const { error } = await _supabase
+		const client = await loadSupabaseClient();
+		const { error } = await client
 			.rpc("increment_visit", { name_param: projectName })
 			.abortSignal(controller.signal);
 
@@ -585,14 +586,30 @@ async function trackProjectActivity(projectName) {
 	}
 }
 
-// Runs after the deferred scripts, so it never competes with the app
-window.addEventListener("load", () => trackProjectActivity("RadioCast"));
+// Runs once the app is on screen, so it never competes with it
+window.addEventListener("load", () => setTimeout(() => trackProjectActivity("RadioCast"), 1500));
+
+/* ===================== SHORTCUTS ===================== */
+// Handle app shortcuts (?view=favs, ?action=sleep)
+function handleLaunchParams() {
+	const params = new URLSearchParams(location.search);
+	if (![...params.keys()].length) return;
+
+	const view = params.get("view");
+	const action = params.get("action");
+
+	// Clean the address so a reload does not repeat the action
+	history.replaceState(null, "", location.pathname + location.hash);
+
+	if (view === "favs" || view === "stations") setView(view);
+	if (action === "sleep") toggleSheet(true);
+}
+handleLaunchParams();
 
 /* ===================== SERVICE WORKER ===================== */
 if ("serviceWorker" in navigator) {
-	window.addEventListener("load", () => {
-		navigator.serviceWorker
-			.register("./sw.js")
-			.catch((err) => console.error("SW registration failed:", err));
-	});
+	// Register right away: waiting for "load" delays offline support on slow networks
+	navigator.serviceWorker
+		.register("./sw.js")
+		.catch((err) => console.error("SW registration failed:", err));
 }

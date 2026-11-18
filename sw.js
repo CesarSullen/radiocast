@@ -1,5 +1,5 @@
 // Cache version
-const CACHE_NAME = "radiocast-v1.1.1";
+const CACHE_NAME = "radiocast-v1.1.2";
 
 const STATIC_ASSETS = [
 	// Page
@@ -17,7 +17,9 @@ const STATIC_ASSETS = [
 	"./typography/poppins-600.woff2",
 
 	// Icons and images
-	"./assets/logo.png",
+	"./assets/icon-192.png",
+	"./assets/icon-512.png",
+	"./assets/icon-512-maskable.png",
 	"./assets/next-fill.svg",
 	"./assets/prev-fill.svg",
 	"./assets/play-fill.svg",
@@ -30,11 +32,25 @@ const STATIC_ASSETS = [
 	"./assets/moon-stars-fill.svg",
 ];
 
+// Max time to wait for the network before giving up
+const NETWORK_TIMEOUT = 6000;
+
+// Files needed to render the app: if these fail, the install fails
+const CORE_ASSETS = STATIC_ASSETS.slice(0, 6);
+
 // Install: precache the app shell
 self.addEventListener("install", (event) => {
 	self.skipWaiting();
 	event.waitUntil(
-		caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS)),
+		(async () => {
+			const cache = await caches.open(CACHE_NAME);
+			await cache.addAll(CORE_ASSETS);
+
+			// The rest is best effort, one missing file must not block the update
+			await Promise.allSettled(
+				STATIC_ASSETS.slice(CORE_ASSETS.length).map((url) => cache.add(url)),
+			);
+		})(),
 	);
 });
 
@@ -51,6 +67,17 @@ self.addEventListener("activate", (event) => {
 	);
 });
 
+// Fetch with a timeout so a hanging connection never blocks the app
+async function fetchWithTimeout(request) {
+	const controller = new AbortController();
+	const timer = setTimeout(() => controller.abort(), NETWORK_TIMEOUT);
+	try {
+		return await fetch(request, { signal: controller.signal });
+	} finally {
+		clearTimeout(timer);
+	}
+}
+
 // Fetch: cache-first for same-origin static files only (never streams or APIs)
 self.addEventListener("fetch", (event) => {
 	const { request } = event;
@@ -61,16 +88,26 @@ self.addEventListener("fetch", (event) => {
 	}
 
 	event.respondWith(
-		caches.match(request).then((cached) => {
+		(async () => {
+			// ignoreSearch lets "./?view=favs" open from cache
+			const cached = await caches.match(request, { ignoreSearch: true });
 			if (cached) return cached;
 
-			return fetch(request).then((response) => {
+			try {
+				const response = await fetchWithTimeout(request);
 				if (response.ok) {
-					const copy = response.clone();
-					caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+					const cache = await caches.open(CACHE_NAME);
+					cache.put(request, response.clone());
 				}
 				return response;
-			});
-		}),
+			} catch (err) {
+				// Offline or too slow: fall back to the app shell for page loads
+				if (request.mode === "navigate") {
+					const shell = await caches.match("./index.html");
+					if (shell) return shell;
+				}
+				return Response.error();
+			}
+		})(),
 	);
 });
