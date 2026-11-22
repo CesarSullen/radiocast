@@ -1,18 +1,14 @@
-const SUPABASE_URL = "https://eagwosdtokwxicicvkqf.supabase.co";
-const SUPABASE_KEY = "sb_publishable_L52lco6_z5_FnmF4lwe-Lg_uX_QNkGm";
-const SUPABASE_SDK = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js";
-const SUPABASE_SDK_HASH = "sha384-Rj26LVGvoeRVR6+mwQmFfcR3QOBEwT+ZmuCWpuiqeTzJpCs0ER4ITAWGb4Hiy3Ok";
+const SUPABASE_URL = "https://iyitiknnrcsmbwwwwolu.supabase.co";
+const SUPABASE_KEY = "sb_publishable_WdjU1jQEjusa7dt-3hERYQ__GSokW1B";
+const SUPABASE_SDK = "./js/supabase.js";
 
-// Load the Supabase SDK on demand, so a slow or blocked CDN never delays the app,
-// its "load" event or the service worker registration
+// Load the self-hosted Supabase SDK on demand, so it never delays the app or the service worker registration
 function loadSupabaseClient(timeoutMs = 8000) {
 	return new Promise((resolve, reject) => {
 		if (window.supabase) return resolve(window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY));
 
 		const script = document.createElement("script");
 		script.src = SUPABASE_SDK;
-		script.integrity = SUPABASE_SDK_HASH;
-		script.crossOrigin = "anonymous";
 		script.async = true;
 
 		const timer = setTimeout(() => {
